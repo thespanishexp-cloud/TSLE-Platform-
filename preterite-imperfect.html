@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pretérito vs. Imperfecto | TSLE</title>
+<style>
+  :root{
+    --navy:#12213f;
+    --navy-light:#1c2f56;
+    --red:#c8102e;
+    --red-dark:#9c0c22;
+    --gray:#f4f5f7;
+    --text:#1f2430;
+    --green:#1e8a4c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:var(--gray);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:680px; width:100%;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+    border-radius:12px 12px 0 0;
+  }
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header p{margin:0; opacity:.85; font-size:.92rem;}
+  .progress-bar{
+    height:6px; background:rgba(255,255,255,.25); border-radius:4px; margin-top:16px; overflow:hidden;
+  }
+  .progress-fill{height:100%; background:var(--red); width:0%; transition:width .3s ease;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+  .question{display:none; padding:28px 24px;}
+  .question.active{display:block;}
+  .q-tag{
+    display:inline-block; background:var(--red); color:#fff; font-size:.72rem;
+    font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:4px 10px; border-radius:20px; margin-bottom:14px;
+  }
+  .q-text{font-size:1.15rem; line-height:1.5; margin:0 0 20px; color:var(--navy);}
+  .story-box{
+    background:var(--gray); border-left:4px solid var(--red);
+    padding:16px 18px; border-radius:6px; margin-bottom:20px; font-size:1.02rem; line-height:1.6;
+  }
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .opt-btn{
+    text-align:left; padding:14px 16px; border:2px solid #e0e2e8; border-radius:8px;
+    background:#fff; cursor:pointer; font-size:1rem; transition:all .15s ease;
+  }
+  .opt-btn:hover{border-color:var(--navy-light);}
+  .opt-btn.selected{border-color:var(--navy); background:#eef1f8;}
+  .opt-btn.correct{border-color:var(--green); background:#e8f7ee; color:var(--green); font-weight:600;}
+  .opt-btn.incorrect{border-color:var(--red); background:#fdecee; color:var(--red-dark); font-weight:600;}
+  .two-tense{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;}
+  .fill-input{
+    width:100%; padding:12px 14px; font-size:1rem; border:2px solid #e0e2e8;
+    border-radius:8px; margin-top:4px;
+  }
+  .fill-input:focus{outline:none; border-color:var(--navy);}
+  .feedback{
+    margin-top:14px; padding:10px 14px; border-radius:8px; font-size:.92rem; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e8f7ee; color:var(--green);}
+  .feedback.bad{background:#fdecee; color:var(--red-dark);}
+  .nav-row{display:flex; justify-content:space-between; align-items:center; padding:0 24px 24px;}
+  .btn{
+    border:none; padding:12px 22px; border-radius:8px; font-size:.95rem; font-weight:600;
+    cursor:pointer; transition:opacity .15s ease;
+  }
+  .btn-primary{background:var(--red); color:#fff;}
+  .btn-primary:disabled{opacity:.4; cursor:not-allowed;}
+  .btn-secondary{background:transparent; color:var(--navy); text-decoration:underline; padding:12px 6px;}
+  .result-screen{display:none; padding:40px 24px; text-align:center;}
+  .result-screen.active{display:block;}
+  .score-num{font-size:3rem; font-weight:800; color:var(--navy); margin:10px 0 4px;}
+  .score-label{color:#666; margin-bottom:20px;}
+  .score-msg{font-size:1.05rem; margin-bottom:28px; color:var(--text);}
+  .brand-footer{text-align:center; margin-top:18px; color:#8a8f9c; font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Pretérito vs. Imperfecto</h1>
+    <p>The Spanish Learning Experience</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <main id="quizMain">
+
+    <div class="question active" data-index="0" data-type="mc"
+         data-question="Cuando era niño, yo _______ al parque todos los domingos."
+         data-options="fui|iba|iré|voy" data-correct="1">
+    </div>
+
+    <div class="question" data-index="1" data-type="mc"
+         data-question="Ayer María _______ al supermercado."
+         data-options="iba|fue|era|estaba" data-correct="1">
+    </div>
+
+    <div class="question" data-index="2" data-type="fill"
+         data-question="Cuando vivía en México, _______ tacos todos los viernes. (comer)"
+         data-answer="comía|comia">
+    </div>
+
+    <div class="question" data-index="3" data-type="twotense"
+         data-question="Mientras yo _______ (estudiar), mi hermano _______ (llegar)."
+         data-blank1-options="estudiaba|estudié" data-blank1-correct="0"
+         data-blank2-options="llegaba|llegó" data-blank2-correct="1">
+    </div>
+
+    <div class="question" data-index="4" data-type="mc"
+         data-question="Todos los sábados, nosotros _______ al mercado con mi abuela."
+         data-options="fuimos|íbamos|iremos|vamos" data-correct="1">
+    </div>
+
+    <div class="question" data-index="5" data-type="story"
+         data-story="Cuando tenía 15 años, vivía con mi familia en Guadalajara. Todos los sábados íbamos al mercado. Un día, conocí a una persona que cambió mi vida."
+         data-question="¿Qué hacía la persona todos los sábados?"
+         data-options="Trabajaba|Iba al mercado|Estudiaba|Dormía" data-correct="1">
+    </div>
+
+    <div class="question" data-index="6" data-type="story"
+         data-story="Cuando tenía 15 años, vivía con mi familia en Guadalajara. Todos los sábados íbamos al mercado. Un día, conocí a una persona que cambió mi vida."
+         data-question="¿Qué pasó un día en particular?"
+         data-options="Se mudó de casa|Conoció a una persona|Perdió su trabajo|Viajó a otra ciudad" data-correct="1">
+    </div>
+
+    <div class="question" data-index="7" data-type="mc"
+         data-question="De repente, el teléfono _______ y todos se asustaron."
+         data-options="sonaba|sonó|suena|sonará" data-correct="1">
+    </div>
+
+    <div class="question" data-index="8" data-type="fill"
+         data-question="Mi abuela siempre _______ historias por las noches. (contar)"
+         data-answer="contaba">
+    </div>
+
+    <div class="question" data-index="9" data-type="twotense"
+         data-question="Yo _______ (leer) un libro cuando de repente _______ (sonar) la alarma."
+         data-blank1-options="leía|leí" data-blank1-correct="0"
+         data-blank2-options="sonaba|sonó" data-blank2-correct="1">
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">Anterior</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Siguiente</button>
+    </div>
+
+  </main>
+
+  <div class="result-screen" id="resultScreen">
+    <div class="score-label">Your Score</div>
+    <div class="score-num" id="scoreNum">0 / 10</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+  </div>
+
+  <div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+
+<script>
+  var questions = Array.prototype.slice.call(document.querySelectorAll('.question'));
+  var current = 0;
+  var answers = new Array(questions.length).fill(null);
+  var score = 0;
+
+  function buildQuestion(q){
+    var type = q.getAttribute('data-type');
+    var text = q.getAttribute('data-question');
+    var tagText = 'Multiple Choice';
+    if(type === 'fill') tagText = 'Completar';
+    if(type === 'twotense') tagText = 'Elige el tiempo correcto';
+    if(type === 'story') tagText = 'Mini historia';
+
+    var html = '<span class="q-tag">' + tagText + '</span>';
+
+    if(type === 'story'){
+      var story = q.getAttribute('data-story');
+      html += '<div class="story-box">' + story + '</div>';
+    }
+
+    html += '<p class="q-text">' + text + '</p>';
+
+    if(type === 'mc' || type === 'story'){
+      var opts = q.getAttribute('data-options').split('|');
+      html += '<div class="options">';
+      opts.forEach(function(opt, i){
+        html += '<button type="button" class="opt-btn" data-value="' + i + '" onclick="selectOption(this,' + i + ')">' + opt + '</button>';
+      });
+      html += '</div>';
+    }
+
+    if(type === 'fill'){
+      html += '<input type="text" class="fill-input" placeholder="Escribe tu respuesta..." oninput="fillTyped(this)">';
+    }
+
+    if(type === 'twotense'){
+      var b1 = q.getAttribute('data-blank1-options').split('|');
+      var b2 = q.getAttribute('data-blank2-options').split('|');
+      html += '<div><strong>Primer espacio:</strong><div class="two-tense">';
+      b1.forEach(function(opt,i){
+        html += '<button type="button" class="opt-btn" data-blank="1" data-value="' + i + '" onclick="selectTense(this,1,' + i + ')">' + opt + '</button>';
+      });
+      html += '</div></div>';
+      html += '<div style="margin-top:14px;"><strong>Segundo espacio:</strong><div class="two-tense">';
+      b2.forEach(function(opt,i){
+        html += '<button type="button" class="opt-btn" data-blank="2" data-value="' + i + '" onclick="selectTense(this,2,' + i + ')">' + opt + '</button>';
+      });
+      html += '</div></div>';
+    }
+
+    html += '<div class="feedback" id="feedback-' + q.getAttribute('data-index') + '"></div>';
+    q.innerHTML = html;
+  }
+
+  questions.forEach(buildQuestion);
+
+  function updateProgress(){
+    var pct = (current / questions.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function showQuestion(i){
+    questions.forEach(function(q){ q.classList.remove('active'); });
+    questions[i].classList.add('active');
+    document.getElementById('prevBtn').style.visibility = i === 0 ? 'hidden' : 'visible';
+    var nextBtn = document.getElementById('nextBtn');
+    nextBtn.textContent = i === questions.length - 1 ? 'Ver resultado' : 'Siguiente';
+    nextBtn.disabled = answers[i] === null;
+    updateProgress();
+  }
+
+  function selectOption(btn, value){
+    var qEl = btn.closest('.question');
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return;
+    var correctIdx = parseInt(qEl.getAttribute('data-correct'), 10);
+    var opts = qEl.querySelectorAll('.opt-btn');
+    var isCorrect = value === correctIdx;
+
+    opts.forEach(function(o, i){
+      o.disabled = true;
+      if(i === correctIdx) o.classList.add('correct');
+      if(i === value && !isCorrect) o.classList.add('incorrect');
+    });
+
+    answers[idx] = isCorrect;
+    if(isCorrect) score++;
+    showFeedback(idx, isCorrect);
+    document.getElementById('nextBtn').disabled = false;
+  }
+
+  function selectTense(btn, blankNum, value){
+    var qEl = btn.closest('.question');
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return;
+
+    var groupSelector = '.opt-btn[data-blank="' + blankNum + '"]';
+    var groupBtns = qEl.querySelectorAll(groupSelector);
+    groupBtns.forEach(function(b){ b.classList.remove('selected'); });
+    btn.classList.add('selected');
+    btn.setAttribute('data-picked', 'true');
+
+    qEl.setAttribute('data-b' + blankNum + '-picked', value);
+
+    var picked1 = qEl.getAttribute('data-b1-picked');
+    var picked2 = qEl.getAttribute('data-b2-picked');
+
+    if(picked1 !== null && picked2 !== null){
+      var c1 = parseInt(qEl.getAttribute('data-blank1-correct'), 10);
+      var c2 = parseInt(qEl.getAttribute('data-blank2-correct'), 10);
+      var isCorrect = (parseInt(picked1,10) === c1) && (parseInt(picked2,10) === c2);
+
+      qEl.querySelectorAll('.opt-btn').forEach(function(b){ b.disabled = true; });
+      qEl.querySelectorAll('.opt-btn[data-blank="1"]').forEach(function(b,i){
+        if(i === c1) b.classList.add('correct');
+      });
+      qEl.querySelectorAll('.opt-btn[data-blank="2"]').forEach(function(b,i){
+        if(i === c2) b.classList.add('correct');
+      });
+
+      answers[idx] = isCorrect;
+      if(isCorrect) score++;
+      showFeedback(idx, isCorrect);
+      document.getElementById('nextBtn').disabled = false;
+    }
+  }
+
+  function normalize(str){
+    return str.trim().toLowerCase()
+      .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+  }
+
+  function fillTyped(input){
+    var qEl = input.closest('.question');
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return;
+    input.setAttribute('data-current', input.value);
+    document.getElementById('nextBtn').disabled = input.value.trim().length === 0;
+  }
+
+  function checkFillOnAdvance(qEl){
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return true;
+    var input = qEl.querySelector('.fill-input');
+    if(!input || input.value.trim().length === 0) return false;
+
+    var acceptable = qEl.getAttribute('data-answer').split('|').map(normalize);
+    var isCorrect = acceptable.indexOf(normalize(input.value)) !== -1;
+    input.disabled = true;
+    input.style.borderColor = isCorrect ? '#1e8a4c' : '#c8102e';
+
+    answers[idx] = isCorrect;
+    if(isCorrect) score++;
+    showFeedback(idx, isCorrect, qEl.getAttribute('data-answer').split('|')[0]);
+    return true;
+  }
+
+  function showFeedback(idx, isCorrect, correctAnswerText){
+    var fb = document.getElementById('feedback-' + idx);
+    if(!fb) return;
+    fb.classList.remove('ok','bad');
+    fb.classList.add('show');
+    if(isCorrect){
+      fb.classList.add('ok');
+      fb.textContent = '¡Correcto! Muy bien.';
+    } else {
+      fb.classList.add('bad');
+      fb.textContent = correctAnswerText
+        ? 'No exactamente. Respuesta correcta: ' + correctAnswerText
+        : 'No exactamente. Revisa la opción marcada en verde.';
+    }
+  }
+
+  function nextQuestion(){
+    var qEl = questions[current];
+    var type = qEl.getAttribute('data-type');
+
+    if(type === 'fill'){
+      var ok = checkFillOnAdvance(qEl);
+      if(!ok) return;
+    }
+
+    if(answers[current] === null) return;
+
+    if(current === questions.length - 1){
+      finishQuiz();
+      return;
+    }
+    current++;
+    showQuestion(current);
+  }
+
+  function prevQuestion(){
+    if(current === 0) return;
+    current--;
+    showQuestion(current);
+  }
+
+  function finishQuiz(){
+    document.getElementById('quizMain').style.display = 'none';
+    document.getElementById('resultScreen').classList.add('active');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('scoreNum').textContent = score + ' / ' + questions.length;
+
+    var msg;
+    var pct = score / questions.length;
+    if(pct === 1) msg = '¡Perfecto! Dominas la diferencia entre pretérito e imperfecto.';
+    else if(pct >= 0.8) msg = 'Great job! You are getting better at distinguishing the preterite and imperfect.';
+    else if(pct >= 0.5) msg = 'Buen intento. Sigue practicando la diferencia entre acciones completas y descripciones del pasado.';
+    else msg = 'Vamos a repasar juntos. Vuelve a intentarlo y presta atención a las pistas de tiempo.';
+    document.getElementById('scoreMsg').textContent = msg;
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    answers = new Array(questions.length).fill(null);
+
+    questions.forEach(function(q){
+      q.removeAttribute('data-b1-picked');
+      q.removeAttribute('data-b2-picked');
+      buildQuestion(q);
+    });
+
+    document.getElementById('quizMain').style.display = 'block';
+    document.getElementById('resultScreen').classList.remove('active');
+    showQuestion(0);
+  }
+
+  showQuestion(0);
+</script>
+
+</body>
+</html>
