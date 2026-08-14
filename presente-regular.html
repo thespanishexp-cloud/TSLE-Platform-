@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presente Regular | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-light:#1c5fa0;
+    --red:#EE3535;
+    --red-dark:#b8241f;
+    --gray:#f4f5f7;
+    --text:#1f2430;
+    --green:#1e8a4c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:var(--gray);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:680px; width:100%;}
+  .back-link{display:inline-block; margin-bottom:14px; color:var(--navy); text-decoration:none; font-size:.9rem; font-weight:600;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+    border-radius:12px 12px 0 0;
+  }
+  .brand-logo{max-width:150px; height:auto; margin-bottom:14px; display:block;}
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header p{margin:0; opacity:.85; font-size:.92rem;}
+  .progress-bar{height:6px; background:rgba(255,255,255,.25); border-radius:4px; margin-top:16px; overflow:hidden;}
+  .progress-fill{height:100%; background:var(--red); width:0%; transition:width .3s ease;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+  .question{display:none; padding:28px 24px;}
+  .question.active{display:block;}
+  .q-tag{display:inline-block; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-bottom:14px;}
+  .q-text{font-size:1.15rem; line-height:1.5; margin:0 0 20px; color:var(--navy);}
+  .verb-hint{font-size:.85rem; color:#6b7280; margin:-14px 0 16px;}
+  .story-box{background:var(--gray); border-left:4px solid var(--red); padding:16px 18px; border-radius:6px; margin-bottom:20px; font-size:1.02rem; line-height:1.6;}
+  .options{display:flex; flex-direction:column; gap:10px;}
+  .opt-btn{text-align:left; padding:14px 16px; border:2px solid #e0e2e8; border-radius:8px; background:#fff; cursor:pointer; font-size:1rem; transition:all .15s ease;}
+  .opt-btn:hover{border-color:var(--navy-light);}
+  .opt-btn.correct{border-color:var(--green); background:#e8f7ee; color:var(--green); font-weight:600;}
+  .opt-btn.incorrect{border-color:var(--red); background:#fdecee; color:var(--red-dark); font-weight:600;}
+  .fill-input{width:100%; padding:12px 14px; font-size:1rem; border:2px solid #e0e2e8; border-radius:8px; margin-top:4px;}
+  .fill-input:focus{outline:none; border-color:var(--navy);}
+  .feedback{margin-top:14px; padding:10px 14px; border-radius:8px; font-size:.92rem; display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e8f7ee; color:var(--green);}
+  .feedback.bad{background:#fdecee; color:var(--red-dark);}
+  .nav-row{display:flex; justify-content:space-between; align-items:center; padding:0 24px 24px;}
+  .btn{border:none; padding:12px 22px; border-radius:8px; font-size:.95rem; font-weight:600; cursor:pointer;}
+  .btn-primary{background:var(--red); color:#fff;}
+  .btn-primary:disabled{opacity:.4; cursor:not-allowed;}
+  .btn-secondary{background:transparent; color:var(--navy); text-decoration:underline; padding:12px 6px;}
+  .result-screen{display:none; padding:40px 24px; text-align:center;}
+  .result-screen.active{display:block;}
+  .score-num{font-size:3rem; font-weight:800; color:var(--navy); margin:10px 0 4px;}
+  .score-label{color:#666; margin-bottom:20px;}
+  .score-msg{font-size:1.05rem; margin-bottom:28px;}
+  .brand-footer{text-align:center; margin-top:18px; color:#8a8f9c; font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="s1.html">&larr; Volver a Español 1</a>
+
+  <header>
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience" class="brand-logo">
+    <h1>Presente Regular</h1>
+    <p>Verbos -ar, -er, -ir en presente</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </header>
+
+  <main id="quizMain">
+
+    <div class="question active" data-index="0" data-type="fill"
+         data-question="Yo _______ español todos los días."
+         data-hint="hablar" data-answer="hablo">
+    </div>
+
+    <div class="question" data-index="1" data-type="fill"
+         data-question="Ella _______ en la casa todos los días."
+         data-hint="comer" data-answer="come">
+    </div>
+
+    <div class="question" data-index="2" data-type="fill"
+         data-question="Nosotros _______ en Guadalajara."
+         data-hint="vivir" data-answer="vivimos">
+    </div>
+
+    <div class="question" data-index="3" data-type="fill"
+         data-question="Tú _______ mucho café por la mañana."
+         data-hint="tomar" data-answer="tomas">
+    </div>
+
+    <div class="question" data-index="4" data-type="fill"
+         data-question="Mis amigos _______ en una oficina grande."
+         data-hint="trabajar" data-answer="trabajan">
+    </div>
+
+    <div class="question" data-index="5" data-type="fill"
+         data-question="Yo _______ cartas a mi familia."
+         data-hint="escribir" data-answer="escribo">
+    </div>
+
+    <div class="question" data-index="6" data-type="fill"
+         data-question="Nosotros _______ la tarea por la noche."
+         data-hint="leer" data-answer="leemos">
+    </div>
+
+    <div class="question" data-index="7" data-type="fill"
+         data-question="Él _______ la puerta cuando llega a casa."
+         data-hint="abrir" data-answer="abre">
+    </div>
+
+    <!-- Mini historia -->
+    <div class="question" data-index="8" data-type="story"
+         data-story="Todos los días, Marta se levanta temprano. Ella vive en un apartamento pequeño cerca del centro. Por la mañana, Marta corre en el parque y después bebe un café. Marta trabaja en una escuela donde enseña matemáticas. Por la tarde, ella lee libros y escribe mensajes a sus amigos."
+         data-question="¿Dónde vive Marta?"
+         data-options="En una casa grande|En un apartamento pequeño|En un hotel|En el parque" data-correct="1">
+    </div>
+
+    <div class="question" data-index="9" data-type="story"
+         data-story="Todos los días, Marta se levanta temprano. Ella vive en un apartamento pequeño cerca del centro. Por la mañana, Marta corre en el parque y después bebe un café. Marta trabaja en una escuela donde enseña matemáticas. Por la tarde, ella lee libros y escribe mensajes a sus amigos."
+         data-question="¿Qué hace Marta por la mañana?"
+         data-options="Trabaja en la oficina|Corre y bebe un café|Escribe mensajes|Duerme todo el día" data-correct="1">
+    </div>
+
+    <div class="question" data-index="10" data-type="story"
+         data-story="Todos los días, Marta se levanta temprano. Ella vive en un apartamento pequeño cerca del centro. Por la mañana, Marta corre en el parque y después bebe un café. Marta trabaja en una escuela donde enseña matemáticas. Por la tarde, ella lee libros y escribe mensajes a sus amigos."
+         data-question="¿Qué enseña Marta en la escuela?"
+         data-options="Historia|Español|Matemáticas|Arte" data-correct="2">
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">Anterior</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Siguiente</button>
+    </div>
+
+  </main>
+
+  <div class="result-screen" id="resultScreen">
+    <div class="score-label">Your Score</div>
+    <div class="score-num" id="scoreNum">0 / 11</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <button class="btn btn-primary" onclick="restartQuiz()">Try Again</button>
+  </div>
+
+  <div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+
+<script>
+  var questions = Array.prototype.slice.call(document.querySelectorAll('.question'));
+  var current = 0;
+  var answers = new Array(questions.length).fill(null);
+  var score = 0;
+
+  function buildQuestion(q){
+    var type = q.getAttribute('data-type');
+    var text = q.getAttribute('data-question');
+    var tagText = type === 'fill' ? 'Completar' : 'Mini historia';
+    var html = '<span class="q-tag">' + tagText + '</span>';
+
+    if(type === 'story'){
+      var story = q.getAttribute('data-story');
+      html += '<div class="story-box">' + story + '</div>';
+    }
+
+    html += '<p class="q-text">' + text + '</p>';
+
+    if(type === 'fill'){
+      var hint = q.getAttribute('data-hint');
+      html += '<div class="verb-hint">Verbo: ' + hint + '</div>';
+      html += '<input type="text" class="fill-input" placeholder="Escribe la conjugación..." oninput="fillTyped(this)">';
+    }
+
+    if(type === 'story'){
+      var opts = q.getAttribute('data-options').split('|');
+      html += '<div class="options">';
+      opts.forEach(function(opt, i){
+        html += '<button type="button" class="opt-btn" data-value="' + i + '" onclick="selectOption(this,' + i + ')">' + opt + '</button>';
+      });
+      html += '</div>';
+    }
+
+    html += '<div class="feedback" id="feedback-' + q.getAttribute('data-index') + '"></div>';
+    q.innerHTML = html;
+  }
+
+  questions.forEach(buildQuestion);
+
+  function updateProgress(){
+    document.getElementById('progressFill').style.width = ((current / questions.length) * 100) + '%';
+  }
+
+  function showQuestion(i){
+    questions.forEach(function(q){ q.classList.remove('active'); });
+    questions[i].classList.add('active');
+    document.getElementById('prevBtn').style.visibility = i === 0 ? 'hidden' : 'visible';
+    var nextBtn = document.getElementById('nextBtn');
+    nextBtn.textContent = i === questions.length - 1 ? 'Ver resultado' : 'Siguiente';
+    nextBtn.disabled = answers[i] === null;
+    updateProgress();
+  }
+
+  function selectOption(btn, value){
+    var qEl = btn.closest('.question');
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return;
+    var correctIdx = parseInt(qEl.getAttribute('data-correct'), 10);
+    var opts = qEl.querySelectorAll('.opt-btn');
+    var isCorrect = value === correctIdx;
+
+    opts.forEach(function(o, i){
+      o.disabled = true;
+      if(i === correctIdx) o.classList.add('correct');
+      if(i === value && !isCorrect) o.classList.add('incorrect');
+    });
+
+    answers[idx] = isCorrect;
+    if(isCorrect) score++;
+    showFeedback(idx, isCorrect);
+    document.getElementById('nextBtn').disabled = false;
+  }
+
+  function normalize(str){
+    return str.trim().toLowerCase()
+      .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+  }
+
+  function fillTyped(input){
+    var qEl = input.closest('.question');
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return;
+    document.getElementById('nextBtn').disabled = input.value.trim().length === 0;
+  }
+
+  function checkFillOnAdvance(qEl){
+    var idx = parseInt(qEl.getAttribute('data-index'), 10);
+    if(answers[idx] !== null) return true;
+    var input = qEl.querySelector('.fill-input');
+    if(!input || input.value.trim().length === 0) return false;
+
+    var isCorrect = normalize(input.value) === normalize(qEl.getAttribute('data-answer'));
+    input.disabled = true;
+    input.style.borderColor = isCorrect ? '#1e8a4c' : '#c8102e';
+
+    answers[idx] = isCorrect;
+    if(isCorrect) score++;
+    showFeedback(idx, isCorrect, qEl.getAttribute('data-answer'));
+    return true;
+  }
+
+  function showFeedback(idx, isCorrect, correctAnswerText){
+    var fb = document.getElementById('feedback-' + idx);
+    if(!fb) return;
+    fb.classList.remove('ok','bad');
+    fb.classList.add('show');
+    if(isCorrect){
+      fb.classList.add('ok');
+      fb.textContent = '¡Correcto! Muy bien.';
+    } else {
+      fb.classList.add('bad');
+      fb.textContent = correctAnswerText ? 'No exactamente. Respuesta correcta: ' + correctAnswerText : 'No exactamente. Revisa la opción marcada en verde.';
+    }
+  }
+
+  function nextQuestion(){
+    var qEl = questions[current];
+    var type = qEl.getAttribute('data-type');
+
+    if(type === 'fill'){
+      var ok = checkFillOnAdvance(qEl);
+      if(!ok) return;
+    }
+
+    if(answers[current] === null) return;
+
+    if(current === questions.length - 1){
+      finishQuiz();
+      return;
+    }
+    current++;
+    showQuestion(current);
+  }
+
+  function prevQuestion(){
+    if(current === 0) return;
+    current--;
+    showQuestion(current);
+  }
+
+  function finishQuiz(){
+    document.getElementById('quizMain').style.display = 'none';
+    document.getElementById('resultScreen').classList.add('active');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('scoreNum').textContent = score + ' / ' + questions.length;
+
+    var msg;
+    var pct = score / questions.length;
+    if(pct === 1) msg = '¡Perfecto! Dominas el presente regular.';
+    else if(pct >= 0.8) msg = 'Great job! Ya casi dominas las conjugaciones regulares.';
+    else if(pct >= 0.5) msg = 'Buen intento. Sigue practicando las terminaciones -ar, -er, -ir.';
+    else msg = 'Vamos a repasar juntos las conjugaciones. Inténtalo otra vez.';
+    document.getElementById('scoreMsg').textContent = msg;
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    answers = new Array(questions.length).fill(null);
+    questions.forEach(buildQuestion);
+    document.getElementById('quizMain').style.display = 'block';
+    document.getElementById('resultScreen').classList.remove('active');
+    showQuestion(0);
+  }
+
+  showQuestion(0);
+</script>
+
+</body>
+</html>
