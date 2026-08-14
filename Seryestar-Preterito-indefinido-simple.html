@@ -3,381 +3,333 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ser vs Estar – Pretérito Simple | TSLE</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>Ser vs. Estar — Pretérito | TSLE</title>
 <style>
-  :root {
-    --red: #EE3535;
-    --navy: #0B4A7C;
-    --navy-light: #2a5298;
-    --bg: #F7F8FC;
-    --white: #ffffff;
-    --border: #D0D8E8;
-    --correct: #2e7d32;
-    --correct-bg: #e8f5e9;
-    --incorrect: #c62828;
-    --incorrect-bg: #ffebee;
-    --muted: #6b7a99;
-    --shadow: 0 2px 12px rgba(27,58,107,0.10);
+  :root{
+    --navy:#0B4A7C;
+    --navy-light:#1c5fa0;
+    --red:#EE3535;
+    --red-dark:#b8241f;
+    --gray:#f4f5f7;
+    --text:#1f2430;
+    --green:#1e8a4c;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
-  header { background: var(--white); border-bottom: 3px solid var(--red); padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow); }
-  .header-badge { background: var(--navy); color: #fff; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; }
-  main { max-width: 780px; margin: 36px auto 60px; padding: 0 20px; }
-  .page-title { background: var(--navy); color: #fff; border-radius: 12px 12px 0 0; padding: 24px 32px 20px; }
-  .page-title h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
-  .page-title p { font-size: 0.9rem; color: rgba(255,255,255,0.72); font-weight: 400; }
-  .scoreboard { background: var(--navy-light); display: flex; gap: 0; overflow: hidden; }
-  .score-cell { flex: 1; text-align: center; padding: 10px 8px; border-right: 1px solid rgba(255,255,255,0.15); color: #fff; }
-  .score-cell:last-child { border-right: none; }
-  .score-cell .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
-  .score-cell .val { font-size: 1.4rem; font-weight: 800; margin-top: 2px; }
-  .score-cell.correct .val { color: #81c784; }
-  .score-cell.incorrect .val { color: #ef9a9a; }
-  .score-cell.remaining .val { color: #fff; }
-  .exercises-wrapper { background: var(--white); border-radius: 0 0 12px 12px; padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 32px; }
-  .exercise { margin-bottom: 26px; padding-bottom: 26px; border-bottom: 1px dashed var(--border); }
-  .exercise:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .ex-num { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--red); margin-bottom: 6px; }
-  .ex-sentence { font-size: 1.08rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; font-family: 'Lora', serif; font-style: italic; }
-  .controls-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-  select { font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--navy); background: var(--bg); border: 2px solid var(--border); border-radius: 8px; padding: 7px 12px; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 130px; }
-  select:focus { border-color: var(--navy); }
-  .btn-check { background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.1s; }
-  .btn-check:hover { background: var(--navy-light); }
-  .btn-check:active { transform: scale(0.97); }
-  .feedback { margin-top: 8px; font-size: 0.85rem; font-weight: 700; border-radius: 6px; padding: 6px 12px; display: none; }
-  .feedback.show { display: block; }
-  .feedback.correct { background: var(--correct-bg); color: var(--correct); }
-  .feedback.incorrect { background: var(--incorrect-bg); color: var(--incorrect); }
-  .bottom-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
-  .btn-all { background: var(--red); color: #fff; border: none; border-radius: 8px; padding: 10px 26px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
-  .btn-all:hover { opacity: 0.88; }
-  .btn-reset { background: transparent; color: var(--navy); border: 2px solid var(--border); border-radius: 8px; padding: 10px 26px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: border-color 0.2s; }
-  .btn-reset:hover { border-color: var(--navy); }
-  .story-section { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 32px; }
-  .story-header { background: var(--red); color: #fff; padding: 20px 32px; }
-  .story-header h2 { font-size: 1.25rem; font-weight: 800; }
-  .story-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
-  .story-body { padding: 30px 32px; }
-  .story-text { font-family: 'Lora', serif; font-size: 1.05rem; line-height: 1.95; color: #2c3e50; }
-  .story-text .blank-group { display: inline-block; vertical-align: middle; margin: 0 3px; }
-  .story-text select.story-select { font-family: 'Lora', serif; font-size: 0.95rem; font-style: normal; font-weight: 600; color: var(--navy); background: #eef1f8; border: 2px solid var(--navy-light); border-radius: 6px; padding: 2px 8px; cursor: pointer; outline: none; min-width: 100px; transition: border-color 0.2s, background 0.2s; }
-  .story-text select.story-select:focus { border-color: var(--red); background: #fff; }
-  .story-text select.story-select.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
-  .story-text select.story-select.incorrect { border-color: var(--incorrect); background: var(--incorrect-bg); color: var(--incorrect); }
-  .story-actions { padding: 0 32px 28px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .story-score { padding: 10px 32px; background: var(--bg); border-top: 1px solid var(--border); font-size: 0.88rem; font-weight: 700; color: var(--navy); display: none; }
-  .story-score.show { display: block; }
-  .ref-box { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); padding: 28px 32px; margin-bottom: 32px; }
-  .ref-box h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 2px solid var(--red); padding-bottom: 8px; display: inline-block; }
-  .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .ref-card { background: var(--bg); border-radius: 8px; padding: 14px 18px; border-left: 4px solid var(--navy); }
-  .ref-card.red { border-left-color: var(--red); }
-  .ref-card h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
-  .ref-card table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-  .ref-card table td { padding: 3px 6px; }
-  .ref-card table td:first-child { color: var(--muted); font-weight: 600; }
-  .ref-card table td:last-child { font-weight: 700; color: var(--navy); }
-  @media (max-width: 600px) {
-    header { padding: 12px 16px; }
-    .exercises-wrapper, .story-body, .story-actions, .story-header, .ref-box { padding-left: 18px; padding-right: 18px; }
-    .page-title { padding: 18px 18px 14px; }
-    .ref-grid { grid-template-columns: 1fr; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:var(--gray);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px 60px;
   }
+  .wrap{max-width:720px; width:100%;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+    border-radius:12px 12px 0 0;
+    text-align:left;
+  }
+  .brand-logo{max-width:170px; height:auto; margin-bottom:14px; display:block;}
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header p{margin:0; opacity:.85; font-size:.92rem;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+
+  .ref-box{padding:22px 24px; border-bottom:1px dashed #e0e2e8;}
+  .ref-box h3{font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--navy); margin:0 0 12px;}
+  .ref-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .ref-card{background:var(--gray); border-radius:8px; padding:12px 16px; border-left:4px solid var(--navy);}
+  .ref-card.red{border-left-color:var(--red);}
+  .ref-card h4{margin:0 0 8px; font-size:.8rem; color:#5a6070; text-transform:uppercase; letter-spacing:.04em;}
+  .ref-card table{width:100%; border-collapse:collapse; font-size:.85rem;}
+  .ref-card td{padding:2px 4px;}
+  .ref-card td:first-child{color:#6b7280;}
+  .ref-card td:last-child{font-weight:700; color:var(--navy); text-align:right;}
+  @media (max-width:520px){.ref-grid{grid-template-columns:1fr;}}
+
+  .scoreboard{display:flex; background:var(--navy-light);}
+  .score-cell{flex:1; text-align:center; padding:10px 8px; color:#fff; border-right:1px solid rgba(255,255,255,.15);}
+  .score-cell:last-child{border-right:none;}
+  .score-cell .label{font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; opacity:.75;}
+  .score-cell .val{font-size:1.3rem; font-weight:800; margin-top:2px;}
+  .score-cell.correct .val{color:#8de3ab;}
+  .score-cell.incorrect .val{color:#ffb3b3;}
+
+  .exercises-wrapper{padding:24px;}
+  .exercise{margin-bottom:22px; padding-bottom:22px; border-bottom:1px dashed #e0e2e8;}
+  .exercise:last-child{border:none; margin:0; padding:0;}
+  .ex-num{font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--red); margin-bottom:6px;}
+  .ex-sentence{font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:12px;}
+  .controls-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  select{font-family:inherit; font-size:.88rem; font-weight:600; color:var(--navy); background:var(--gray); border:2px solid #e0e2e8; border-radius:8px; padding:7px 12px; cursor:pointer; min-width:130px;}
+  .btn-check{background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:.88rem; font-weight:700; cursor:pointer;}
+  .feedback{margin-top:8px; font-size:.85rem; font-weight:700; border-radius:6px; padding:6px 12px; display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e8f7ee; color:var(--green);}
+  .feedback.bad{background:#fdecee; color:var(--red-dark);}
+
+  .bottom-row{display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;}
+  .btn-all{background:var(--red); color:#fff; border:none; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+  .btn-reset{background:transparent; color:var(--navy); border:2px solid #e0e2e8; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+
+  .story-section{border-top:6px solid var(--red);}
+  .story-header{background:var(--red); color:#fff; padding:18px 24px;}
+  .story-header h2{margin:0 0 4px; font-size:1.15rem;}
+  .story-header p{margin:0; font-size:.85rem; opacity:.88;}
+  .story-body{padding:24px;}
+  .story-text{font-size:1.02rem; line-height:2;}
+  .story-select{font-size:.92rem; font-weight:600; color:var(--navy); background:#eef1f8; border:2px solid var(--navy-light); border-radius:6px; padding:3px 8px; margin:0 3px;}
+  .story-select.correct{border-color:var(--green); background:#e8f7ee; color:var(--green);}
+  .story-select.incorrect{border-color:var(--red); background:#fdecee; color:var(--red-dark);}
+  .story-actions{padding:0 24px 24px; display:flex; gap:12px; flex-wrap:wrap;}
+  .story-score{margin:0 24px 20px; padding:10px 16px; border-radius:8px; background:var(--gray); font-weight:700; color:var(--navy); display:none;}
+  .story-score.show{display:block;}
+
+  .brand-footer{text-align:center; margin-top:18px; color:#8a8f9c; font-size:.8rem;}
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header>
-  <div style="display:flex;align-items:center;gap:14px;">
-    <div style="width:44px;height:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.3rem;">S</div>
-    <div>
-      <div style="font-weight:800;color:var(--navy);font-size:1.1rem;line-height:1.2;">The Spanish Learning Experience</div>
-      <div style="font-style:italic;color:var(--red);font-size:0.78rem;">Living the Language</div>
-    </div>
-  </div>
-  <span class="header-badge">Ejercicio de Gramática</span>
-</header>
+  <header>
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience" class="brand-logo">
+    <h1>Ser vs. Estar — Pretérito</h1>
+    <p>Elige el verbo correcto y su conjugación para cada oración</p>
+  </header>
 
-<main>
-
-  <div class="ref-box">
-    <h3>Referencia Rápida — Pretérito Simple</h3>
-    <div class="ref-grid">
-      <div class="ref-card">
-        <h4>SER – Pretérito Simple</h4>
-        <table>
-          <tr><td>yo</td><td>fui</td></tr>
-          <tr><td>tú</td><td>fuiste</td></tr>
-          <tr><td>él/ella</td><td>fue</td></tr>
-          <tr><td>nosotros</td><td>fuimos</td></tr>
-          <tr><td>ellos/ellas</td><td>fueron</td></tr>
-        </table>
-      </div>
-      <div class="ref-card red">
-        <h4>ESTAR – Pretérito Simple</h4>
-        <table>
-          <tr><td>yo</td><td>estuve</td></tr>
-          <tr><td>tú</td><td>estuviste</td></tr>
-          <tr><td>él/ella</td><td>estuvo</td></tr>
-          <tr><td>nosotros</td><td>estuvimos</td></tr>
-          <tr><td>ellos/ellas</td><td>estuvieron</td></tr>
-        </table>
+  <main>
+    <div class="ref-box">
+      <h3>Referencia rápida</h3>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <h4>Ser</h4>
+          <table>
+            <tr><td>yo</td><td>fui</td></tr>
+            <tr><td>tú</td><td>fuiste</td></tr>
+            <tr><td>él/ella</td><td>fue</td></tr>
+            <tr><td>nosotros</td><td>fuimos</td></tr>
+            <tr><td>ellos/ellas</td><td>fueron</td></tr>
+          </table>
+        </div>
+        <div class="ref-card red">
+          <h4>Estar</h4>
+          <table>
+            <tr><td>yo</td><td>estuve</td></tr>
+            <tr><td>tú</td><td>estuviste</td></tr>
+            <tr><td>él/ella</td><td>estuvo</td></tr>
+            <tr><td>nosotros</td><td>estuvimos</td></tr>
+            <tr><td>ellos/ellas</td><td>estuvieron</td></tr>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="page-title">
-    <h1>Ser vs Estar — Pretérito Simple</h1>
-    <p>Selecciona el verbo correcto (SER o ESTAR) y su conjugación para cada oración.</p>
-  </div>
-  <div class="scoreboard">
-    <div class="score-cell correct"><div class="label">Correctas</div><div class="val" id="score-correct">0</div></div>
-    <div class="score-cell incorrect"><div class="label">Incorrectas</div><div class="val" id="score-incorrect">0</div></div>
-    <div class="score-cell remaining"><div class="label">Restantes</div><div class="val" id="score-remaining">15</div></div>
-  </div>
-  <div class="exercises-wrapper">
-    <div id="exercises-container"></div>
-    <div class="bottom-row">
-      <button class="btn-all" onclick="checkAll()">Verificar Todas</button>
-      <button class="btn-reset" onclick="resetAll()">Reiniciar</button>
+    <div class="scoreboard">
+      <div class="score-cell correct"><div class="label">Correctas</div><div class="val" id="score-correct">0</div></div>
+      <div class="score-cell incorrect"><div class="label">Incorrectas</div><div class="val" id="score-incorrect">0</div></div>
+      <div class="score-cell"><div class="label">Restantes</div><div class="val" id="score-remaining">12</div></div>
     </div>
-  </div>
 
-  <div class="story-section">
-    <div class="story-header">
-      <h2>Historia: El Verano Inolvidable</h2>
-      <p>Completa la historia eligiendo el verbo correcto (SER o ESTAR) y la conjugación adecuada.</p>
+    <div class="exercises-wrapper">
+      <div id="exercises-container"></div>
+      <div class="bottom-row">
+        <button class="btn-all" onclick="checkAll()">Verificar todas</button>
+        <button class="btn-reset" onclick="resetAll()">Reiniciar</button>
+      </div>
     </div>
-    <div class="story-body">
-      <div class="story-text" id="story-container"></div>
-    </div>
-    <div class="story-score" id="story-score-bar"></div>
-    <div class="story-actions">
-      <button class="btn-all" onclick="checkStory()">Verificar Historia</button>
-      <button class="btn-reset" onclick="resetStory()">Reiniciar Historia</button>
-    </div>
-  </div>
 
-</main>
+    <div class="story-section">
+      <div class="story-header">
+        <h2>Mini historia: El verano en Guadalajara</h2>
+        <p>Completa la historia eligiendo la conjugación correcta</p>
+      </div>
+      <div class="story-body">
+        <div class="story-text" id="story-container"></div>
+      </div>
+      <div class="story-score" id="story-score-bar"></div>
+      <div class="story-actions">
+        <button class="btn-all" onclick="checkStory()">Verificar historia</button>
+        <button class="btn-reset" onclick="resetStory()">Reiniciar historia</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
 
 <script>
-  var exercises = [
-    { sentence: "La película _____ muy aburrida.", verb: "ser", form: "fue", hint: "Descripción permanente." },
-    { sentence: "Nosotros _____ en Madrid durante tres días.", verb: "estar", form: "estuvimos", hint: "Ubicación temporal." },
-    { sentence: "Ella _____ la mejor estudiante de la clase.", verb: "ser", form: "fue", hint: "Identidad / característica." },
-    { sentence: "¿Dónde _____ tú ayer por la noche?", verb: "estar", form: "estuviste", hint: "Ubicación en el pasado." },
-    { sentence: "El concierto _____ en el parque central.", verb: "ser", form: "fue", hint: "Eventos con SER." },
-    { sentence: "Los niños _____ enfermos toda la semana.", verb: "estar", form: "estuvieron", hint: "Estado físico temporal." },
-    { sentence: "Mi abuelo _____ médico durante 40 años.", verb: "ser", form: "fue", hint: "Profesión / identidad." },
-    { sentence: "Yo _____ muy nervioso antes del examen.", verb: "estar", form: "estuve", hint: "Estado emocional temporal." },
-    { sentence: "La reunión _____ muy larga y cansada.", verb: "ser", form: "fue", hint: "Descripción de un evento." },
-    { sentence: "Ellos _____ juntos en la biblioteca toda la tarde.", verb: "estar", form: "estuvieron", hint: "Ubicación temporal." },
-    { sentence: "La boda _____ en la iglesia del pueblo.", verb: "ser", form: "fue", hint: "Eventos con SER." },
-    { sentence: "¿_____ tú contento con los resultados?", verb: "estar", form: "estuviste", hint: "Estado emocional." },
-    { sentence: "El examen _____ muy difícil para todos.", verb: "ser", form: "fue", hint: "Descripción del evento." },
-    { sentence: "Nosotros _____ de acuerdo con la decisión.", verb: "estar", form: "estuvimos", hint: "Estado de opinión." },
-    { sentence: "Cervantes _____ el autor del Quijote.", verb: "ser", form: "fue", hint: "Identidad permanente." }
-  ];
+var exercises = [
+  { sentence: "La película _____ muy aburrida.", verb: "ser", form: "fue" },
+  { sentence: "Nosotros _____ en Madrid tres días.", verb: "estar", form: "estuvimos" },
+  { sentence: "Ella _____ la mejor estudiante de la clase.", verb: "ser", form: "fue" },
+  { sentence: "¿Dónde _____ tú ayer por la noche?", verb: "estar", form: "estuviste" },
+  { sentence: "El concierto _____ en el parque central.", verb: "ser", form: "fue" },
+  { sentence: "Los niños _____ enfermos toda la semana.", verb: "estar", form: "estuvieron" },
+  { sentence: "Mi abuelo _____ médico durante 40 años.", verb: "ser", form: "fue" },
+  { sentence: "Yo _____ muy nervioso antes del examen.", verb: "estar", form: "estuve" },
+  { sentence: "La reunión _____ muy larga y cansada.", verb: "ser", form: "fue" },
+  { sentence: "Ellos _____ juntos en la biblioteca toda la tarde.", verb: "estar", form: "estuvieron" },
+  { sentence: "La boda _____ en la iglesia del pueblo.", verb: "ser", form: "fue" },
+  { sentence: "¿_____ tú contento con los resultados?", verb: "estar", form: "estuviste" }
+];
 
-  var verbForms = {
-    ser:   ["fui","fuiste","fue","fuimos","fueron"],
-    estar: ["estuve","estuviste","estuvo","estuvimos","estuvieron"]
-  };
+var verbForms = {
+  ser:   ["fui","fuiste","fue","fuimos","fueron"],
+  estar: ["estuve","estuviste","estuvo","estuvimos","estuvieron"]
+};
 
-  var scores = { correct: 0, incorrect: 0, checked: {} };
+var scores = { correct: 0, incorrect: 0, checked: {} };
 
-  function renderExercises() {
-    var container = document.getElementById("exercises-container");
-    container.innerHTML = "";
-    for (var i = 0; i < exercises.length; i++) {
-      var ex = exercises[i];
-      var div = document.createElement("div");
-      div.className = "exercise";
-      div.id = "ex-" + i;
-      div.innerHTML =
-        "<div class='ex-num'>Ejercicio " + (i+1) + " de " + exercises.length + "</div>" +
-        "<div class='ex-sentence'>" + ex.sentence + "</div>" +
-        "<div class='controls-row'>" +
-          "<select id='verb-" + i + "' onchange='rebuildForms(" + i + ")'>" +
-            "<option value=''>- verbo -</option>" +
-            "<option value='ser'>SER</option>" +
-            "<option value='estar'>ESTAR</option>" +
-          "</select>" +
-          "<select id='form-" + i + "'><option value=''>- conjugación -</option></select>" +
-          "<button class='btn-check' onclick='checkOne(" + i + ")'>Verificar</button>" +
-        "</div>" +
-        "<div class='feedback' id='feedback-" + i + "'></div>";
-      container.appendChild(div);
-    }
+function renderExercises(){
+  var container = document.getElementById("exercises-container");
+  container.innerHTML = "";
+  for (var i = 0; i < exercises.length; i++){
+    var ex = exercises[i];
+    var div = document.createElement("div");
+    div.className = "exercise";
+    div.innerHTML =
+      '<div class="ex-num">Ejercicio ' + (i+1) + ' de ' + exercises.length + '</div>' +
+      '<div class="ex-sentence">' + ex.sentence + '</div>' +
+      '<div class="controls-row">' +
+        '<select id="verb-' + i + '" onchange="rebuildForms(' + i + ')">' +
+          '<option value="">- verbo -</option>' +
+          '<option value="ser">SER</option>' +
+          '<option value="estar">ESTAR</option>' +
+        '</select>' +
+        '<select id="form-' + i + '"><option value="">- conjugación -</option></select>' +
+        '<button class="btn-check" onclick="checkOne(' + i + ')">Verificar</button>' +
+      '</div>' +
+      '<div class="feedback" id="feedback-' + i + '"></div>';
+    container.appendChild(div);
+  }
+  updateScoreboard();
+}
+
+function rebuildForms(i){
+  var verb = document.getElementById("verb-" + i).value;
+  var sel = document.getElementById("form-" + i);
+  sel.innerHTML = '<option value="">- conjugación -</option>';
+  if (verb && verbForms[verb]){
+    verbForms[verb].forEach(function(f){
+      var opt = document.createElement("option");
+      opt.value = f;
+      opt.textContent = f;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+function checkOne(i){
+  var ex = exercises[i];
+  var verb = document.getElementById("verb-" + i).value;
+  var form = document.getElementById("form-" + i).value;
+  var fb = document.getElementById("feedback-" + i);
+  if (!verb || !form){
+    fb.className = "feedback show bad";
+    fb.textContent = "Selecciona el verbo y la conjugación.";
+    return;
+  }
+  var correct = (verb === ex.verb && form === ex.form);
+  if (!scores.checked[i]){
+    scores.checked[i] = true;
+    if (correct) scores.correct++; else scores.incorrect++;
     updateScoreboard();
   }
-
-  function rebuildForms(i) {
-    var verb = document.getElementById("verb-" + i).value;
-    var formSel = document.getElementById("form-" + i);
-    formSel.innerHTML = "<option value=''>- conjugación -</option>";
-    if (verb && verbForms[verb]) {
-      for (var j = 0; j < verbForms[verb].length; j++) {
-        var f = verbForms[verb][j];
-        var opt = document.createElement("option");
-        opt.value = f.toLowerCase();
-        opt.textContent = f.charAt(0).toUpperCase() + f.slice(1);
-        formSel.appendChild(opt);
-      }
-    }
+  if (correct){
+    fb.className = "feedback show ok";
+    fb.textContent = "¡Correcto!";
+  } else {
+    fb.className = "feedback show bad";
+    fb.textContent = "No exactamente. Respuesta correcta: " + ex.form;
   }
+}
 
-  function checkOne(i) {
-    var ex = exercises[i];
-    var verb = document.getElementById("verb-" + i).value;
-    var form = document.getElementById("form-" + i).value;
-    var fb   = document.getElementById("feedback-" + i);
-    if (!verb || !form) {
-      fb.className = "feedback show incorrect";
-      fb.textContent = "Selecciona el verbo y la conjugación.";
-      return;
-    }
-    var correct = (verb === ex.verb && form.toLowerCase() === ex.form.toLowerCase());
-    if (!scores.checked[i]) {
-      scores.checked[i] = true;
-      if (correct) scores.correct++; else scores.incorrect++;
-      updateScoreboard();
-    }
-    if (correct) {
-      fb.className = "feedback show correct";
-      fb.textContent = "¡Correcto! " + ex.hint;
+function checkAll(){ for (var i = 0; i < exercises.length; i++) checkOne(i); }
+function resetAll(){ scores = { correct: 0, incorrect: 0, checked: {} }; renderExercises(); }
+function updateScoreboard(){
+  document.getElementById("score-correct").textContent = scores.correct;
+  document.getElementById("score-incorrect").textContent = scores.incorrect;
+  document.getElementById("score-remaining").textContent = exercises.length - Object.keys(scores.checked).length;
+}
+
+var storyParts = [
+  { text: "El verano pasado " },
+  { blank: true, form: "fue" },
+  { text: " una aventura increíble. Todo " },
+  { blank: true, form: "fue" },
+  { text: " organizado con anticipación. El primer día nosotros " },
+  { blank: true, form: "estuvimos" },
+  { text: " en el aeropuerto casi tres horas porque el vuelo " },
+  { blank: true, form: "estuvo" },
+  { text: " retrasado. Yo " },
+  { blank: true, form: "estuve" },
+  { text: " muy nervioso al principio. Cuando llegamos, el hotel " },
+  { blank: true, form: "fue" },
+  { text: " impresionante. La primera noche la cena " },
+  { blank: true, form: "fue" },
+  { text: " en un restaurante tradicional. Al día siguiente, la experiencia en el mercado " },
+  { blank: true, form: "fue" },
+  { text: " mágica y nosotros " },
+  { blank: true, form: "estuvimos" },
+  { text: " ahí toda la mañana." }
+];
+
+var allStoryOptions = ["fui","fuiste","fue","fuimos","fueron","estuve","estuviste","estuvo","estuvimos","estuvieron"];
+
+function renderStory(){
+  var container = document.getElementById("story-container");
+  container.innerHTML = "";
+  document.getElementById("story-score-bar").className = "story-score";
+  document.getElementById("story-score-bar").innerHTML = "";
+  for (var i = 0; i < storyParts.length; i++){
+    var part = storyParts[i];
+    if (!part.blank){
+      var span = document.createElement("span");
+      span.textContent = part.text;
+      container.appendChild(span);
     } else {
-      fb.className = "feedback show incorrect";
-      fb.textContent = "Incorrecto. Respuesta: " + ex.form + ". " + ex.hint;
+      var sel = document.createElement("select");
+      sel.className = "story-select";
+      sel.id = "story-blank-" + i;
+      var def = document.createElement("option");
+      def.value = ""; def.textContent = "- elige -";
+      sel.appendChild(def);
+      allStoryOptions.forEach(function(f){
+        var opt = document.createElement("option");
+        opt.value = f;
+        opt.textContent = f;
+        sel.appendChild(opt);
+      });
+      container.appendChild(sel);
     }
   }
+}
 
-  function checkAll()  { for (var i = 0; i < exercises.length; i++) checkOne(i); }
-  function resetAll()  { scores = { correct: 0, incorrect: 0, checked: {} }; renderExercises(); }
-  function updateScoreboard() {
-    document.getElementById("score-correct").textContent   = scores.correct;
-    document.getElementById("score-incorrect").textContent = scores.incorrect;
-    document.getElementById("score-remaining").textContent = exercises.length - Object.keys(scores.checked).length;
+function checkStory(){
+  var correct = 0, total = 0;
+  for (var i = 0; i < storyParts.length; i++){
+    var part = storyParts[i];
+    if (!part.blank) continue;
+    total++;
+    var sel = document.getElementById("story-blank-" + i);
+    sel.classList.remove("correct","incorrect");
+    if (!sel.value) continue;
+    if (sel.value === part.form){ sel.classList.add("correct"); correct++; }
+    else { sel.classList.add("incorrect"); }
   }
+  var bar = document.getElementById("story-score-bar");
+  bar.className = "story-score show";
+  var pct = Math.round(correct / total * 100);
+  bar.textContent = "Resultado: " + correct + " / " + total + " correctas (" + pct + "%).";
+}
 
-  var storyParts = [
-    { text: "El verano pasado " },
-    { blank: true, form: "fue" },
-    { text: " una aventura increíble para mi familia y para mí. Todo " },
-    { blank: true, form: "fue" },
-    { text: " organizado con mucha anticipación. El destino " },
-    { blank: true, form: "fue" },
-    { text: " México, un país que siempre " },
-    { blank: true, form: "fue" },
-    { text: " mi sueño visitar. El primer día nosotros " },
-    { blank: true, form: "estuvimos" },
-    { text: " en el aeropuerto de la Ciudad de México durante casi tres horas porque el vuelo " },
-    { blank: true, form: "estuvo" },
-    { text: " retrasado. Yo " },
-    { blank: true, form: "estuve" },
-    { text: " muy nervioso al principio, pero mis padres " },
-    { blank: true, form: "estuvieron" },
-    { text: " tranquilos todo el tiempo. Cuando llegamos, el hotel " },
-    { blank: true, form: "fue" },
-    { text: " impresionante. La habitación " },
-    { blank: true, form: "estuvo" },
-    { text: " lista desde temprano. La primera noche la cena " },
-    { blank: true, form: "fue" },
-    { text: " en un restaurante tradicional donde los meseros " },
-    { blank: true, form: "fueron" },
-    { text: " muy amables con nosotros. Al día siguiente visitamos Teotihuacán. La experiencia " },
-    { blank: true, form: "fue" },
-    { text: " mágica. Subimos la Pirámide del Sol y " },
-    { blank: true, form: "estuvimos" },
-    { text: " arriba casi media hora. El calor " },
-    { blank: true, form: "estuvo" },
-    { text: " insoportable, pero la vista " },
-    { blank: true, form: "fue" },
-    { text: " espectacular. Mi hermana " },
-    { blank: true, form: "estuvo" },
-    { text: " muy emocionada durante todo el recorrido. En el tercer día, nosotros " },
-    { blank: true, form: "estuvimos" },
-    { text: " en el mercado de artesanías por la mañana. Los precios " },
-    { blank: true, form: "fueron" },
-    { text: " muy buenos y compramos muchos recuerdos. Mi madre " },
-    { blank: true, form: "estuvo" },
-    { text: " encantada con las telas y los colores. El último día " },
-    { blank: true, form: "fue" },
-    { text: " triste para todos. Nosotros " },
-    { blank: true, form: "estuvimos" },
-    { text: " en silencio durante el camino al aeropuerto. Pero el viaje entero " },
-    { blank: true, form: "fue" },
-    { text: " perfecto. Sin duda, ese verano " },
-    { blank: true, form: "fue" },
-    { text: " el mejor de mi vida." }
-  ];
+function resetStory(){ renderStory(); }
 
-  var allStoryOptions = [
-    "fui","fuiste","fue","fuimos","fueron",
-    "estuve","estuviste","estuvo","estuvimos","estuvieron"
-  ];
-
-  function renderStory() {
-    var container = document.getElementById("story-container");
-    container.innerHTML = "";
-    var scoreBar = document.getElementById("story-score-bar");
-    scoreBar.className = "story-score";
-    scoreBar.innerHTML = "";
-    for (var i = 0; i < storyParts.length; i++) {
-      var part = storyParts[i];
-      if (!part.blank) {
-        var span = document.createElement("span");
-        span.innerHTML = part.text;
-        container.appendChild(span);
-      } else {
-        var wrapper = document.createElement("span");
-        wrapper.className = "blank-group";
-        var sel = document.createElement("select");
-        sel.className = "story-select";
-        sel.id = "story-blank-" + i;
-        var def = document.createElement("option");
-        def.value = ""; def.textContent = "- elige -";
-        sel.appendChild(def);
-        for (var j = 0; j < allStoryOptions.length; j++) {
-          var o = document.createElement("option");
-          o.value = allStoryOptions[j];
-          o.textContent = allStoryOptions[j].charAt(0).toUpperCase() + allStoryOptions[j].slice(1);
-          sel.appendChild(o);
-        }
-        wrapper.appendChild(sel);
-        container.appendChild(wrapper);
-      }
-    }
-  }
-
-  function checkStory() {
-    var correct = 0, total = 0;
-    for (var i = 0; i < storyParts.length; i++) {
-      var part = storyParts[i];
-      if (!part.blank) continue;
-      total++;
-      var sel = document.getElementById("story-blank-" + i);
-      var val = sel.value.toLowerCase();
-      sel.classList.remove("correct","incorrect");
-      if (!val) continue;
-      if (val === part.form.toLowerCase()) { sel.classList.add("correct"); correct++; }
-      else { sel.classList.add("incorrect"); }
-    }
-    var bar = document.getElementById("story-score-bar");
-    bar.className = "story-score show";
-    var pct = Math.round(correct / total * 100);
-    var msg = pct === 100 ? "Perfecto." : (pct >= 70 ? "Buen trabajo." : "Sigue practicando.");
-    bar.innerHTML = "Resultado: <strong>" + correct + " / " + total + "</strong> correctas (" + pct + "%). " +
-      (pct < 100 ? "Los errores aparecen en rojo. " : "") + msg;
-  }
-
-  function resetStory() { renderStory(); }
-
-  renderExercises();
-  renderStory();
+renderExercises();
+renderStory();
 </script>
+
 </body>
 </html>
