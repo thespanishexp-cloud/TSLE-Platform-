@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ser vs. Estar — Presente | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-light:#1c5fa0;
+    --red:#EE3535;
+    --red-dark:#b8241f;
+    --gray:#f4f5f7;
+    --text:#1f2430;
+    --green:#1e8a4c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:var(--gray);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:720px; width:100%;}
+  .back-link{display:inline-block; margin-bottom:14px; color:var(--navy); text-decoration:none; font-size:.9rem; font-weight:600;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+    border-radius:12px 12px 0 0;
+    text-align:left;
+  }
+  .brand-logo{max-width:150px; height:auto; margin-bottom:14px; display:block;}
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header p{margin:0; opacity:.85; font-size:.92rem;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+
+  .ref-box{padding:22px 24px; border-bottom:1px dashed #e0e2e8;}
+  .ref-box h3{font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--navy); margin:0 0 12px;}
+  .ref-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .ref-card{background:var(--gray); border-radius:8px; padding:12px 16px; border-left:4px solid var(--navy);}
+  .ref-card.red{border-left-color:var(--red);}
+  .ref-card h4{margin:0 0 8px; font-size:.8rem; color:#5a6070; text-transform:uppercase; letter-spacing:.04em;}
+  .ref-card table{width:100%; border-collapse:collapse; font-size:.85rem;}
+  .ref-card td{padding:2px 4px;}
+  .ref-card td:first-child{color:#6b7280;}
+  .ref-card td:last-child{font-weight:700; color:var(--navy); text-align:right;}
+  @media (max-width:520px){.ref-grid{grid-template-columns:1fr;}}
+
+  .scoreboard{display:flex; background:var(--navy-light);}
+  .score-cell{flex:1; text-align:center; padding:10px 8px; color:#fff; border-right:1px solid rgba(255,255,255,.15);}
+  .score-cell:last-child{border-right:none;}
+  .score-cell .label{font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; opacity:.75;}
+  .score-cell .val{font-size:1.3rem; font-weight:800; margin-top:2px;}
+  .score-cell.correct .val{color:#8de3ab;}
+  .score-cell.incorrect .val{color:#ffb3b3;}
+
+  .exercises-wrapper{padding:24px;}
+  .exercise{margin-bottom:22px; padding-bottom:22px; border-bottom:1px dashed #e0e2e8;}
+  .exercise:last-child{border:none; margin:0; padding:0;}
+  .ex-num{font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--red); margin-bottom:6px;}
+  .ex-sentence{font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:12px;}
+  .controls-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  select{font-family:inherit; font-size:.88rem; font-weight:600; color:var(--navy); background:var(--gray); border:2px solid #e0e2e8; border-radius:8px; padding:7px 12px; cursor:pointer; min-width:130px;}
+  .btn-check{background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:.88rem; font-weight:700; cursor:pointer;}
+  .feedback{margin-top:8px; font-size:.85rem; font-weight:700; border-radius:6px; padding:6px 12px; display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e8f7ee; color:var(--green);}
+  .feedback.bad{background:#fdecee; color:var(--red-dark);}
+
+  .bottom-row{display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;}
+  .btn-all{background:var(--red); color:#fff; border:none; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+  .btn-reset{background:transparent; color:var(--navy); border:2px solid #e0e2e8; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+
+  .story-section{border-top:6px solid var(--red);}
+  .story-header{background:var(--red); color:#fff; padding:18px 24px;}
+  .story-header h2{margin:0 0 4px; font-size:1.15rem;}
+  .story-header p{margin:0; font-size:.85rem; opacity:.88;}
+  .story-body{padding:24px;}
+  .story-text{font-size:1.02rem; line-height:2;}
+  .story-select{font-size:.92rem; font-weight:600; color:var(--navy); background:#eef1f8; border:2px solid var(--navy-light); border-radius:6px; padding:3px 8px; margin:0 3px;}
+  .story-select.correct{border-color:var(--green); background:#e8f7ee; color:var(--green);}
+  .story-select.incorrect{border-color:var(--red); background:#fdecee; color:var(--red-dark);}
+  .story-actions{padding:0 24px 24px; display:flex; gap:12px; flex-wrap:wrap;}
+  .story-score{margin:0 24px 20px; padding:10px 16px; border-radius:8px; background:var(--gray); font-weight:700; color:var(--navy); display:none;}
+  .story-score.show{display:block;}
+
+  .brand-footer{text-align:center; margin-top:18px; color:#8a8f9c; font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="s1.html">&larr; Volver a Español 1</a>
+
+  <header>
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience" class="brand-logo">
+    <h1>Ser vs. Estar — Presente</h1>
+    <p>Elige el verbo correcto y su conjugación para cada oración</p>
+  </header>
+
+  <main>
+    <div class="ref-box">
+      <h3>Referencia rápida</h3>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <h4>Ser</h4>
+          <table>
+            <tr><td>yo</td><td>soy</td></tr>
+            <tr><td>tú</td><td>eres</td></tr>
+            <tr><td>él/ella</td><td>es</td></tr>
+            <tr><td>nosotros</td><td>somos</td></tr>
+            <tr><td>ellos/ellas</td><td>son</td></tr>
+          </table>
+        </div>
+        <div class="ref-card red">
+          <h4>Estar</h4>
+          <table>
+            <tr><td>yo</td><td>estoy</td></tr>
+            <tr><td>tú</td><td>estás</td></tr>
+            <tr><td>él/ella</td><td>está</td></tr>
+            <tr><td>nosotros</td><td>estamos</td></tr>
+            <tr><td>ellos/ellas</td><td>están</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score-cell correct"><div class="label">Correctas</div><div class="val" id="score-correct">0</div></div>
+      <div class="score-cell incorrect"><div class="label">Incorrectas</div><div class="val" id="score-incorrect">0</div></div>
+      <div class="score-cell"><div class="label">Restantes</div><div class="val" id="score-remaining">10</div></div>
+    </div>
+
+    <div class="exercises-wrapper">
+      <div id="exercises-container"></div>
+      <div class="bottom-row">
+        <button class="btn-all" onclick="checkAll()">Verificar todas</button>
+        <button class="btn-reset" onclick="resetAll()">Reiniciar</button>
+      </div>
+    </div>
+
+    <div class="story-section">
+      <div class="story-header">
+        <h2>Mini historia: Un día en la vida de Ana</h2>
+        <p>Completa la historia eligiendo la conjugación correcta</p>
+      </div>
+      <div class="story-body">
+        <div class="story-text" id="story-container"></div>
+      </div>
+      <div class="story-score" id="story-score-bar"></div>
+      <div class="story-actions">
+        <button class="btn-all" onclick="checkStory()">Verificar historia</button>
+        <button class="btn-reset" onclick="resetStory()">Reiniciar historia</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+
+<script>
+var exercises = [
+  { sentence: "Ana _____ profesora de matemáticas.", verb: "ser", form: "es" },
+  { sentence: "Nosotros _____ muy cansados hoy.", verb: "estar", form: "estamos" },
+  { sentence: "El restaurante _____ cerca de mi casa.", verb: "estar", form: "está" },
+  { sentence: "Mis padres _____ de Colombia.", verb: "ser", form: "son" },
+  { sentence: "Yo _____ estudiante de la universidad.", verb: "ser", form: "soy" },
+  { sentence: "¿Cómo _____ tú hoy? ¿Bien?", verb: "estar", form: "estás" },
+  { sentence: "Este libro _____ muy interesante.", verb: "ser", form: "es" },
+  { sentence: "La comida _____ muy caliente todavía.", verb: "estar", form: "está" },
+  { sentence: "Nosotros _____ contentos con las noticias.", verb: "estar", form: "estamos" },
+  { sentence: "Mi hermana y yo _____ muy altos.", verb: "ser", form: "somos" }
+];
+
+var verbForms = {
+  ser:   ["soy","eres","es","somos","son"],
+  estar: ["estoy","estás","está","estamos","están"]
+};
+
+var scores = { correct: 0, incorrect: 0, checked: {} };
+
+function renderExercises(){
+  var container = document.getElementById("exercises-container");
+  container.innerHTML = "";
+  for (var i = 0; i < exercises.length; i++){
+    var ex = exercises[i];
+    var div = document.createElement("div");
+    div.className = "exercise";
+    div.innerHTML =
+      '<div class="ex-num">Ejercicio ' + (i+1) + ' de ' + exercises.length + '</div>' +
+      '<div class="ex-sentence">' + ex.sentence + '</div>' +
+      '<div class="controls-row">' +
+        '<select id="verb-' + i + '" onchange="rebuildForms(' + i + ')">' +
+          '<option value="">- verbo -</option>' +
+          '<option value="ser">SER</option>' +
+          '<option value="estar">ESTAR</option>' +
+        '</select>' +
+        '<select id="form-' + i + '"><option value="">- conjugación -</option></select>' +
+        '<button class="btn-check" onclick="checkOne(' + i + ')">Verificar</button>' +
+      '</div>' +
+      '<div class="feedback" id="feedback-' + i + '"></div>';
+    container.appendChild(div);
+  }
+  updateScoreboard();
+}
+
+function rebuildForms(i){
+  var verb = document.getElementById("verb-" + i).value;
+  var sel = document.getElementById("form-" + i);
+  sel.innerHTML = '<option value="">- conjugación -</option>';
+  if (verb && verbForms[verb]){
+    verbForms[verb].forEach(function(f){
+      var opt = document.createElement("option");
+      opt.value = f;
+      opt.textContent = f;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+function checkOne(i){
+  var ex = exercises[i];
+  var verb = document.getElementById("verb-" + i).value;
+  var form = document.getElementById("form-" + i).value;
+  var fb = document.getElementById("feedback-" + i);
+  if (!verb || !form){
+    fb.className = "feedback show bad";
+    fb.textContent = "Selecciona el verbo y la conjugación.";
+    return;
+  }
+  var correct = (verb === ex.verb && form === ex.form);
+  if (!scores.checked[i]){
+    scores.checked[i] = true;
+    if (correct) scores.correct++; else scores.incorrect++;
+    updateScoreboard();
+  }
+  if (correct){
+    fb.className = "feedback show ok";
+    fb.textContent = "¡Correcto!";
+  } else {
+    fb.className = "feedback show bad";
+    fb.textContent = "No exactamente. Respuesta correcta: " + ex.verb.toUpperCase() + " → " + ex.form;
+  }
+}
+
+function checkAll(){ for (var i = 0; i < exercises.length; i++) checkOne(i); }
+function resetAll(){ scores = { correct: 0, incorrect: 0, checked: {} }; renderExercises(); }
+function updateScoreboard(){
+  document.getElementById("score-correct").textContent = scores.correct;
+  document.getElementById("score-incorrect").textContent = scores.incorrect;
+  document.getElementById("score-remaining").textContent = exercises.length - Object.keys(scores.checked).length;
+}
+
+var storyParts = [
+  { text: "Ana " },
+  { blank: true, form: "es" },
+  { text: " una mujer muy trabajadora. Ella " },
+  { blank: true, form: "es" },
+  { text: " de Puebla, pero ahora " },
+  { blank: true, form: "está" },
+  { text: " en la Ciudad de México por su trabajo. Su apartamento " },
+  { blank: true, form: "está" },
+  { text: " cerca de su oficina, y por eso Ana siempre " },
+  { blank: true, form: "está" },
+  { text: " tranquila con el tráfico. Ana " },
+  { blank: true, form: "es" },
+  { text: " ingeniera y trabaja en una empresa grande. Sus compañeros " },
+  { blank: true, form: "son" },
+  { text: " muy amables y siempre " },
+  { blank: true, form: "están" },
+  { text: " dispuestos a ayudar. Hoy Ana " },
+  { blank: true, form: "está" },
+  { text: " un poco cansada porque " },
+  { blank: true, form: "es" },
+  { text: " viernes y la semana " },
+  { blank: true, form: "es" },
+  { text: " larga." }
+];
+
+var allStoryOptions = ["soy","eres","es","somos","son","estoy","estás","está","estamos","están"];
+
+function renderStory(){
+  var container = document.getElementById("story-container");
+  container.innerHTML = "";
+  document.getElementById("story-score-bar").className = "story-score";
+  document.getElementById("story-score-bar").innerHTML = "";
+  for (var i = 0; i < storyParts.length; i++){
+    var part = storyParts[i];
+    if (!part.blank){
+      var span = document.createElement("span");
+      span.textContent = part.text;
+      container.appendChild(span);
+    } else {
+      var sel = document.createElement("select");
+      sel.className = "story-select";
+      sel.id = "story-blank-" + i;
+      var def = document.createElement("option");
+      def.value = ""; def.textContent = "- elige -";
+      sel.appendChild(def);
+      allStoryOptions.forEach(function(f){
+        var opt = document.createElement("option");
+        opt.value = f;
+        opt.textContent = f;
+        sel.appendChild(opt);
+      });
+      container.appendChild(sel);
+    }
+  }
+}
+
+function checkStory(){
+  var correct = 0, total = 0;
+  for (var i = 0; i < storyParts.length; i++){
+    var part = storyParts[i];
+    if (!part.blank) continue;
+    total++;
+    var sel = document.getElementById("story-blank-" + i);
+    sel.classList.remove("correct","incorrect");
+    if (!sel.value) continue;
+    if (sel.value === part.form){ sel.classList.add("correct"); correct++; }
+    else { sel.classList.add("incorrect"); }
+  }
+  var bar = document.getElementById("story-score-bar");
+  bar.className = "story-score show";
+  var pct = Math.round(correct / total * 100);
+  bar.textContent = "Resultado: " + correct + " / " + total + " correctas (" + pct + "%).";
+}
+
+function resetStory(){ renderStory(); }
+
+renderExercises();
+renderStory();
+</script>
+
+</body>
+</html>
