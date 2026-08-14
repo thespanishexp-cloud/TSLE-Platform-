@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --red: #E8392A;
-    --navy: #1B3A6B;
+    --red: #EE3535;
+    --navy: #0B4A7C;
     --navy-light: #2a5298;
     --bg: #F7F8FC;
     --white: #ffffff;
@@ -20,329 +20,68 @@
     --muted: #6b7a99;
     --shadow: 0 2px 12px rgba(27,58,107,0.10);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--bg);
-    color: var(--navy);
-    min-height: 100vh;
-  }
-
-  /* ── HEADER ── */
-  header {
-    background: var(--white);
-    border-bottom: 3px solid var(--red);
-    padding: 18px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: var(--shadow);
-  }
-  header img { height: 64px; }
-  .header-badge {
-    background: var(--navy);
-    color: #fff;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 6px 14px;
-    border-radius: 20px;
-  }
-
-  /* ── MAIN CONTAINER ── */
-  main {
-    max-width: 780px;
-    margin: 36px auto 60px;
-    padding: 0 20px;
-  }
-
-  /* ── PAGE TITLE ── */
-  .page-title {
-    background: var(--navy);
-    color: #fff;
-    border-radius: 12px 12px 0 0;
-    padding: 24px 32px 20px;
-  }
-  .page-title h1 {
-    font-size: 1.55rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    margin-bottom: 4px;
-  }
-  .page-title p {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.72);
-    font-weight: 400;
-  }
-
-  /* ── SCOREBOARD ── */
-  .scoreboard {
-    background: var(--navy-light);
-    display: flex;
-    gap: 0;
-    border-radius: 0;
-    overflow: hidden;
-  }
-  .score-cell {
-    flex: 1;
-    text-align: center;
-    padding: 10px 8px;
-    border-right: 1px solid rgba(255,255,255,0.15);
-    color: #fff;
-  }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); color: var(--navy); min-height: 100vh; }
+  header { background: var(--white); border-bottom: 3px solid var(--red); padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow); }
+  .header-badge { background: var(--navy); color: #fff; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; }
+  main { max-width: 780px; margin: 36px auto 60px; padding: 0 20px; }
+  .page-title { background: var(--navy); color: #fff; border-radius: 12px 12px 0 0; padding: 24px 32px 20px; }
+  .page-title h1 { font-size: 1.55rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .page-title p { font-size: 0.9rem; color: rgba(255,255,255,0.72); font-weight: 400; }
+  .scoreboard { background: var(--navy-light); display: flex; gap: 0; overflow: hidden; }
+  .score-cell { flex: 1; text-align: center; padding: 10px 8px; border-right: 1px solid rgba(255,255,255,0.15); color: #fff; }
   .score-cell:last-child { border-right: none; }
   .score-cell .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; }
   .score-cell .val { font-size: 1.4rem; font-weight: 800; margin-top: 2px; }
   .score-cell.correct .val { color: #81c784; }
   .score-cell.incorrect .val { color: #ef9a9a; }
   .score-cell.remaining .val { color: #fff; }
-
-  /* ── EXERCISES WRAPPER ── */
-  .exercises-wrapper {
-    background: var(--white);
-    border-radius: 0 0 12px 12px;
-    padding: 28px 32px;
-    box-shadow: var(--shadow);
-    margin-bottom: 32px;
-  }
-
-  /* ── SINGLE EXERCISE ── */
-  .exercise {
-    margin-bottom: 26px;
-    padding-bottom: 26px;
-    border-bottom: 1px dashed var(--border);
-  }
+  .exercises-wrapper { background: var(--white); border-radius: 0 0 12px 12px; padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 32px; }
+  .exercise { margin-bottom: 26px; padding-bottom: 26px; border-bottom: 1px dashed var(--border); }
   .exercise:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-  .ex-num {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: var(--red);
-    margin-bottom: 6px;
-  }
-  .ex-sentence {
-    font-size: 1.08rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 12px;
-    font-family: 'Lora', serif;
-    font-style: italic;
-  }
-
-  .controls-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  select {
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--navy);
-    background: var(--bg);
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 12px;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s;
-    min-width: 130px;
-  }
+  .ex-num { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--red); margin-bottom: 6px; }
+  .ex-sentence { font-size: 1.08rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; font-family: 'Lora', serif; font-style: italic; }
+  .controls-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  select { font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--navy); background: var(--bg); border: 2px solid var(--border); border-radius: 8px; padding: 7px 12px; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 130px; }
   select:focus { border-color: var(--navy); }
-
-  .btn-check {
-    background: var(--navy);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 20px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-  }
+  .btn-check { background: var(--navy); color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.1s; }
   .btn-check:hover { background: var(--navy-light); }
   .btn-check:active { transform: scale(0.97); }
-
-  .feedback {
-    margin-top: 8px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    border-radius: 6px;
-    padding: 6px 12px;
-    display: none;
-  }
+  .feedback { margin-top: 8px; font-size: 0.85rem; font-weight: 700; border-radius: 6px; padding: 6px 12px; display: none; }
   .feedback.show { display: block; }
   .feedback.correct { background: var(--correct-bg); color: var(--correct); }
   .feedback.incorrect { background: var(--incorrect-bg); color: var(--incorrect); }
-
-  /* ── BOTTOM BUTTONS ── */
-  .bottom-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-  .btn-all {
-    background: var(--red);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 26px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
+  .bottom-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+  .btn-all { background: var(--red); color: #fff; border: none; border-radius: 8px; padding: 10px 26px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
   .btn-all:hover { opacity: 0.88; }
-  .btn-reset {
-    background: transparent;
-    color: var(--navy);
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 26px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
+  .btn-reset { background: transparent; color: var(--navy); border: 2px solid var(--border); border-radius: 8px; padding: 10px 26px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: border-color 0.2s; }
   .btn-reset:hover { border-color: var(--navy); }
-
-  /* ── STORY SECTION ── */
-  .story-section {
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    margin-bottom: 32px;
-  }
-  .story-header {
-    background: var(--red);
-    color: #fff;
-    padding: 20px 32px;
-  }
-  .story-header h2 {
-    font-size: 1.25rem;
-    font-weight: 800;
-  }
-  .story-header p {
-    font-size: 0.85rem;
-    opacity: 0.85;
-    margin-top: 4px;
-  }
-  .story-body {
-    padding: 30px 32px;
-  }
-  .story-text {
-    font-family: 'Lora', serif;
-    font-size: 1.05rem;
-    line-height: 1.95;
-    color: #2c3e50;
-  }
-  .story-text .blank-group {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 3px;
-  }
-  .story-text select.story-select {
-    font-family: 'Lora', serif;
-    font-size: 0.95rem;
-    font-style: normal;
-    font-weight: 600;
-    color: var(--navy);
-    background: #eef1f8;
-    border: 2px solid var(--navy-light);
-    border-radius: 6px;
-    padding: 2px 8px;
-    cursor: pointer;
-    outline: none;
-    min-width: 100px;
-    transition: border-color 0.2s, background 0.2s;
-  }
+  .story-section { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 32px; }
+  .story-header { background: var(--red); color: #fff; padding: 20px 32px; }
+  .story-header h2 { font-size: 1.25rem; font-weight: 800; }
+  .story-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
+  .story-body { padding: 30px 32px; }
+  .story-text { font-family: 'Lora', serif; font-size: 1.05rem; line-height: 1.95; color: #2c3e50; }
+  .story-text .blank-group { display: inline-block; vertical-align: middle; margin: 0 3px; }
+  .story-text select.story-select { font-family: 'Lora', serif; font-size: 0.95rem; font-style: normal; font-weight: 600; color: var(--navy); background: #eef1f8; border: 2px solid var(--navy-light); border-radius: 6px; padding: 2px 8px; cursor: pointer; outline: none; min-width: 100px; transition: border-color 0.2s, background 0.2s; }
   .story-text select.story-select:focus { border-color: var(--red); background: #fff; }
   .story-text select.story-select.correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
   .story-text select.story-select.incorrect { border-color: var(--incorrect); background: var(--incorrect-bg); color: var(--incorrect); }
-
-  .story-actions {
-    padding: 0 32px 28px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .story-score {
-    padding: 10px 32px;
-    background: var(--bg);
-    border-top: 1px solid var(--border);
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--navy);
-    display: none;
-  }
+  .story-actions { padding: 0 32px 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .story-score { padding: 10px 32px; background: var(--bg); border-top: 1px solid var(--border); font-size: 0.88rem; font-weight: 700; color: var(--navy); display: none; }
   .story-score.show { display: block; }
-
-  /* ── REFERENCE BOX ── */
-  .ref-box {
-    background: var(--white);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 28px 32px;
-    margin-bottom: 32px;
-  }
-  .ref-box h3 {
-    font-size: 1rem;
-    font-weight: 800;
-    color: var(--navy);
-    margin-bottom: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    border-bottom: 2px solid var(--red);
-    padding-bottom: 8px;
-    display: inline-block;
-  }
-  .ref-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-  }
-  .ref-card {
-    background: var(--bg);
-    border-radius: 8px;
-    padding: 14px 18px;
-    border-left: 4px solid var(--navy);
-  }
+  .ref-box { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); padding: 28px 32px; margin-bottom: 32px; }
+  .ref-box h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 2px solid var(--red); padding-bottom: 8px; display: inline-block; }
+  .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ref-card { background: var(--bg); border-radius: 8px; padding: 14px 18px; border-left: 4px solid var(--navy); }
   .ref-card.red { border-left-color: var(--red); }
-  .ref-card h4 {
-    font-size: 0.82rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
+  .ref-card h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
   .ref-card table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   .ref-card table td { padding: 3px 6px; }
   .ref-card table td:first-child { color: var(--muted); font-weight: 600; }
   .ref-card table td:last-child { font-weight: 700; color: var(--navy); }
-
-  /* ── PRINT ── */
-  @media print {
-    header { box-shadow: none; }
-    .btn-check, .btn-all, .btn-reset, .btn-check-story, .btn-reset-story { display: none; }
-    body { background: white; }
-  }
-
   @media (max-width: 600px) {
     header { padding: 12px 16px; }
-    header img { height: 44px; }
     .exercises-wrapper, .story-body, .story-actions, .story-header, .ref-box { padding-left: 18px; padding-right: 18px; }
     .page-title { padding: 18px 18px 14px; }
     .ref-grid { grid-template-columns: 1fr; }
@@ -352,12 +91,11 @@
 <body>
 
 <header>
-  <img src="logo-tsle.png" alt="The Spanish Learning Experience">
-  <div id="logo-fallback" style="display:none; align-items:center; gap:10px;">
-    <div style="width:44px;height:44px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.2rem;">S</div>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div style="width:44px;height:44px;background:var(--red);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1.3rem;">S</div>
     <div>
-      <div style="font-weight:800;color:var(--navy);font-size:1rem;line-height:1.1;">The Spanish Learning Experience</div>
-      <div style="font-style:italic;color:var(--red);font-size:0.75rem;">Living the Language</div>
+      <div style="font-weight:800;color:var(--navy);font-size:1.1rem;line-height:1.2;">The Spanish Learning Experience</div>
+      <div style="font-style:italic;color:var(--red);font-size:0.78rem;">Living the Language</div>
     </div>
   </div>
   <span class="header-badge">Ejercicio de Gramática</span>
@@ -365,9 +103,8 @@
 
 <main>
 
-  <!-- REFERENCE TABLE -->
   <div class="ref-box">
-    <h3>📋 Referencia Rápida — Pretérito Simple</h3>
+    <h3>Referencia Rápida — Pretérito Simple</h3>
     <div class="ref-grid">
       <div class="ref-card">
         <h4>SER – Pretérito Simple</h4>
@@ -376,7 +113,6 @@
           <tr><td>tú</td><td>fuiste</td></tr>
           <tr><td>él/ella</td><td>fue</td></tr>
           <tr><td>nosotros</td><td>fuimos</td></tr>
-          <tr><td>vosotros</td><td>fuisteis</td></tr>
           <tr><td>ellos/ellas</td><td>fueron</td></tr>
         </table>
       </div>
@@ -387,14 +123,12 @@
           <tr><td>tú</td><td>estuviste</td></tr>
           <tr><td>él/ella</td><td>estuvo</td></tr>
           <tr><td>nosotros</td><td>estuvimos</td></tr>
-          <tr><td>vosotros</td><td>estuvisteis</td></tr>
           <tr><td>ellos/ellas</td><td>estuvieron</td></tr>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- EXERCISES -->
   <div class="page-title">
     <h1>Ser vs Estar — Pretérito Simple</h1>
     <p>Selecciona el verbo correcto (SER o ESTAR) y su conjugación para cada oración.</p>
@@ -407,15 +141,14 @@
   <div class="exercises-wrapper">
     <div id="exercises-container"></div>
     <div class="bottom-row">
-      <button class="btn-all" onclick="checkAll()">Verificar Todas ✓</button>
+      <button class="btn-all" onclick="checkAll()">Verificar Todas</button>
       <button class="btn-reset" onclick="resetAll()">Reiniciar</button>
     </div>
   </div>
 
-  <!-- STORY -->
   <div class="story-section">
     <div class="story-header">
-      <h2>📖 Historia: El Verano Inolvidable</h2>
+      <h2>Historia: El Verano Inolvidable</h2>
       <p>Completa la historia eligiendo el verbo correcto (SER o ESTAR) y la conjugación adecuada.</p>
     </div>
     <div class="story-body">
@@ -423,260 +156,228 @@
     </div>
     <div class="story-score" id="story-score-bar"></div>
     <div class="story-actions">
-      <button class="btn-all btn-check-story" onclick="checkStory()">Verificar Historia ✓</button>
-      <button class="btn-reset btn-reset-story" onclick="resetStory()">Reiniciar Historia</button>
+      <button class="btn-all" onclick="checkStory()">Verificar Historia</button>
+      <button class="btn-reset" onclick="resetStory()">Reiniciar Historia</button>
     </div>
   </div>
 
 </main>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
+  var exercises = [
+    { sentence: "La película _____ muy aburrida.", verb: "ser", form: "fue", hint: "Descripción permanente." },
+    { sentence: "Nosotros _____ en Madrid durante tres días.", verb: "estar", form: "estuvimos", hint: "Ubicación temporal." },
+    { sentence: "Ella _____ la mejor estudiante de la clase.", verb: "ser", form: "fue", hint: "Identidad / característica." },
+    { sentence: "¿Dónde _____ tú ayer por la noche?", verb: "estar", form: "estuviste", hint: "Ubicación en el pasado." },
+    { sentence: "El concierto _____ en el parque central.", verb: "ser", form: "fue", hint: "Eventos con SER." },
+    { sentence: "Los niños _____ enfermos toda la semana.", verb: "estar", form: "estuvieron", hint: "Estado físico temporal." },
+    { sentence: "Mi abuelo _____ médico durante 40 años.", verb: "ser", form: "fue", hint: "Profesión / identidad." },
+    { sentence: "Yo _____ muy nervioso antes del examen.", verb: "estar", form: "estuve", hint: "Estado emocional temporal." },
+    { sentence: "La reunión _____ muy larga y cansada.", verb: "ser", form: "fue", hint: "Descripción de un evento." },
+    { sentence: "Ellos _____ juntos en la biblioteca toda la tarde.", verb: "estar", form: "estuvieron", hint: "Ubicación temporal." },
+    { sentence: "La boda _____ en la iglesia del pueblo.", verb: "ser", form: "fue", hint: "Eventos con SER." },
+    { sentence: "¿_____ tú contento con los resultados?", verb: "estar", form: "estuviste", hint: "Estado emocional." },
+    { sentence: "El examen _____ muy difícil para todos.", verb: "ser", form: "fue", hint: "Descripción del evento." },
+    { sentence: "Nosotros _____ de acuerdo con la decisión.", verb: "estar", form: "estuvimos", hint: "Estado de opinión." },
+    { sentence: "Cervantes _____ el autor del Quijote.", verb: "ser", form: "fue", hint: "Identidad permanente." }
+  ];
 
-const exercises = [
-  { sentence: "La película _____ muy aburrida.", verb: "ser", form: "fue", hint: "Descripción permanente/característica." },
-  { sentence: "Nosotros _____ en Madrid durante tres días.", verb: "estar", form: "estuvimos", hint: "Ubicación temporal." },
-  { sentence: "Ella _____ la mejor estudiante de la clase.", verb: "ser", form: "fue", hint: "Identidad / característica." },
-  { sentence: "¿Dónde _____ tú ayer por la noche?", verb: "estar", form: "estuviste", hint: "Ubicación en el pasado." },
-  { sentence: "El concierto _____ en el parque central.", verb: "ser", form: "fue", hint: "Eventos — lugar con SER." },
-  { sentence: "Los niños _____ enfermos toda la semana.", verb: "estar", form: "estuvieron", hint: "Estado físico temporal." },
-  { sentence: "Mi abuelo _____ médico durante 40 años.", verb: "ser", form: "fue", hint: "Profesión / identidad." },
-  { sentence: "Yo _____ muy nervioso antes del examen.", verb: "estar", form: "estuve", hint: "Estado emocional temporal." },
-  { sentence: "La reunión _____ muy larga y cansada.", verb: "ser", form: "fue", hint: "Descripción de un evento." },
-  { sentence: "Ellos _____ juntos en la biblioteca toda la tarde.", verb: "estar", form: "estuvieron", hint: "Ubicación temporal." },
-  { sentence: "La boda _____ en la iglesia del pueblo.", verb: "ser", form: "fue", hint: "Eventos — con SER." },
-  { sentence: "¿_____ tú contento con los resultados?", verb: "estar", form: "Estuviste", hint: "Estado emocional." },
-  { sentence: "El examen _____ muy difícil para todos.", verb: "ser", form: "fue", hint: "Descripción del evento." },
-  { sentence: "Nosotros _____ de acuerdo con la decisión.", verb: "estar", form: "estuvimos", hint: "Estado de opinión." },
-  { sentence: "Cervantes _____ el autor del Quijote.", verb: "ser", form: "fue", hint: "Identidad permanente." },
-];
+  var verbForms = {
+    ser:   ["fui","fuiste","fue","fuimos","fueron"],
+    estar: ["estuve","estuviste","estuvo","estuvimos","estuvieron"]
+  };
 
-const verbForms = {
-  ser: ["fui","fuiste","fue","fuimos","fuisteis","fueron"],
-  estar: ["estuve","estuviste","estuvo","estuvimos","estuvisteis","estuvieron"],
-};
+  var scores = { correct: 0, incorrect: 0, checked: {} };
 
-let scores = { correct: 0, incorrect: 0, checked: new Set() };
-
-// ── RENDER EXERCISES ──────────────────────────────────────────────────────────
-
-function renderExercises() {
-  const container = document.getElementById('exercises-container');
-  container.innerHTML = '';
-  exercises.forEach((ex, i) => {
-    const div = document.createElement('div');
-    div.className = 'exercise';
-    div.id = `ex-${i}`;
-    div.innerHTML = `
-      <div class="ex-num">Ejercicio ${i+1} de ${exercises.length}</div>
-      <div class="ex-sentence">${ex.sentence}</div>
-      <div class="controls-row">
-        <select id="verb-${i}" onchange="rebuildForms(${i})">
-          <option value="">— verbo —</option>
-          <option value="ser">SER</option>
-          <option value="estar">ESTAR</option>
-        </select>
-        <select id="form-${i}">
-          <option value="">— conjugación —</option>
-        </select>
-        <button class="btn-check" onclick="checkOne(${i})">Verificar</button>
-      </div>
-      <div class="feedback" id="feedback-${i}"></div>
-    `;
-    container.appendChild(div);
-  });
-  updateScoreboard();
-}
-
-function rebuildForms(i) {
-  const verbSel = document.getElementById(`verb-${i}`);
-  const formSel = document.getElementById(`form-${i}`);
-  const verb = verbSel.value;
-  formSel.innerHTML = '<option value="">— conjugación —</option>';
-  if (verb && verbForms[verb]) {
-    verbForms[verb].forEach(f => {
-      const opt = document.createElement('option');
-      opt.value = f.toLowerCase();
-      opt.textContent = f.charAt(0).toUpperCase() + f.slice(1);
-      formSel.appendChild(opt);
-    });
-  }
-}
-
-function checkOne(i) {
-  const ex = exercises[i];
-  const verb = document.getElementById(`verb-${i}`).value;
-  const form = document.getElementById(`form-${i}`).value;
-  const fb = document.getElementById(`feedback-${i}`);
-  const wasChecked = scores.checked.has(i);
-
-  if (!verb || !form) {
-    fb.className = 'feedback show incorrect';
-    fb.textContent = '⚠️ Selecciona el verbo y la conjugación.';
-    return;
-  }
-
-  const correct = verb === ex.verb && form.toLowerCase() === ex.form.toLowerCase();
-
-  if (!wasChecked) {
-    scores.checked.add(i);
-    if (correct) scores.correct++;
-    else scores.incorrect++;
+  function renderExercises() {
+    var container = document.getElementById("exercises-container");
+    container.innerHTML = "";
+    for (var i = 0; i < exercises.length; i++) {
+      var ex = exercises[i];
+      var div = document.createElement("div");
+      div.className = "exercise";
+      div.id = "ex-" + i;
+      div.innerHTML =
+        "<div class='ex-num'>Ejercicio " + (i+1) + " de " + exercises.length + "</div>" +
+        "<div class='ex-sentence'>" + ex.sentence + "</div>" +
+        "<div class='controls-row'>" +
+          "<select id='verb-" + i + "' onchange='rebuildForms(" + i + ")'>" +
+            "<option value=''>- verbo -</option>" +
+            "<option value='ser'>SER</option>" +
+            "<option value='estar'>ESTAR</option>" +
+          "</select>" +
+          "<select id='form-" + i + "'><option value=''>- conjugación -</option></select>" +
+          "<button class='btn-check' onclick='checkOne(" + i + ")'>Verificar</button>" +
+        "</div>" +
+        "<div class='feedback' id='feedback-" + i + "'></div>";
+      container.appendChild(div);
+    }
     updateScoreboard();
   }
 
-  if (correct) {
-    fb.className = 'feedback show correct';
-    fb.textContent = `✅ ¡Correcto! "${ex.form}" — ${ex.hint}`;
-  } else {
-    fb.className = 'feedback show incorrect';
-    fb.textContent = `❌ Incorrecto. Respuesta: "${ex.form}". ${ex.hint}`;
-  }
-}
-
-function checkAll() {
-  exercises.forEach((_, i) => checkOne(i));
-}
-
-function resetAll() {
-  scores = { correct: 0, incorrect: 0, checked: new Set() };
-  renderExercises();
-}
-
-function updateScoreboard() {
-  document.getElementById('score-correct').textContent = scores.correct;
-  document.getElementById('score-incorrect').textContent = scores.incorrect;
-  document.getElementById('score-remaining').textContent = exercises.length - scores.checked.size;
-}
-
-// ── STORY ─────────────────────────────────────────────────────────────────────
-
-// Story parts: {text} = literal text, {blank} = dropdown
-// Each blank has: verb, form, options (all possible options shown)
-const storyParts = [
-  { text: "El verano pasado " },
-  { blank: true, verb: "ser", form: "fue", label: "A" }, // fue una aventura increíble
-  { text: " una aventura increíble para mi familia y para mí. Todo " },
-  { blank: true, verb: "ser", form: "fue", label: "B" }, // fue organizado
-  { text: " organizado con mucha anticipación. El destino " },
-  { blank: true, verb: "ser", form: "fue", label: "C" }, // fue México
-  { text: " México, un país que siempre " },
-  { blank: true, verb: "ser", form: "fue", label: "D" }, // fue mi sueño
-  { text: " mi sueño visitar.\n\nEl primer día nosotros " },
-  { blank: true, verb: "estar", form: "estuvimos", label: "E" }, // estuvimos
-  { text: " en el aeropuerto de la Ciudad de México durante casi tres horas porque el vuelo " },
-  { blank: true, verb: "estar", form: "estuvo", label: "F" }, // estuvo retrasado
-  { text: " retrasado. Yo " },
-  { blank: true, verb: "estar", form: "estuve", label: "G" }, // estuve nervioso
-  { text: " muy nervioso al principio, pero mis padres " },
-  { blank: true, verb: "estar", form: "estuvieron", label: "H" }, // estuvieron tranquilos
-  { text: " tranquilos todo el tiempo.\n\nCuando llegamos, el hotel " },
-  { blank: true, verb: "ser", form: "fue", label: "I" }, // fue impresionante
-  { text: " impresionante. La habitación " },
-  { blank: true, verb: "estar", form: "estuvo", label: "J" }, // estuvo lista
-  { text: " lista desde temprano, así que pudimos descansar. La primera noche la cena " },
-  { blank: true, verb: "ser", form: "fue", label: "K" }, // fue en un restaurante
-  { text: " en un restaurante tradicional donde los meseros " },
-  { blank: true, verb: "ser", form: "fueron", label: "L" }, // fueron muy amables
-  { text: " muy amables con nosotros.\n\nAl día siguiente visitamos Teotihuacán. La experiencia " },
-  { blank: true, verb: "ser", form: "fue", label: "M" }, // fue mágica
-  { text: " mágica. Subimos la Pirámide del Sol y " },
-  { blank: true, verb: "estar", form: "estuvimos", label: "N" }, // estuvimos arriba
-  { text: " arriba casi media hora. El calor " },
-  { blank: true, verb: "estar", form: "estuvo", label: "O" }, // estuvo insoportable
-  { text: " insoportable, pero la vista " },
-  { blank: true, verb: "ser", form: "fue", label: "P" }, // fue espectacular
-  { text: " espectacular. Mi hermana " },
-  { blank: true, verb: "estar", form: "estuvo", label: "Q" }, // estuvo emocionada
-  { text: " muy emocionada durante todo el recorrido.\n\nEn el tercer día, nosotros " },
-  { blank: true, verb: "estar", form: "estuvimos", label: "R" }, // estuvimos en el mercado
-  { text: " en el mercado de artesanías por la mañana. Los precios " },
-  { blank: true, verb: "ser", form: "fueron", label: "S" }, // fueron muy buenos
-  { text: " muy buenos y compramos muchos recuerdos. Mi madre " },
-  { blank: true, verb: "estar", form: "estuvo", label: "T" }, // estuvo encantada
-  { text: " encantada con las telas y los colores.\n\nEl último día " },
-  { blank: true, verb: "ser", form: "fue", label: "U" }, // fue triste
-  { text: " triste para todos. Nosotros " },
-  { blank: true, verb: "estar", form: "estuvimos", label: "V" }, // estuvimos en silencio
-  { text: " en silencio durante el camino al aeropuerto. Pero el viaje entero " },
-  { blank: true, verb: "ser", form: "fue", label: "W" }, // fue perfecto
-  { text: " perfecto. Sin duda, ese verano " },
-  { blank: true, verb: "ser", form: "fue", label: "X" }, // fue
-  { text: " el mejor de mi vida." },
-];
-
-// All possible options for every blank
-const allStoryOptions = [
-  "fui","fuiste","fue","fuimos","fuisteis","fueron",
-  "estuve","estuviste","estuvo","estuvimos","estuvisteis","estuvieron"
-];
-
-function renderStory() {
-  const container = document.getElementById('story-container');
-  container.innerHTML = '';
-  const scoreBar = document.getElementById('story-score-bar');
-  scoreBar.className = 'story-score';
-  scoreBar.innerHTML = '';
-
-  storyParts.forEach((part, i) => {
-    if (!part.blank) {
-      // Replace newlines with <br>
-      const span = document.createElement('span');
-      span.innerHTML = part.text.replace(/\n/g, '<br>');
-      container.appendChild(span);
-    } else {
-      const wrapper = document.createElement('span');
-      wrapper.className = 'blank-group';
-
-      const sel = document.createElement('select');
-      sel.className = 'story-select';
-      sel.id = `story-blank-${i}`;
-
-      const defaultOpt = document.createElement('option');
-      defaultOpt.value = '';
-      defaultOpt.textContent = '— elige —';
-      sel.appendChild(defaultOpt);
-
-      allStoryOptions.forEach(opt => {
-        const o = document.createElement('option');
-        o.value = opt;
-        o.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
-        sel.appendChild(o);
-      });
-
-      wrapper.appendChild(sel);
-      container.appendChild(wrapper);
+  function rebuildForms(i) {
+    var verb = document.getElementById("verb-" + i).value;
+    var formSel = document.getElementById("form-" + i);
+    formSel.innerHTML = "<option value=''>- conjugación -</option>";
+    if (verb && verbForms[verb]) {
+      for (var j = 0; j < verbForms[verb].length; j++) {
+        var f = verbForms[verb][j];
+        var opt = document.createElement("option");
+        opt.value = f.toLowerCase();
+        opt.textContent = f.charAt(0).toUpperCase() + f.slice(1);
+        formSel.appendChild(opt);
+      }
     }
-  });
-}
+  }
 
-function checkStory() {
-  let correct = 0, total = 0;
-  storyParts.forEach((part, i) => {
-    if (!part.blank) return;
-    total++;
-    const sel = document.getElementById(`story-blank-${i}`);
-    const val = sel.value.toLowerCase();
-    const expected = part.form.toLowerCase();
-    sel.classList.remove('correct','incorrect');
-    if (!val) return;
-    if (val === expected) { sel.classList.add('correct'); correct++; }
-    else { sel.classList.add('incorrect'); }
-  });
-  const bar = document.getElementById('story-score-bar');
-  bar.className = 'story-score show';
-  const pct = Math.round(correct/total*100);
-  const emoji = pct === 100 ? '🏆' : pct >= 70 ? '👍' : '📚';
-  bar.innerHTML = `${emoji} Resultado: <strong>${correct} / ${total}</strong> correctas (${pct}%). ${pct < 100 ? 'Los errores aparecen en rojo — ¡inténtalo de nuevo!' : '¡Perfecto! Excelente trabajo.'}`;
-}
+  function checkOne(i) {
+    var ex = exercises[i];
+    var verb = document.getElementById("verb-" + i).value;
+    var form = document.getElementById("form-" + i).value;
+    var fb   = document.getElementById("feedback-" + i);
+    if (!verb || !form) {
+      fb.className = "feedback show incorrect";
+      fb.textContent = "Selecciona el verbo y la conjugación.";
+      return;
+    }
+    var correct = (verb === ex.verb && form.toLowerCase() === ex.form.toLowerCase());
+    if (!scores.checked[i]) {
+      scores.checked[i] = true;
+      if (correct) scores.correct++; else scores.incorrect++;
+      updateScoreboard();
+    }
+    if (correct) {
+      fb.className = "feedback show correct";
+      fb.textContent = "¡Correcto! " + ex.hint;
+    } else {
+      fb.className = "feedback show incorrect";
+      fb.textContent = "Incorrecto. Respuesta: " + ex.form + ". " + ex.hint;
+    }
+  }
 
-function resetStory() {
+  function checkAll()  { for (var i = 0; i < exercises.length; i++) checkOne(i); }
+  function resetAll()  { scores = { correct: 0, incorrect: 0, checked: {} }; renderExercises(); }
+  function updateScoreboard() {
+    document.getElementById("score-correct").textContent   = scores.correct;
+    document.getElementById("score-incorrect").textContent = scores.incorrect;
+    document.getElementById("score-remaining").textContent = exercises.length - Object.keys(scores.checked).length;
+  }
+
+  var storyParts = [
+    { text: "El verano pasado " },
+    { blank: true, form: "fue" },
+    { text: " una aventura increíble para mi familia y para mí. Todo " },
+    { blank: true, form: "fue" },
+    { text: " organizado con mucha anticipación. El destino " },
+    { blank: true, form: "fue" },
+    { text: " México, un país que siempre " },
+    { blank: true, form: "fue" },
+    { text: " mi sueño visitar. El primer día nosotros " },
+    { blank: true, form: "estuvimos" },
+    { text: " en el aeropuerto de la Ciudad de México durante casi tres horas porque el vuelo " },
+    { blank: true, form: "estuvo" },
+    { text: " retrasado. Yo " },
+    { blank: true, form: "estuve" },
+    { text: " muy nervioso al principio, pero mis padres " },
+    { blank: true, form: "estuvieron" },
+    { text: " tranquilos todo el tiempo. Cuando llegamos, el hotel " },
+    { blank: true, form: "fue" },
+    { text: " impresionante. La habitación " },
+    { blank: true, form: "estuvo" },
+    { text: " lista desde temprano. La primera noche la cena " },
+    { blank: true, form: "fue" },
+    { text: " en un restaurante tradicional donde los meseros " },
+    { blank: true, form: "fueron" },
+    { text: " muy amables con nosotros. Al día siguiente visitamos Teotihuacán. La experiencia " },
+    { blank: true, form: "fue" },
+    { text: " mágica. Subimos la Pirámide del Sol y " },
+    { blank: true, form: "estuvimos" },
+    { text: " arriba casi media hora. El calor " },
+    { blank: true, form: "estuvo" },
+    { text: " insoportable, pero la vista " },
+    { blank: true, form: "fue" },
+    { text: " espectacular. Mi hermana " },
+    { blank: true, form: "estuvo" },
+    { text: " muy emocionada durante todo el recorrido. En el tercer día, nosotros " },
+    { blank: true, form: "estuvimos" },
+    { text: " en el mercado de artesanías por la mañana. Los precios " },
+    { blank: true, form: "fueron" },
+    { text: " muy buenos y compramos muchos recuerdos. Mi madre " },
+    { blank: true, form: "estuvo" },
+    { text: " encantada con las telas y los colores. El último día " },
+    { blank: true, form: "fue" },
+    { text: " triste para todos. Nosotros " },
+    { blank: true, form: "estuvimos" },
+    { text: " en silencio durante el camino al aeropuerto. Pero el viaje entero " },
+    { blank: true, form: "fue" },
+    { text: " perfecto. Sin duda, ese verano " },
+    { blank: true, form: "fue" },
+    { text: " el mejor de mi vida." }
+  ];
+
+  var allStoryOptions = [
+    "fui","fuiste","fue","fuimos","fueron",
+    "estuve","estuviste","estuvo","estuvimos","estuvieron"
+  ];
+
+  function renderStory() {
+    var container = document.getElementById("story-container");
+    container.innerHTML = "";
+    var scoreBar = document.getElementById("story-score-bar");
+    scoreBar.className = "story-score";
+    scoreBar.innerHTML = "";
+    for (var i = 0; i < storyParts.length; i++) {
+      var part = storyParts[i];
+      if (!part.blank) {
+        var span = document.createElement("span");
+        span.innerHTML = part.text;
+        container.appendChild(span);
+      } else {
+        var wrapper = document.createElement("span");
+        wrapper.className = "blank-group";
+        var sel = document.createElement("select");
+        sel.className = "story-select";
+        sel.id = "story-blank-" + i;
+        var def = document.createElement("option");
+        def.value = ""; def.textContent = "- elige -";
+        sel.appendChild(def);
+        for (var j = 0; j < allStoryOptions.length; j++) {
+          var o = document.createElement("option");
+          o.value = allStoryOptions[j];
+          o.textContent = allStoryOptions[j].charAt(0).toUpperCase() + allStoryOptions[j].slice(1);
+          sel.appendChild(o);
+        }
+        wrapper.appendChild(sel);
+        container.appendChild(wrapper);
+      }
+    }
+  }
+
+  function checkStory() {
+    var correct = 0, total = 0;
+    for (var i = 0; i < storyParts.length; i++) {
+      var part = storyParts[i];
+      if (!part.blank) continue;
+      total++;
+      var sel = document.getElementById("story-blank-" + i);
+      var val = sel.value.toLowerCase();
+      sel.classList.remove("correct","incorrect");
+      if (!val) continue;
+      if (val === part.form.toLowerCase()) { sel.classList.add("correct"); correct++; }
+      else { sel.classList.add("incorrect"); }
+    }
+    var bar = document.getElementById("story-score-bar");
+    bar.className = "story-score show";
+    var pct = Math.round(correct / total * 100);
+    var msg = pct === 100 ? "Perfecto." : (pct >= 70 ? "Buen trabajo." : "Sigue practicando.");
+    bar.innerHTML = "Resultado: <strong>" + correct + " / " + total + "</strong> correctas (" + pct + "%). " +
+      (pct < 100 ? "Los errores aparecen en rojo. " : "") + msg;
+  }
+
+  function resetStory() { renderStory(); }
+
+  renderExercises();
   renderStory();
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-renderExercises();
-renderStory();
 </script>
 </body>
 </html>
