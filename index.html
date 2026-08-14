@@ -1,3 +1,4 @@
+ex · HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,94 +6,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TSLE | Librería de Ejercicios</title>
 <style>
-  :root{
-    --navy:#0B4A7C;
-    --red:#EE3535;
-    --gray:#f4f5f7;
-    --text:#1f2430;
-  }
+  :root{ --navy:#0B4A7C; --red:#EE3535; --gray:#f4f5f7; --text:#1f2430; }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background:var(--gray);
-    color:var(--text);
-    display:flex;
-    justify-content:center;
-    padding:24px 12px 60px;
-  }
-  .wrap{max-width:680px; width:100%;}
-  header{
-    text-align:center;
-    padding:20px 0 30px;
-  }
-  header img{max-width:220px; height:auto;}
-  header p{color:#5a6070; margin-top:6px; font-size:0.95rem;}
-  h2.section-title{
-    font-size:0.8rem; text-transform:uppercase; letter-spacing:.06em;
-    color:#8a8f9c; margin:28px 0 12px; padding-left:4px;
-  }
-  .ex-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
-  .ex-card{
-    display:block; background:#fff; border-radius:10px; padding:18px 20px;
-    text-decoration:none; color:var(--text); box-shadow:0 2px 10px rgba(0,0,0,.06);
-    border-left:4px solid var(--red); transition:transform .15s ease;
-  }
-  .ex-card:hover{transform:translateX(4px);}
-  .ex-card .ex-title{font-weight:700; color:var(--navy); font-size:1.05rem; margin-bottom:4px;}
-  .ex-card .ex-desc{font-size:.88rem; color:#6b7280;}
-  .empty-note{
-    background:#fff; border-radius:10px; padding:20px; text-align:center;
-    color:#8a8f9c; font-size:.9rem; border:1px dashed #d0d5dd;
-  }
-  footer{text-align:center; margin-top:40px; color:#a5a9b5; font-size:.8rem;}
+  body{margin:0; font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--gray); color:var(--text); display:flex; justify-content:center; padding:24px 12px 60px;}
+  .wrap{max-width:720px; width:100%;}
+  header{text-align:center; padding:20px 0 30px;}
+  header img{max-width:200px; height:auto;}
+  header p{color:#5a6070; margin-top:8px; font-size:1rem;}
+  .level-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .level-card{display:block; background:#fff; border-radius:12px; padding:22px 20px; text-decoration:none; color:var(--text); box-shadow:0 2px 10px rgba(0,0,0,.06); border-top:4px solid var(--navy); text-align:center; transition:transform .15s ease;}
+  .level-card:hover{transform:translateY(-3px);}
+  .level-card .lvl-num{font-size:1.6rem; font-weight:800; color:var(--navy);}
+  .level-card .lvl-desc{font-size:.82rem; color:#6b7280; margin-top:4px;}
+  @media (max-width:480px){.level-grid{grid-template-columns:1fr;}}
+  footer{text-align:center; margin-top:36px; color:#a5a9b5; font-size:.8rem;}
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <header>
     <img src="logo-tsle.png" alt="The Spanish Learning Experience">
-    <p>Librería de ejercicios interactivos de gramática</p>
+    <p>Librería de ejercicios interactivos por nivel</p>
   </header>
-
-  <h2 class="section-title">Pretérito e Imperfecto</h2>
-  <ul class="ex-list">
-    <li>
-      <a class="ex-card" href="preterite-imperfect.html">
-        <div class="ex-title">Pretérito vs. Imperfecto</div>
-        <div class="ex-desc">Multiple choice, completar y mini-historia — 10 preguntas</div>
-      </a>
-    </li>
-    <li>
-      <a class="ex-card" href="ser-vs-estar-preterito.html">
-        <div class="ex-title">Ser vs. Estar — Pretérito Simple</div>
-        <div class="ex-desc">15 ejercicios + historia narrativa de 24 espacios</div>
-      </a>
-    </li>
-  </ul>
-
+ 
+  <div class="level-grid">
+    <a class="level-card" href="s1.html"><div class="lvl-num">Español 1</div><div class="lvl-desc">Presente, verbos irregulares, ser/estar</div></a>
+    <a class="level-card" href="s2.html"><div class="lvl-num">Español 2</div><div class="lvl-desc">Hacer/poner/deber, progresivo, indefinido</div></a>
+    <a class="level-card" href="s3.html"><div class="lvl-num">Español 3</div><div class="lvl-desc">Pretéritos, futuro, objetos, por/para</div></a>
+    <a class="level-card" href="s4.html"><div class="lvl-num">Español 4</div><div class="lvl-desc">Próximamente</div></a>
+    <a class="level-card" href="s5.html"><div class="lvl-num">Español 5</div><div class="lvl-desc">Próximamente</div></a>
+    <a class="level-card" href="s6.html"><div class="lvl-num">Español 6</div><div class="lvl-desc">Próximamente</div></a>
+    <a class="level-card" href="s7.html"><div class="lvl-num">Español 7</div><div class="lvl-desc">Próximamente</div></a>
+    <a class="level-card" href="s8.html"><div class="lvl-num">Español 8</div><div class="lvl-desc">Próximamente</div></a>
+  </div>
+ 
   <!--
-    ══════════════════════════════════════════════
-    CÓMO AGREGAR UN NUEVO EJERCICIO A ESTA LISTA:
-
-    1. Copia este bloque completo:
-
-    <li>
-      <a class="ex-card" href="NOMBRE-DEL-ARCHIVO.html">
-        <div class="ex-title">Título del ejercicio</div>
-        <div class="ex-desc">Breve descripción — qué tipo de preguntas tiene</div>
-      </a>
-    </li>
-
-    2. Pégalo justo antes de </ul> (arriba de esta línea de comentario)
-    3. Cambia NOMBRE-DEL-ARCHIVO.html por el nombre real de tu archivo
-    4. Cambia el título y la descripción
-    5. Commit changes — listo, ya aparece en el menú
-    ══════════════════════════════════════════════
+  ═══════════════════════════════════════
+  CÓMO AGREGAR UN EJERCICIO A UN NIVEL:
+  No se toca este archivo (index.html) — este archivo
+  solo enlaza a los niveles. Para agregar un ejercicio,
+  edita el archivo sN.html correspondiente (s1.html, s2.html...)
+  y sigue las instrucciones que están comentadas ahí dentro.
+  ═══════════════════════════════════════
   -->
-
+ 
   <footer>TSLE · The Spanish Learning Experience</footer>
 </div>
 </body>
 </html>
+ 
