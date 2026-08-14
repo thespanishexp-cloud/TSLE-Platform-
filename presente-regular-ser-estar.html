@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presente Regular + Ser vs. Estar | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-light:#1c5fa0;
+    --red:#EE3535;
+    --red-dark:#b8241f;
+    --gray:#f4f5f7;
+    --text:#1f2430;
+    --green:#1e8a4c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:var(--gray);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:24px 12px 60px;
+  }
+  .wrap{max-width:720px; width:100%;}
+  .back-link{display:inline-block; margin-bottom:16px; color:var(--navy); text-decoration:none; font-size:.9rem; font-weight:600;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+    border-radius:12px 12px 0 0;
+  }
+  .brand-logo{max-width:150px; height:auto; margin-bottom:14px; display:block;}
+  header h1{margin:0 0 4px; font-size:1.4rem;}
+  header p{margin:0; opacity:.85; font-size:.92rem;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+ 
+  .ref-box{padding:22px 24px; border-bottom:1px dashed #e0e2e8;}
+  .ref-box h3{font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--navy); margin:0 0 12px;}
+  .ref-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .ref-card{background:var(--gray); border-radius:8px; padding:12px 14px; border-left:4px solid var(--navy);}
+  .ref-card.red{border-left-color:var(--red);}
+  .ref-card h4{margin:0 0 8px; font-size:.76rem; color:#5a6070; text-transform:uppercase;}
+  .ref-card table{width:100%; border-collapse:collapse; font-size:.8rem;}
+  .ref-card td{padding:2px 2px;}
+  .ref-card td:first-child{color:#6b7280;}
+  .ref-card td:last-child{font-weight:700; color:var(--navy); text-align:right;}
+  @media (max-width:560px){.ref-grid{grid-template-columns:1fr;}}
+ 
+  .scoreboard{display:flex; background:var(--navy-light);}
+  .score-cell{flex:1; text-align:center; padding:10px 8px; color:#fff; border-right:1px solid rgba(255,255,255,.15);}
+  .score-cell:last-child{border-right:none;}
+  .score-cell .label{font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; opacity:.75;}
+  .score-cell .val{font-size:1.3rem; font-weight:800; margin-top:2px;}
+  .score-cell.correct .val{color:#8de3ab;}
+  .score-cell.incorrect .val{color:#ffb3b3;}
+ 
+  .exercises-wrapper{padding:24px;}
+  .exercise{margin-bottom:22px; padding-bottom:22px; border-bottom:1px dashed #e0e2e8;}
+  .exercise:last-child{border:none; margin:0; padding:0;}
+  .ex-num{font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--red); margin-bottom:6px;}
+  .ex-sentence{font-size:1.05rem; font-weight:600; color:var(--navy); margin-bottom:12px;}
+  .controls-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  input.fill-input{width:200px; padding:9px 12px; font-size:.95rem; border:2px solid #e0e2e8; border-radius:8px;}
+  .btn-check{background:var(--navy); color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:.88rem; font-weight:700; cursor:pointer;}
+  .feedback{margin-top:8px; font-size:.85rem; font-weight:700; border-radius:6px; padding:6px 12px; display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e8f7ee; color:var(--green);}
+  .feedback.bad{background:#fdecee; color:var(--red-dark);}
+ 
+  .bottom-row{display:flex; gap:12px; margin-top:10px; flex-wrap:wrap;}
+  .btn-all{background:var(--red); color:#fff; border:none; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+  .btn-reset{background:transparent; color:var(--navy); border:2px solid #e0e2e8; border-radius:8px; padding:10px 24px; font-size:.92rem; font-weight:700; cursor:pointer;}
+ 
+  .section-divider{background:var(--red); color:#fff; padding:14px 24px; font-weight:700; font-size:.95rem;}
+ 
+  .brand-footer{text-align:center; margin-top:18px; color:#8a8f9c; font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="s1.html">&larr; Volver a Español 1</a>
+ 
+  <header>
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience" class="brand-logo">
+    <h1>Presente Regular + Ser vs. Estar</h1>
+    <p>Conjuga los verbos regulares y elige entre Ser y Estar en presente</p>
+  </header>
+ 
+  <main>
+    <div class="ref-box">
+      <h3>Referencia rápida — Presente regular</h3>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <h4>-AR (hablar)</h4>
+          <table>
+            <tr><td>yo</td><td>hablo</td></tr>
+            <tr><td>tú</td><td>hablas</td></tr>
+            <tr><td>él/ella</td><td>habla</td></tr>
+            <tr><td>nosotros</td><td>hablamos</td></tr>
+            <tr><td>ellos</td><td>hablan</td></tr>
+          </table>
+        </div>
+        <div class="ref-card red">
+          <h4>-ER (comer)</h4>
+          <table>
+            <tr><td>yo</td><td>como</td></tr>
+            <tr><td>tú</td><td>comes</td></tr>
+            <tr><td>él/ella</td><td>come</td></tr>
+            <tr><td>nosotros</td><td>comemos</td></tr>
+            <tr><td>ellos</td><td>comen</td></tr>
+          </table>
+        </div>
+        <div class="ref-card">
+          <h4>-IR (vivir)</h4>
+          <table>
+            <tr><td>yo</td><td>vivo</td></tr>
+            <tr><td>tú</td><td>vives</td></tr>
+            <tr><td>él/ella</td><td>vive</td></tr>
+            <tr><td>nosotros</td><td>vivimos</td></tr>
+            <tr><td>ellos</td><td>viven</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="scoreboard">
+      <div class="score-cell correct"><div class="label">Correctas</div><div class="val" id="score-correct">0</div></div>
+      <div class="score-cell incorrect"><div class="label">Incorrectas</div><div class="val" id="score-incorrect">0</div></div>
+      <div class="score-cell"><div class="label">Restantes</div><div class="val" id="score-remaining">8</div></div>
+    </div>
+ 
+    <div class="section-divider">Parte 1 — Verbos regulares en presente</div>
+    <div class="exercises-wrapper" id="regular-wrapper">
+      <div id="regular-container"></div>
+    </div>
+ 
+    <div class="section-divider">Parte 2 — Ser vs. Estar en presente</div>
+    <div class="exercises-wrapper">
+      <div id="serestar-container"></div>
+      <div class="bottom-row">
+        <button class="btn-all" onclick="checkAll()">Verificar todas</button>
+        <button class="btn-reset" onclick="resetAll()">Reiniciar</button>
+      </div>
+    </div>
+  </main>
+ 
+  <div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+ 
+<script>
+var regularExercises = [
+  { sentence: "Ella _____ (comer) en la casa todos los días.", answer: "come" },
+  { sentence: "Yo _____ (hablar) español con mis amigos.", answer: "hablo" },
+  { sentence: "Nosotros _____ (vivir) en Guadalajara.", answer: "vivimos" },
+  { sentence: "Tú _____ (trabajar) en una oficina.", answer: "trabajas" }
+];
+ 
+var serEstarExercises = [
+  { sentence: "Mi hermana _____ doctora.", verb: "ser", form: "es" },
+  { sentence: "Nosotros _____ muy cansados hoy.", verb: "estar", form: "estamos" },
+  { sentence: "El café _____ en la mesa.", verb: "estar", form: "está" },
+  { sentence: "Ellos _____ de México.", verb: "ser", form: "son" }
+];
+ 
+var allExercises = [];
+regularExercises.forEach(function(ex){ allExercises.push({ type: "fill", data: ex }); });
+serEstarExercises.forEach(function(ex){ allExercises.push({ type: "serestar", data: ex }); });
+ 
+var verbForms = {
+  ser:   ["soy","eres","es","somos","son"],
+  estar: ["estoy","estás","está","estamos","están"]
+};
+ 
+var scores = { correct: 0, incorrect: 0, checked: {} };
+ 
+function normalize(str){
+  return str.trim().toLowerCase()
+    .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+}
+ 
+function renderRegular(){
+  var container = document.getElementById("regular-container");
+  container.innerHTML = "";
+  for (var i = 0; i < regularExercises.length; i++){
+    var ex = regularExercises[i];
+    var div = document.createElement("div");
+    div.className = "exercise";
+    div.innerHTML =
+      '<div class="ex-num">Ejercicio ' + (i+1) + ' de ' + regularExercises.length + '</div>' +
+      '<div class="ex-sentence">' + ex.sentence + '</div>' +
+      '<div class="controls-row">' +
+        '<input type="text" class="fill-input" id="reg-' + i + '" placeholder="Escribe la conjugación...">' +
+        '<button class="btn-check" onclick="checkRegular(' + i + ')">Verificar</button>' +
+      '</div>' +
+      '<div class="feedback" id="reg-feedback-' + i + '"></div>';
+    container.appendChild(div);
+  }
+}
+ 
+function checkRegular(i){
+  var ex = regularExercises[i];
+  var input = document.getElementById("reg-" + i);
+  var fb = document.getElementById("reg-feedback-" + i);
+  var key = "reg-" + i;
+  if (input.value.trim() === ""){
+    fb.className = "feedback show bad";
+    fb.textContent = "Escribe una respuesta.";
+    return;
+  }
+  var correct = normalize(input.value) === normalize(ex.answer);
+  if (!scores.checked[key]){
+    scores.checked[key] = true;
+    if (correct) scores.correct++; else scores.incorrect++;
+    updateScoreboard();
+  }
+  if (correct){
+    fb.className = "feedback show ok";
+    fb.textContent = "¡Correcto!";
+  } else {
+    fb.className = "feedback show bad";
+    fb.textContent = "No exactamente. Respuesta correcta: " + ex.answer;
+  }
+}
+ 
+function renderSerEstar(){
+  var container = document.getElementById("serestar-container");
+  container.innerHTML = "";
+  for (var i = 0; i < serEstarExercises.length; i++){
+    var ex = serEstarExercises[i];
+    var div = document.createElement("div");
+    div.className = "exercise";
+    div.innerHTML =
+      '<div class="ex-num">Ejercicio ' + (i+1) + ' de ' + serEstarExercises.length + '</div>' +
+      '<div class="ex-sentence">' + ex.sentence + '</div>' +
+      '<div class="controls-row">' +
+        '<select id="se-verb-' + i + '" onchange="rebuildForms(' + i + ')">' +
+          '<option value="">- verbo -</option>' +
+          '<option value="ser">SER</option>' +
+          '<option value="estar">ESTAR</option>' +
+        '</select>' +
+        '<select id="se-form-' + i + '"><option value="">- conjugación -</option></select>' +
+        '<button class="btn-check" onclick="checkSerEstar(' + i + ')">Verificar</button>' +
+      '</div>' +
+      '<div class="feedback" id="se-feedback-' + i + '"></div>';
+    container.appendChild(div);
+  }
+}
+ 
+function rebuildForms(i){
+  var verb = document.getElementById("se-verb-" + i).value;
+  var sel = document.getElementById("se-form-" + i);
+  sel.innerHTML = '<option value="">- conjugación -</option>';
+  if (verb && verbForms[verb]){
+    verbForms[verb].forEach(function(f){
+      var opt = document.createElement("option");
+      opt.value = f;
+      opt.textContent = f;
+      sel.appendChild(opt);
+    });
+  }
+}
+ 
+function checkSerEstar(i){
+  var ex = serEstarExercises[i];
+  var verb = document.getElementById("se-verb-" + i).value;
+  var form = document.getElementById("se-form-" + i).value;
+  var fb = document.getElementById("se-feedback-" + i);
+  var key = "se-" + i;
+  if (!verb || !form){
+    fb.className = "feedback show bad";
+    fb.textContent = "Selecciona el verbo y la conjugación.";
+    return;
+  }
+  var correct = (verb === ex.verb && form === ex.form);
+  if (!scores.checked[key]){
+    scores.checked[key] = true;
+    if (correct) scores.correct++; else scores.incorrect++;
+    updateScoreboard();
+  }
+  if (correct){
+    fb.className = "feedback show ok";
+    fb.textContent = "¡Correcto!";
+  } else {
+    fb.className = "feedback show bad";
+    fb.textContent = "No exactamente. Respuesta correcta: " + ex.form;
+  }
+}
+ 
+function checkAll(){
+  for (var i = 0; i < regularExercises.length; i++) checkRegular(i);
+  for (var j = 0; j < serEstarExercises.length; j++) checkSerEstar(j);
+}
+ 
+function resetAll(){
+  scores = { correct: 0, incorrect: 0, checked: {} };
+  renderRegular();
+  renderSerEstar();
+  updateScoreboard();
+}
+ 
+function updateScoreboard(){
+  document.getElementById("score-correct").textContent = scores.correct;
+  document.getElementById("score-incorrect").textContent = scores.incorrect;
+  document.getElementById("score-remaining").textContent = allExercises.length - Object.keys(scores.checked).length;
+}
+ 
+renderRegular();
+renderSerEstar();
+updateScoreboard();
+</script>
+ 
+</body>
+</html>
+ 
