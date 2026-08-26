@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Condicional Simple 2 | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-dark:#08375e;
+    --red:#EE3535;
+    --bg:#f4f7fa;
+    --card:#ffffff;
+    --border:#dbe4ec;
+    --text:#1c2b36;
+    --muted:#5a6b78;
+    --correct:#1e8e5a;
+    --correct-bg:#e6f6ee;
+    --incorrect-bg:#fdeaea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.5;
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+  }
+  .header-inner{
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  header img{
+    height:56px;
+    background:#fff;
+    border-radius:8px;
+    padding:6px;
+  }
+  header h1{
+    margin:0 0 4px 0;
+    font-size:1.6rem;
+  }
+  header p{
+    margin:0;
+    color:#dce8f2;
+    font-size:0.98rem;
+  }
+  .back-link{
+    max-width:900px;
+    margin:16px auto 0 auto;
+    padding:0 20px;
+  }
+  .back-link a{
+    color:var(--navy);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .back-link a:hover{ text-decoration:underline; }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 20px 0 20px;
+  }
+  .ref-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:6px solid var(--navy);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:24px;
+  }
+  .ref-box h2{
+    margin-top:0;
+    font-size:1.1rem;
+    color:var(--navy);
+  }
+  table.conj{
+    border-collapse:collapse;
+    width:100%;
+    margin-top:8px;
+    font-size:0.92rem;
+  }
+  table.conj th, table.conj td{
+    border:1px solid var(--border);
+    padding:6px 10px;
+    text-align:left;
+  }
+  table.conj th{
+    background:#eef4f9;
+    color:var(--navy);
+  }
+  .irreg-stems{
+    margin-top:14px;
+    font-size:0.92rem;
+  }
+  .irreg-stems span{
+    display:inline-block;
+    background:#eef4f9;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:3px 9px;
+    margin:3px 4px 0 0;
+  }
+  .score-bar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--navy-dark);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    padding:10px;
+    border-radius:0 0 10px 10px;
+    margin-bottom:22px;
+    font-weight:600;
+    font-size:0.95rem;
+    flex-wrap:wrap;
+  }
+  .score-bar span.num{
+    font-size:1.1rem;
+    margin-right:4px;
+  }
+  #score-correct .num{ color:#7CE0A6; }
+  #score-incorrect .num{ color:#ff9b9b; }
+  #score-remaining .num{ color:#ffd97c; }
+  section.block{
+    margin-bottom:34px;
+  }
+  section.block > h2{
+    color:var(--navy);
+    font-size:1.25rem;
+    border-bottom:2px solid var(--border);
+    padding-bottom:8px;
+  }
+  .exercise{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .exercise .num{
+    color:var(--red);
+    font-weight:700;
+    margin-right:6px;
+  }
+  .exercise .prompt{
+    margin-bottom:10px;
+    font-size:1.02rem;
+  }
+  .exercise .prompt em{
+    color:var(--muted);
+    font-style:normal;
+    background:#eef4f9;
+    padding:2px 6px;
+    border-radius:5px;
+    font-size:0.9rem;
+  }
+  .exercise .answer-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .exercise input[type="text"]{
+    flex:1;
+    min-width:160px;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:1rem;
+  }
+  .btn{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    font-size:0.95rem;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .btn:hover{ background:var(--navy-dark); }
+  .btn.red{ background:var(--red); }
+  .btn.red:hover{ background:#c92929; }
+  .feedback{
+    margin-top:10px;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:0.92rem;
+    display:none;
+  }
+  .feedback.correct{
+    display:block;
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .feedback.incorrect{
+    display:block;
+    background:var(--incorrect-bg);
+    color:var(--red);
+  }
+  .actions{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin:30px 0 40px 0;
+  }
+  /* Unir columnas */
+  .match-wrap{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .match-col{
+    flex:1;
+    min-width:260px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .match-item{
+    background:var(--card);
+    border:2px solid var(--border);
+    border-radius:8px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-size:0.96rem;
+    transition:border-color .15s, background .15s;
+  }
+  .match-item.selected{
+    border-color:var(--navy);
+    background:#eef4f9;
+  }
+  .match-item.matched{
+    border-color:var(--correct);
+    background:var(--correct-bg);
+    color:var(--correct);
+    cursor:default;
+  }
+  .match-item.wrong-flash{
+    border-color:var(--red);
+    background:var(--incorrect-bg);
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    padding:20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+    <div>
+      <h1>Condicional Simple 2</h1>
+      <p>Español 6 · Segundo set — más práctica con verbos regulares e irregulares</p>
+    </div>
+  </div>
+</header>
+
+<div class="back-link">
+  <a href="s6.html">← Volver a Español 6</a>
+</div>
+
+<main>
+
+  <div class="ref-box">
+    <h2>Referencia rápida: el condicional simple</h2>
+    <p>Se forma con el <strong>infinitivo completo</strong> + las terminaciones (iguales para -ar, -er, -ir):</p>
+    <table class="conj">
+      <tr><th>Pronombre</th><th>viajar</th><th>leer</th><th>vivir</th></tr>
+      <tr><td>yo</td><td>viajar<strong>ía</strong></td><td>leer<strong>ía</strong></td><td>vivir<strong>ía</strong></td></tr>
+      <tr><td>tú</td><td>viajar<strong>ías</strong></td><td>leer<strong>ías</strong></td><td>vivir<strong>ías</strong></td></tr>
+      <tr><td>él/ella/usted</td><td>viajar<strong>ía</strong></td><td>leer<strong>ía</strong></td><td>vivir<strong>ía</strong></td></tr>
+      <tr><td>nosotros</td><td>viajar<strong>íamos</strong></td><td>leer<strong>íamos</strong></td><td>vivir<strong>íamos</strong></td></tr>
+      <tr><td>ellos/ustedes</td><td>viajar<strong>ían</strong></td><td>leer<strong>ían</strong></td><td>vivir<strong>ían</strong></td></tr>
+    </table>
+    <div class="irreg-stems">
+      <strong>Verbos irregulares (raíz irregular + las mismas terminaciones):</strong><br>
+      <span>tener → tendr-</span>
+      <span>poner → pondr-</span>
+      <span>poder → podr-</span>
+      <span>saber → sabr-</span>
+      <span>decir → dir-</span>
+      <span>haber → habr-</span>
+      <span>caber → cabr-</span>
+      <span>valer → valdr-</span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span id="score-correct"><span class="num">0</span>Correctas</span>
+    <span id="score-incorrect"><span class="num">0</span>Incorrectas</span>
+    <span id="score-remaining"><span class="num">20</span>Restantes</span>
+  </div>
+
+  <section class="block">
+    <h2>Parte 1 — Verbos regulares</h2>
+    <div id="regular-exercises"></div>
+  </section>
+
+  <section class="block">
+    <h2>Parte 2 — Verbos irregulares</h2>
+    <div id="irregular-exercises"></div>
+  </section>
+
+  <div class="actions">
+    <button class="btn" id="check-all">Verificar Todas</button>
+    <button class="btn red" id="reset-all">Reiniciar</button>
+  </div>
+
+  <section class="block">
+    <h2>Unir columnas: hipótesis y planes cotidianos</h2>
+    <p style="color:var(--muted);font-size:0.92rem;">Haz clic en una frase de la columna A y luego en la frase de la columna B que la completa correctamente.</p>
+    <div class="match-wrap">
+      <div class="match-col" id="match-col-a"></div>
+      <div class="match-col" id="match-col-b"></div>
+    </div>
+    <div class="feedback" id="match-feedback"></div>
+  </section>
+
+</main>
+
+<footer>TSLE · The Spanish Learning Experience</footer>
+
+<script>
+// ---------- DATA ----------
+const regularExercises = [
+  { prompt: "yo / viajar a México el próximo verano", answer: "viajaría" },
+  { prompt: "tú / estudiar más antes del examen final", answer: "estudiarías" },
+  { prompt: "mi hermano / comprar una casa nueva algún día", answer: "compraría" },
+  { prompt: "nosotros / celebrar el cumpleaños en la playa", answer: "celebraríamos" },
+  { prompt: "ellos / cocinar algo diferente esta noche", answer: "cocinarían" },
+  { prompt: "mi jefe / cambiar el horario de la oficina", answer: "cambiaría" },
+  { prompt: "yo / ahorrar dinero para las vacaciones", answer: "ahorraría" },
+  { prompt: "usted / disfrutar más el fin de semana", answer: "disfrutaría" },
+  { prompt: "nosotros / aprender un nuevo idioma este año", answer: "aprenderíamos" },
+  { prompt: "tú / leer ese libro en un solo fin de semana", answer: "leerías" },
+  { prompt: "yo / escribir una carta a mi familia", answer: "escribiría" },
+  { prompt: "ellos / vivir en otra ciudad si pudieran", answer: "vivirían" },
+];
+
+const irregularExercises = [
+  { prompt: "yo / decir la verdad sobre mis planes", answer: "diría" },
+  { prompt: "en esa fiesta / haber mucha gente conocida", answer: "habría" },
+  { prompt: "todos los invitados / caber en la sala principal", answer: "cabrían" },
+  { prompt: "ese viaje / valer la pena para toda la familia", answer: "valdría" },
+  { prompt: "nosotros / tener más tiempo libre los fines de semana", answer: "tendríamos" },
+  { prompt: "mi amigo / poner música para la fiesta", answer: "pondría" },
+  { prompt: "yo / poder ayudarte con la mudanza el sábado", answer: "podría" },
+  { prompt: "tú / saber la respuesta si estudiaras un poco más", answer: "sabrías" },
+];
+
+const allExercises = [...regularExercises, ...irregularExercises];
+
+function normalize(s){
+  return s.trim().toLowerCase()
+    .replace(/á/g,"a").replace(/é/g,"e").replace(/í/g,"i").replace(/ó/g,"o").replace(/ú/g,"u");
+}
+
+// ---------- SCORE ----------
+let correctCount = 0;
+let incorrectCount = 0;
+const totalExercises = allExercises.length;
+
+function updateScore(){
+  document.querySelector("#score-correct .num").textContent = correctCount;
+  document.querySelector("#score-incorrect .num").textContent = incorrectCount;
+  document.querySelector("#score-remaining .num").textContent = Math.max(totalExercises - correctCount - incorrectCount, 0);
+}
+
+// ---------- BUILD EXERCISES ----------
+function buildExerciseBlock(container, list, offset){
+  list.forEach((ex, i) => {
+    const idx = offset + i;
+    const div = document.createElement("div");
+    div.className = "exercise";
+    div.dataset.answer = normalize(ex.answer);
+    div.dataset.checked = "false";
+    div.innerHTML = `
+      <div class="prompt"><span class="num">${idx + 1}.</span>${ex.prompt} <em>(condicional simple)</em></div>
+      <div class="answer-row">
+        <input type="text" placeholder="escribe la forma correcta">
+        <button class="btn verify-btn">Verificar</button>
+      </div>
+      <div class="feedback"></div>
+    `;
+    container.appendChild(div);
+
+    const input = div.querySelector("input");
+    const btn = div.querySelector(".verify-btn");
+    const fb = div.querySelector(".feedback");
+
+    function check(){
+      const val = normalize(input.value);
+      const wasChecked = div.dataset.checked === "true";
+      if(val === div.dataset.answer && val !== ""){
+        fb.textContent = "¡Correcto!";
+        fb.className = "feedback correct";
+        if(!wasChecked || div.dataset.result !== "correct"){
+          if(div.dataset.result === "incorrect"){ incorrectCount--; }
+          if(div.dataset.result !== "correct"){ correctCount++; }
+        }
+        div.dataset.result = "correct";
+      } else {
+        fb.textContent = `Incorrecto. La respuesta correcta es: "${ex.answer}"`;
+        fb.className = "feedback incorrect";
+        if(!wasChecked || div.dataset.result !== "incorrect"){
+          if(div.dataset.result === "correct"){ correctCount--; }
+          if(div.dataset.result !== "incorrect"){ incorrectCount++; }
+        }
+        div.dataset.result = "incorrect";
+      }
+      div.dataset.checked = "true";
+      updateScore();
+    }
+
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
+  });
+}
+
+buildExerciseBlock(document.getElementById("regular-exercises"), regularExercises, 0);
+buildExerciseBlock(document.getElementById("irregular-exercises"), irregularExercises, regularExercises.length);
+
+document.getElementById("check-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise .verify-btn").forEach(btn => btn.click());
+});
+
+document.getElementById("reset-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise").forEach(div => {
+    div.querySelector("input").value = "";
+    div.querySelector(".feedback").className = "feedback";
+    div.querySelector(".feedback").textContent = "";
+    div.dataset.checked = "false";
+    div.dataset.result = "";
+  });
+  correctCount = 0;
+  incorrectCount = 0;
+  updateScore();
+  buildMatch();
+});
+
+updateScore();
+
+// ---------- UNIR COLUMNAS ----------
+const matchPairs = [
+  { a: "¿Te gustaría", b: "ir al cine este fin de semana?" },
+  { a: "Con más tiempo,", b: "viajaríamos por toda Europa." },
+  { a: "Mi amigo dijo que", b: "llegaría un poco tarde a la reunión." },
+  { a: "¿Preferirías", b: "quedarte en casa o salir a caminar?" },
+  { a: "Sin dinero ahorrado,", b: "las vacaciones serían un problema." },
+  { a: "Yo, en tu lugar,", b: "hablaría con el profesor directamente." },
+  { a: "Nosotros", b: "necesitaríamos más información antes de decidir." },
+  { a: "¿Sabrías", b: "cómo llegar a la estación de tren?" },
+];
+
+let selectedA = null;
+let matchedCount = 0;
+
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildMatch(){
+  const colA = document.getElementById("match-col-a");
+  const colB = document.getElementById("match-col-b");
+  colA.innerHTML = "";
+  colB.innerHTML = "";
+  selectedA = null;
+  matchedCount = 0;
+  document.getElementById("match-feedback").className = "feedback";
+  document.getElementById("match-feedback").textContent = "";
+
+  const shuffledA = shuffle(matchPairs.map((p, i) => ({ text: p.a, id: i })));
+  const shuffledB = shuffle(matchPairs.map((p, i) => ({ text: p.b, id: i })));
+
+  shuffledA.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "match-item";
+    div.textContent = item.text;
+    div.dataset.id = item.id;
+    div.addEventListener("click", () => {
+      if(div.classList.contains("matched")) return;
+      document.querySelectorAll("#match-col-a .match-item").forEach(el => el.classList.remove("selected"));
+      div.classList.add("selected");
+      selectedA = div;
+    });
+    colA.appendChild(div);
+  });
+
+  shuffledB.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "match-item";
+    div.textContent = item.text;
+    div.dataset.id = item.id;
+    div.addEventListener("click", () => {
+      if(div.classList.contains("matched") || !selectedA) return;
+      if(selectedA.dataset.id === div.dataset.id){
+        selectedA.classList.remove("selected");
+        selectedA.classList.add("matched");
+        div.classList.add("matched");
+        selectedA = null;
+        matchedCount++;
+        const fb = document.getElementById("match-feedback");
+        if(matchedCount === matchPairs.length){
+          fb.className = "feedback correct";
+          fb.textContent = "¡Uniste todas las frases correctamente!";
+        }
+      } else {
+        div.classList.add("wrong-flash");
+        selectedA.classList.add("wrong-flash");
+        setTimeout(() => {
+          div.classList.remove("wrong-flash");
+          selectedA.classList.remove("wrong-flash");
+          selectedA.classList.remove("selected");
+          selectedA = null;
+        }, 500);
+      }
+    });
+    colB.appendChild(div);
+  });
+}
+buildMatch();
+</script>
+
+</body>
+</html>
