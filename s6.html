@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español 6 | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-dark:#08375e;
+    --red:#EE3535;
+    --bg:#f4f7fa;
+    --card:#ffffff;
+    --border:#dbe4ec;
+    --text:#1c2b36;
+    --muted:#5a6b78;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.5;
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+  }
+  .header-inner{
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  header img{
+    height:56px;
+    background:#fff;
+    border-radius:8px;
+    padding:6px;
+  }
+  header h1{
+    margin:0 0 4px 0;
+    font-size:1.6rem;
+  }
+  header p{
+    margin:0;
+    color:#dce8f2;
+    font-size:0.98rem;
+  }
+  .back-link{
+    max-width:900px;
+    margin:16px auto 0 auto;
+    padding:0 20px;
+  }
+  .back-link a{
+    color:var(--navy);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .back-link a:hover{ text-decoration:underline; }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 20px 0 20px;
+  }
+  h2.section-title{
+    color:var(--navy);
+    font-size:1.25rem;
+    border-bottom:2px solid var(--border);
+    padding-bottom:8px;
+    margin-top:36px;
+  }
+  ul.ex-list{
+    list-style:none;
+    margin:16px 0;
+    padding:0;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:14px;
+  }
+  a.ex-card{
+    display:block;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:5px solid var(--red);
+    border-radius:10px;
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--text);
+    transition:box-shadow .15s, transform .15s;
+  }
+  a.ex-card:hover{
+    box-shadow:0 4px 12px rgba(11,74,124,0.12);
+    transform:translateY(-2px);
+  }
+  .ex-title{
+    font-weight:700;
+    color:var(--navy);
+    margin-bottom:4px;
+    font-size:1.02rem;
+  }
+  .ex-desc{
+    color:var(--muted);
+    font-size:0.9rem;
+  }
+  .empty-note{
+    color:var(--muted);
+    font-style:italic;
+    padding:10px 0 20px 0;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    padding:20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+    <div>
+      <h1>Español 6</h1>
+      <p>Condicional simple · Subjuntivo presente · Subjuntivo perfecto</p>
+    </div>
+  </div>
+</header>
+
+<div class="back-link">
+  <a href="index.html">← Volver a la portada</a>
+</div>
+
+<main>
+
+  <h2 class="section-title">Condicional Simple</h2>
+  <ul class="ex-list">
+    <li>
+      <a class="ex-card" href="condicional-simple.html">
+        <div class="ex-title">Condicional Simple</div>
+        <div class="ex-desc">Verbos regulares e irregulares, mini-historia y unir columnas</div>
+      </a>
+    </li>
+  </ul>
+
+  <h2 class="section-title">Subjuntivo Presente</h2>
+  <div class="empty-note">Próximamente</div>
+
+  <h2 class="section-title">Subjuntivo Perfecto</h2>
+  <div class="empty-note">Próximamente</div>
+
+</main>
+
+<footer>TSLE · The Spanish Learning Experience</footer>
+
+</body>
+</html>
