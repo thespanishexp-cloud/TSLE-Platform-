@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subjuntivo Presente | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C;
+    --navy-dark:#08375e;
+    --red:#EE3535;
+    --bg:#f4f7fa;
+    --card:#ffffff;
+    --border:#dbe4ec;
+    --text:#1c2b36;
+    --muted:#5a6b78;
+    --correct:#1e8e5a;
+    --correct-bg:#e6f6ee;
+    --incorrect-bg:#fdeaea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.5;
+    padding-bottom:60px;
+  }
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:24px 20px;
+  }
+  .header-inner{
+    max-width:900px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  header img{
+    height:56px;
+    background:#fff;
+    border-radius:8px;
+    padding:6px;
+  }
+  header h1{
+    margin:0 0 4px 0;
+    font-size:1.6rem;
+  }
+  header p{
+    margin:0;
+    color:#dce8f2;
+    font-size:0.98rem;
+  }
+  .back-link{
+    max-width:900px;
+    margin:16px auto 0 auto;
+    padding:0 20px;
+  }
+  .back-link a{
+    color:var(--navy);
+    text-decoration:none;
+    font-weight:600;
+    font-size:0.95rem;
+  }
+  .back-link a:hover{ text-decoration:underline; }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:16px 20px 0 20px;
+  }
+  .ref-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:6px solid var(--navy);
+    border-radius:10px;
+    padding:18px 20px;
+    margin-bottom:24px;
+  }
+  .ref-box h2{
+    margin-top:0;
+    font-size:1.1rem;
+    color:var(--navy);
+  }
+  table.conj{
+    border-collapse:collapse;
+    width:100%;
+    margin-top:8px;
+    font-size:0.92rem;
+  }
+  table.conj th, table.conj td{
+    border:1px solid var(--border);
+    padding:6px 10px;
+    text-align:left;
+  }
+  table.conj th{
+    background:#eef4f9;
+    color:var(--navy);
+  }
+  .irreg-stems{
+    margin-top:14px;
+    font-size:0.92rem;
+  }
+  .irreg-stems span{
+    display:inline-block;
+    background:#eef4f9;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:3px 9px;
+    margin:3px 4px 0 0;
+  }
+  .trigger-note{
+    margin-top:14px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .score-bar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--navy-dark);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    padding:10px;
+    border-radius:0 0 10px 10px;
+    margin-bottom:22px;
+    font-weight:600;
+    font-size:0.95rem;
+    flex-wrap:wrap;
+  }
+  .score-bar span.num{
+    font-size:1.1rem;
+    margin-right:4px;
+  }
+  #score-correct .num{ color:#7CE0A6; }
+  #score-incorrect .num{ color:#ff9b9b; }
+  #score-remaining .num{ color:#ffd97c; }
+  section.block{
+    margin-bottom:34px;
+  }
+  section.block > h2{
+    color:var(--navy);
+    font-size:1.25rem;
+    border-bottom:2px solid var(--border);
+    padding-bottom:8px;
+  }
+  .exercise{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 18px;
+    margin-bottom:14px;
+  }
+  .exercise .num{
+    color:var(--red);
+    font-weight:700;
+    margin-right:6px;
+  }
+  .exercise .prompt{
+    margin-bottom:10px;
+    font-size:1.02rem;
+  }
+  .exercise .prompt em{
+    color:var(--muted);
+    font-style:normal;
+    background:#eef4f9;
+    padding:2px 6px;
+    border-radius:5px;
+    font-size:0.9rem;
+  }
+  .exercise .answer-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .exercise input[type="text"]{
+    flex:1;
+    min-width:160px;
+    padding:8px 10px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:1rem;
+  }
+  .btn{
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:8px 16px;
+    border-radius:6px;
+    font-size:0.95rem;
+    cursor:pointer;
+    font-weight:600;
+  }
+  .btn:hover{ background:var(--navy-dark); }
+  .btn.red{ background:var(--red); }
+  .btn.red:hover{ background:#c92929; }
+  .feedback{
+    margin-top:10px;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:0.92rem;
+    display:none;
+  }
+  .feedback.correct{
+    display:block;
+    background:var(--correct-bg);
+    color:var(--correct);
+  }
+  .feedback.incorrect{
+    display:block;
+    background:var(--incorrect-bg);
+    color:var(--red);
+  }
+  .actions{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    margin:30px 0 40px 0;
+  }
+  /* Mini-historia */
+  .story-text{
+    font-size:1.02rem;
+    line-height:1.9;
+  }
+  .story-text input[type="text"]{
+    width:130px;
+    padding:5px 8px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    font-size:0.98rem;
+    text-align:center;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.85rem;
+    padding:20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+    <div>
+      <h1>Subjuntivo Presente</h1>
+      <p>Español 6 · Deseos, dudas, emociones y expresiones impersonales</p>
+    </div>
+  </div>
+</header>
+
+<div class="back-link">
+  <a href="s6.html">← Volver a Español 6</a>
+</div>
+
+<main>
+
+  <div class="ref-box">
+    <h2>Referencia rápida: el subjuntivo presente</h2>
+    <p>Se forma tomando la raíz del <strong>yo</strong> del presente indicativo y usando las terminaciones "opuestas": los verbos -ar usan terminaciones de -er/-ir, y los verbos -er/-ir usan terminaciones de -ar.</p>
+    <table class="conj">
+      <tr><th>Pronombre</th><th>hablar</th><th>comer</th><th>vivir</th></tr>
+      <tr><td>yo</td><td>habl<strong>e</strong></td><td>com<strong>a</strong></td><td>viv<strong>a</strong></td></tr>
+      <tr><td>tú</td><td>habl<strong>es</strong></td><td>com<strong>as</strong></td><td>viv<strong>as</strong></td></tr>
+      <tr><td>él/ella/usted</td><td>habl<strong>e</strong></td><td>com<strong>a</strong></td><td>viv<strong>a</strong></td></tr>
+      <tr><td>nosotros</td><td>habl<strong>emos</strong></td><td>com<strong>amos</strong></td><td>viv<strong>amos</strong></td></tr>
+      <tr><td>ellos/ustedes</td><td>habl<strong>en</strong></td><td>com<strong>an</strong></td><td>viv<strong>an</strong></td></tr>
+    </table>
+    <div class="irreg-stems">
+      <strong>Verbos irregulares comunes:</strong><br>
+      <span>ser → sea</span>
+      <span>estar → esté</span>
+      <span>ir → vaya</span>
+      <span>saber → sepa</span>
+      <span>haber → haya</span>
+      <span>dar → dé</span>
+      <span>tener → tenga</span>
+      <span>hacer → haga</span>
+      <span>poder → pueda</span>
+      <span>venir → venga</span>
+    </div>
+    <p class="trigger-note">Se usa después de expresiones de deseo (<em>querer que, esperar que, ojalá que</em>), duda o negación (<em>dudar que, no creer que</em>), emoción (<em>alegrarse de que, es una lástima que</em>) y expresiones impersonales (<em>es importante que, es necesario que</em>).</p>
+  </div>
+
+  <div class="score-bar">
+    <span id="score-correct"><span class="num">0</span>Correctas</span>
+    <span id="score-incorrect"><span class="num">0</span>Incorrectas</span>
+    <span id="score-remaining"><span class="num">20</span>Restantes</span>
+  </div>
+
+  <section class="block">
+    <h2>Parte 1 — Verbos regulares</h2>
+    <div id="regular-exercises"></div>
+  </section>
+
+  <section class="block">
+    <h2>Parte 2 — Verbos irregulares y con cambio de raíz</h2>
+    <div id="irregular-exercises"></div>
+  </section>
+
+  <div class="actions">
+    <button class="btn" id="check-all">Verificar Todas</button>
+    <button class="btn red" id="reset-all">Reiniciar</button>
+  </div>
+
+  <section class="block">
+    <h2>Mini-historia: Los planes de Marta</h2>
+    <p style="color:var(--muted);font-size:0.92rem;">Completa la historia conjugando los verbos entre paréntesis en subjuntivo presente.</p>
+    <div class="story-text" id="story-text"></div>
+    <div class="actions">
+      <button class="btn" id="check-story">Verificar Historia</button>
+    </div>
+    <div class="feedback" id="story-feedback"></div>
+  </section>
+
+</main>
+
+<footer>TSLE · The Spanish Learning Experience</footer>
+
+<script>
+// ---------- DATA ----------
+const regularExercises = [
+  { prompt: "Espero que tú (llegar) a tiempo a la cita", answer: "llegues" },
+  { prompt: "Ojalá que ellos (ganar) el partido este sábado", answer: "ganen" },
+  { prompt: "Es importante que nosotros (estudiar) para el examen", answer: "estudiemos" },
+  { prompt: "Quiero que ella (escuchar) mi consejo", answer: "escuche" },
+  { prompt: "Dudo que él (terminar) el trabajo hoy", answer: "termine" },
+  { prompt: "Es necesario que ustedes (comer) algo antes de salir", answer: "coman" },
+  { prompt: "Recomiendo que tú (leer) ese libro este mes", answer: "leas" },
+  { prompt: "Es una lástima que nosotros (perder) el vuelo", answer: "perdamos" },
+  { prompt: "Prefiero que ellos (vivir) cerca de aquí", answer: "vivan" },
+  { prompt: "Espero que tú me (escribir) pronto", answer: "escribas" },
+  { prompt: "No creo que ella (abrir) la tienda hoy", answer: "abra" },
+  { prompt: "Es posible que nosotros (recibir) buenas noticias", answer: "recibamos" },
+];
+
+const irregularExercises = [
+  { prompt: "Quiero que tú (tener) más paciencia", answer: "tengas" },
+  { prompt: "Es importante que él (hacer) la tarea hoy", answer: "haga" },
+  { prompt: "Ojalá que nosotros (poder) viajar juntos este año", answer: "podamos" },
+  { prompt: "Espero que ella (ser) feliz en su nuevo trabajo", answer: "sea" },
+  { prompt: "Dudo que ellos (estar) listos todavía", answer: "estén" },
+  { prompt: "Es necesario que tú (ir) a la reunión mañana", answer: "vayas" },
+  { prompt: "Quiero que ustedes (saber) la verdad", answer: "sepan" },
+  { prompt: "Espero que (haber) suficiente comida para todos", answer: "haya" },
+];
+
+const allExercises = [...regularExercises, ...irregularExercises];
+
+function normalize(s){
+  return s.trim().toLowerCase()
+    .replace(/á/g,"a").replace(/é/g,"e").replace(/í/g,"i").replace(/ó/g,"o").replace(/ú/g,"u");
+}
+
+// ---------- SCORE ----------
+let correctCount = 0;
+let incorrectCount = 0;
+const totalExercises = allExercises.length;
+
+function updateScore(){
+  document.querySelector("#score-correct .num").textContent = correctCount;
+  document.querySelector("#score-incorrect .num").textContent = incorrectCount;
+  document.querySelector("#score-remaining .num").textContent = Math.max(totalExercises - correctCount - incorrectCount, 0);
+}
+
+// ---------- BUILD EXERCISES ----------
+function buildExerciseBlock(container, list, offset){
+  list.forEach((ex, i) => {
+    const idx = offset + i;
+    const div = document.createElement("div");
+    div.className = "exercise";
+    div.dataset.answer = normalize(ex.answer);
+    div.dataset.checked = "false";
+    div.innerHTML = `
+      <div class="prompt"><span class="num">${idx + 1}.</span>${ex.prompt} <em>(subjuntivo presente)</em></div>
+      <div class="answer-row">
+        <input type="text" placeholder="escribe la forma correcta">
+        <button class="btn verify-btn">Verificar</button>
+      </div>
+      <div class="feedback"></div>
+    `;
+    container.appendChild(div);
+
+    const input = div.querySelector("input");
+    const btn = div.querySelector(".verify-btn");
+    const fb = div.querySelector(".feedback");
+
+    function check(){
+      const val = normalize(input.value);
+      const wasChecked = div.dataset.checked === "true";
+      if(val === div.dataset.answer && val !== ""){
+        fb.textContent = "¡Correcto!";
+        fb.className = "feedback correct";
+        if(!wasChecked || div.dataset.result !== "correct"){
+          if(div.dataset.result === "incorrect"){ incorrectCount--; }
+          if(div.dataset.result !== "correct"){ correctCount++; }
+        }
+        div.dataset.result = "correct";
+      } else {
+        fb.textContent = `Incorrecto. La respuesta correcta es: "${ex.answer}"`;
+        fb.className = "feedback incorrect";
+        if(!wasChecked || div.dataset.result !== "incorrect"){
+          if(div.dataset.result === "correct"){ correctCount--; }
+          if(div.dataset.result !== "incorrect"){ incorrectCount++; }
+        }
+        div.dataset.result = "incorrect";
+      }
+      div.dataset.checked = "true";
+      updateScore();
+    }
+
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
+  });
+}
+
+buildExerciseBlock(document.getElementById("regular-exercises"), regularExercises, 0);
+buildExerciseBlock(document.getElementById("irregular-exercises"), irregularExercises, regularExercises.length);
+
+document.getElementById("check-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise .verify-btn").forEach(btn => btn.click());
+});
+
+document.getElementById("reset-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise").forEach(div => {
+    div.querySelector("input").value = "";
+    div.querySelector(".feedback").className = "feedback";
+    div.querySelector(".feedback").textContent = "";
+    div.dataset.checked = "false";
+    div.dataset.result = "";
+  });
+  correctCount = 0;
+  incorrectCount = 0;
+  updateScore();
+  document.getElementById("story-feedback").className = "feedback";
+  document.getElementById("story-feedback").textContent = "";
+  buildStory();
+});
+
+updateScore();
+
+// ---------- MINI-HISTORIA ----------
+const storyParts = [
+  { text: "Marta tiene muchos planes para este año. Espera que su familia " },
+  { blank: "venga", label: "venir" },
+  { text: " a visitarla en el verano. Ojalá que su hermano " },
+  { blank: "consiga", label: "conseguir" },
+  { text: " el trabajo que tanto quiere. Ella quiere que sus amigos " },
+  { blank: "estén", label: "estar" },
+  { text: " presentes en su graduación. Es importante que todos " },
+  { blank: "lleguen", label: "llegar" },
+  { text: " temprano ese día. Marta también espera que " },
+  { blank: "haga", label: "hacer" },
+  { text: " buen tiempo para la fiesta al aire libre. Sus padres quieren que ella " },
+  { blank: "siga", label: "seguir" },
+  { text: " estudiando después de graduarse. Ojalá que este año " },
+  { blank: "sea", label: "ser" },
+  { text: " el mejor de su vida. Todos esperan que las cosas " },
+  { blank: "salgan", label: "salir" },
+  { text: " bien." }
+];
+
+function buildStory(){
+  const container = document.getElementById("story-text");
+  container.innerHTML = "";
+  storyParts.forEach(part => {
+    if(part.text){
+      container.appendChild(document.createTextNode(part.text));
+    } else {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.dataset.answer = normalize(part.blank);
+      input.placeholder = `(${part.label})`;
+      container.appendChild(input);
+    }
+  });
+}
+buildStory();
+
+document.getElementById("check-story").addEventListener("click", () => {
+  const inputs = document.querySelectorAll("#story-text input");
+  let correct = 0;
+  inputs.forEach(input => {
+    if(normalize(input.value) === input.dataset.answer){
+      input.style.borderColor = "var(--correct)";
+      input.style.background = "var(--correct-bg)";
+      correct++;
+    } else {
+      input.style.borderColor = "var(--red)";
+      input.style.background = "var(--incorrect-bg)";
+    }
+  });
+  const fb = document.getElementById("story-feedback");
+  fb.className = correct === inputs.length ? "feedback correct" : "feedback incorrect";
+  fb.textContent = `Tienes ${correct} de ${inputs.length} espacios correctos.` +
+    (correct < inputs.length ? " Revisa los espacios en rojo." : " ¡Excelente trabajo!");
+});
+</script>
+
+</body>
+</html>
