@@ -3,526 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subjuntivo Presente 3 | TSLE</title>
+<title>Español 3 | TSLE</title>
 <style>
-  :root{
-    --navy:#0B4A7C;
-    --navy-dark:#08375e;
-    --red:#EE3535;
-    --bg:#f4f7fa;
-    --card:#ffffff;
-    --border:#dbe4ec;
-    --text:#1c2b36;
-    --muted:#5a6b78;
-    --correct:#1e8e5a;
-    --correct-bg:#e6f6ee;
-    --incorrect-bg:#fdeaea;
-  }
+  :root{ --navy:#0B4A7C; --red:#EE3535; --gray:#f4f5f7; --text:#1f2430; }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:'Segoe UI', Arial, sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.5;
-    padding-bottom:60px;
-  }
-  header{
-    background:var(--navy);
-    color:#fff;
-    padding:24px 20px;
-  }
-  .header-inner{
-    max-width:900px;
-    margin:0 auto;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    flex-wrap:wrap;
-  }
-  header img{
-    height:56px;
-    background:#fff;
-    border-radius:8px;
-    padding:6px;
-  }
-  header h1{
-    margin:0 0 4px 0;
-    font-size:1.6rem;
-  }
-  header p{
-    margin:0;
-    color:#dce8f2;
-    font-size:0.98rem;
-  }
-  .back-link{
-    max-width:900px;
-    margin:16px auto 0 auto;
-    padding:0 20px;
-  }
-  .back-link a{
-    color:var(--navy);
-    text-decoration:none;
-    font-weight:600;
-    font-size:0.95rem;
-  }
-  .back-link a:hover{ text-decoration:underline; }
-  main{
-    max-width:900px;
-    margin:0 auto;
-    padding:16px 20px 0 20px;
-  }
-  .ref-box{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-left:6px solid var(--navy);
-    border-radius:10px;
-    padding:18px 20px;
-    margin-bottom:24px;
-  }
-  .ref-box h2{
-    margin-top:0;
-    font-size:1.1rem;
-    color:var(--navy);
-  }
-  .irreg-stems{
-    margin-top:14px;
-    font-size:0.92rem;
-  }
-  .irreg-stems span{
-    display:inline-block;
-    background:#eef4f9;
-    border:1px solid var(--border);
-    border-radius:6px;
-    padding:3px 9px;
-    margin:3px 4px 0 0;
-  }
-  .trigger-note{
-    margin-top:14px;
-    font-size:0.9rem;
-    color:var(--muted);
-  }
-  .score-bar{
-    position:sticky;
-    top:0;
-    z-index:10;
-    background:var(--navy-dark);
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    gap:28px;
-    padding:10px;
-    border-radius:0 0 10px 10px;
-    margin-bottom:22px;
-    font-weight:600;
-    font-size:0.95rem;
-    flex-wrap:wrap;
-  }
-  .score-bar span.num{
-    font-size:1.1rem;
-    margin-right:4px;
-  }
-  #score-correct .num{ color:#7CE0A6; }
-  #score-incorrect .num{ color:#ff9b9b; }
-  #score-remaining .num{ color:#ffd97c; }
-  section.block{
-    margin-bottom:34px;
-  }
-  section.block > h2{
-    color:var(--navy);
-    font-size:1.25rem;
-    border-bottom:2px solid var(--border);
-    padding-bottom:8px;
-  }
-  .exercise{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:16px 18px;
-    margin-bottom:14px;
-  }
-  .exercise .num{
-    color:var(--red);
-    font-weight:700;
-    margin-right:6px;
-  }
-  .exercise .prompt{
-    margin-bottom:10px;
-    font-size:1.02rem;
-  }
-  .exercise .prompt em{
-    color:var(--muted);
-    font-style:normal;
-    background:#eef4f9;
-    padding:2px 6px;
-    border-radius:5px;
-    font-size:0.9rem;
-  }
-  .exercise .answer-row{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-  .exercise input[type="text"]{
-    flex:1;
-    min-width:160px;
-    padding:8px 10px;
-    border:1px solid var(--border);
-    border-radius:6px;
-    font-size:1rem;
-  }
-  .btn{
-    background:var(--navy);
-    color:#fff;
-    border:none;
-    padding:8px 16px;
-    border-radius:6px;
-    font-size:0.95rem;
-    cursor:pointer;
-    font-weight:600;
-  }
-  .btn:hover{ background:var(--navy-dark); }
-  .btn.red{ background:var(--red); }
-  .btn.red:hover{ background:#c92929; }
-  .feedback{
-    margin-top:10px;
-    padding:8px 12px;
-    border-radius:6px;
-    font-size:0.92rem;
-    display:none;
-  }
-  .feedback.correct{
-    display:block;
-    background:var(--correct-bg);
-    color:var(--correct);
-  }
-  .feedback.incorrect{
-    display:block;
-    background:var(--incorrect-bg);
-    color:var(--red);
-  }
-  .actions{
-    display:flex;
-    justify-content:center;
-    gap:16px;
-    margin:30px 0 40px 0;
-  }
-  .match-wrap{
-    display:flex;
-    gap:24px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .match-col{
-    flex:1;
-    min-width:260px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-  .match-item{
-    background:var(--card);
-    border:2px solid var(--border);
-    border-radius:8px;
-    padding:10px 14px;
-    cursor:pointer;
-    font-size:0.96rem;
-    transition:border-color .15s, background .15s;
-  }
-  .match-item.selected{
-    border-color:var(--navy);
-    background:#eef4f9;
-  }
-  .match-item.matched{
-    border-color:var(--correct);
-    background:var(--correct-bg);
-    color:var(--correct);
-    cursor:default;
-  }
-  .match-item.wrong-flash{
-    border-color:var(--red);
-    background:var(--incorrect-bg);
-  }
-  footer{
-    text-align:center;
-    color:var(--muted);
-    font-size:0.85rem;
-    padding:20px;
-  }
+  body{margin:0; font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:var(--gray); color:var(--text); display:flex; justify-content:center; padding:24px 12px 60px;}
+  .wrap{max-width:720px; width:100%;}
+  .back-link{display:inline-block; margin-bottom:16px; color:var(--navy); text-decoration:none; font-size:.9rem; font-weight:600;}
+  header{background:var(--navy); color:#fff; padding:22px 24px; border-radius:12px 12px 0 0;}
+  header img{max-width:150px; height:auto; margin-bottom:10px; display:block;}
+  header h1{margin:0 0 4px; font-size:1.35rem;}
+  header p{margin:0; opacity:.85; font-size:.9rem;}
+  main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:24px;}
+  h2.section-title{font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:#8a8f9c; margin:22px 0 10px;}
+  h2.section-title:first-child{margin-top:0;}
+  .ex-list{list-style:none; margin:0 0 4px; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .ex-card{display:block; background:var(--gray); border-radius:10px; padding:16px 18px; text-decoration:none; color:var(--text); border-left:4px solid var(--red);}
+  .ex-card .ex-title{font-weight:700; color:var(--navy); font-size:1rem; margin-bottom:3px;}
+  .ex-card .ex-desc{font-size:.85rem; color:#6b7280;}
+  .empty-note{background:var(--gray); border-radius:10px; padding:22px; text-align:center; color:#8a8f9c; font-size:.9rem; border:1px dashed #d0d5dd;}
+  footer{text-align:center; margin-top:18px; color:#a5a9b5; font-size:.8rem;}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <a class="back-link" href="index.html">&larr; Volver a todos los niveles</a>
+  <header>
+    <img src="logo-tsle.png" alt="TSLE">
+    <h1>Español 3</h1>
+    <p>Pretéritos, futuro, pretérito perfecto, objetos, por y para</p>
+  </header>
+  <main>
 
-<header>
-  <div class="header-inner">
-    <img src="logo-tsle.png" alt="The Spanish Learning Experience">
-    <div>
-      <h1>Subjuntivo Presente 3</h1>
-      <p>Español 6 · Tercer set — verbos con cambio de raíz</p>
-    </div>
-  </div>
-</header>
+    <h2 class="section-title">Pretérito vs. Imperfecto</h2>
+    <ul class="ex-list">
+      <li>
+        <a class="ex-card" href="preterite-imperfect.html">
+          <div class="ex-title">Pretérito vs. Imperfecto</div>
+          <div class="ex-desc">Multiple choice, completar y mini-historia — 10 preguntas</div>
+        </a>
+      </li>
+      <li>
+        <a class="ex-card" href="historia-preterito-imperfecto.html">
+          <div class="ex-title">Historia: El accidente en la carretera</div>
+          <div class="ex-desc">25 espacios + vocabulario clave — nivel medio</div>
+        </a>
+      </li>
+    </ul>
 
-<div class="back-link">
-  <a href="s6.html">← Volver a Español 6</a>
+    <h2 class="section-title">Historias narrativas</h2>
+    <ul class="ex-list">
+      <li>
+        <a class="ex-card" href="historia-vida-mario.html">
+          <div class="ex-title">Historia: La vida de Mario</div>
+          <div class="ex-desc">35 conjugaciones a elegir + vocabulario + 5 preguntas de comprensión</div>
+        </a>
+      </li>
+      <li>
+        <a class="ex-card" href="historia-vida-albert.html">
+          <div class="ex-title">Historia: La vida de Albert</div>
+          <div class="ex-desc">35 conjugaciones con menú desplegable + vocabulario + comprensión</div>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="section-title">Por y Para</h2>
+    <ul class="ex-list">
+      <li>
+        <a class="ex-card" href="por-para.html">
+          <div class="ex-title">Por y Para</div>
+          <div class="ex-desc">Explicación + 15 ejercicios + historia + unir columnas</div>
+        </a>
+      </li>
+      <li>
+        <a class="ex-card" href="por-para2.html">
+          <div class="ex-title">Por y Para 2</div>
+          <div class="ex-desc">10 pares para unir columnas + 10 traducciones del inglés</div>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="section-title">Preposiciones</h2>
+    <ul class="ex-list">
+      <li>
+        <a class="ex-card" href="preposiciones1.html">
+          <div class="ex-title">Preposiciones</div>
+          <div class="ex-desc">En, de, a, con, sin, desde, hasta, hacia, sobre, entre, durante — 15 ejercicios + historia larga</div>
+        </a>
+      </li>
+      <li>
+        <a class="ex-card" href="preposiciones2.html">
+          <div class="ex-title">Preposiciones 2</div>
+          <div class="ex-desc">10 pares para unir columnas + 10 traducciones del inglés</div>
+        </a>
+      </li>
+    </ul>
+
+    <h2 class="section-title">Futuro</h2>
+    <div class="empty-note">Próximamente</div>
+
+    <h2 class="section-title">Pretérito Perfecto</h2>
+    <div class="empty-note">Próximamente</div>
+
+    <h2 class="section-title">Objetos Directos e Indirectos</h2>
+    <div class="empty-note">Próximamente</div>
+
+    <!--
+    ═══════════════════════════════════════
+    CÓMO AGREGAR UN EJERCICIO NUEVO A ESTE NIVEL:
+
+    1. Sube tu archivo HTML del ejercicio nuevo al repositorio
+       (Add file → Create new file), igual que siempre.
+
+    2. Si la sección todavía dice "Próximamente" (empty-note),
+       BORRA esa línea completa y en su lugar escribe:
+
+       <ul class="ex-list">
+         <li>
+           <a class="ex-card" href="NOMBRE-DEL-ARCHIVO.html">
+             <div class="ex-title">Título del ejercicio</div>
+             <div class="ex-desc">Breve descripción</div>
+           </a>
+         </li>
+       </ul>
+
+    3. Si la sección YA tiene un <ul class="ex-list">...</ul> con
+       ejercicios dentro, NO lo reemplaces — solo agrega un <li>...</li>
+       nuevo justo antes del </ul> que cierra esa sección, para no
+       perder los ejercicios que ya estaban.
+
+    4. Cambia NOMBRE-DEL-ARCHIVO.html, el título y la descripción.
+    5. Commit changes.
+    ═══════════════════════════════════════
+    -->
+
+  </main>
+  <footer>TSLE &middot; The Spanish Learning Experience</footer>
 </div>
-
-<main>
-
-  <div class="ref-box">
-    <h2>Referencia rápida: el subjuntivo presente</h2>
-    <p>Raíz del <strong>yo</strong> del presente indicativo + terminaciones "opuestas". Los verbos con cambio de raíz mantienen ese cambio en el subjuntivo (excepto nosotros/vosotros en -ar/-er).</p>
-    <div class="irreg-stems">
-      <strong>Verbos con cambio de raíz de este set:</strong><br>
-      <span>pensar (e→ie) → piense</span>
-      <span>volver (o→ue) → vuelva</span>
-      <span>querer (e→ie) → quiera</span>
-      <span>jugar (u→ue) → juegue</span>
-      <span>sentir (e→ie) → sienta</span>
-      <span>seguir (e→i) → siga</span>
-      <span>oír → oiga</span>
-      <span>ver → vea</span>
-    </div>
-    <p class="trigger-note">Se usa después de expresiones de deseo (<em>querer que, esperar que, ojalá que</em>), duda (<em>dudar que</em>) y expresiones impersonales (<em>es importante que, es necesario que</em>).</p>
-  </div>
-
-  <div class="score-bar">
-    <span id="score-correct"><span class="num">0</span>Correctas</span>
-    <span id="score-incorrect"><span class="num">0</span>Incorrectas</span>
-    <span id="score-remaining"><span class="num">20</span>Restantes</span>
-  </div>
-
-  <section class="block">
-    <h2>Parte 1 — Verbos regulares</h2>
-    <div id="regular-exercises"></div>
-  </section>
-
-  <section class="block">
-    <h2>Parte 2 — Verbos con cambio de raíz</h2>
-    <div id="irregular-exercises"></div>
-  </section>
-
-  <div class="actions">
-    <button class="btn" id="check-all">Verificar Todas</button>
-    <button class="btn red" id="reset-all">Reiniciar</button>
-  </div>
-
-  <section class="block">
-    <h2>Unir columnas: deseos y peticiones</h2>
-    <p style="color:var(--muted);font-size:0.92rem;">Haz clic en una frase de la columna A y luego en la frase de la columna B que la completa correctamente.</p>
-    <div class="match-wrap">
-      <div class="match-col" id="match-col-a"></div>
-      <div class="match-col" id="match-col-b"></div>
-    </div>
-    <div class="feedback" id="match-feedback"></div>
-  </section>
-
-</main>
-
-<footer>TSLE · The Spanish Learning Experience</footer>
-
-<script>
-const regularExercises = [
-  { prompt: "Espero que tú (preparar) todo con tiempo", answer: "prepares" },
-  { prompt: "Es importante que nosotros (organizar) bien el evento", answer: "organicemos" },
-  { prompt: "Ojalá que ellos (invitar) a toda la familia", answer: "inviten" },
-  { prompt: "Quiero que ustedes (compartir) sus ideas", answer: "compartan" },
-  { prompt: "Dudo que él (subir) esa montaña solo", answer: "suba" },
-  { prompt: "Es necesario que tú (bajar) el volumen un poco", answer: "bajes" },
-  { prompt: "Espero que nosotros (arreglar) el problema pronto", answer: "arreglemos" },
-  { prompt: "Quiero que ella (revisar) el documento antes de enviarlo", answer: "revise" },
-  { prompt: "Es importante que ustedes (practicar) todos los días", answer: "practiquen" },
-  { prompt: "Ojalá que tú (mejorar) tu pronunciación pronto", answer: "mejores" },
-  { prompt: "Espero que ellos (mandar) la información hoy", answer: "manden" },
-  { prompt: "Mis papás no quieren que yo les (permitir) faltarme al respeto", answer: "permita" },
-];
-
-const irregularExercises = [
-  { prompt: "Espero que tú (pensar) bien antes de decidir", answer: "pienses" },
-  { prompt: "Quiero que nosotros (volver) temprano a casa", answer: "volvamos" },
-  { prompt: "Mis papás quieren que yo (querer) estudiar algo útil", answer: "quiera" },
-  { prompt: "Espero que los niños (jugar) sin pelear", answer: "jueguen" },
-  { prompt: "Dudo que él (sentir) lo mismo que tú", answer: "sienta" },
-  { prompt: "Es importante que ustedes (seguir) las instrucciones", answer: "sigan" },
-  { prompt: "Quiero que tú me (oír) bien esta vez", answer: "oigas" },
-  { prompt: "Espero que ella (ver) el mensaje a tiempo", answer: "vea" },
-];
-
-const allExercises = [...regularExercises, ...irregularExercises];
-
-function normalize(s){
-  return s.trim().toLowerCase()
-    .replace(/á/g,"a").replace(/é/g,"e").replace(/í/g,"i").replace(/ó/g,"o").replace(/ú/g,"u");
-}
-
-let correctCount = 0;
-let incorrectCount = 0;
-const totalExercises = allExercises.length;
-
-function updateScore(){
-  document.querySelector("#score-correct .num").textContent = correctCount;
-  document.querySelector("#score-incorrect .num").textContent = incorrectCount;
-  document.querySelector("#score-remaining .num").textContent = Math.max(totalExercises - correctCount - incorrectCount, 0);
-}
-
-function buildExerciseBlock(container, list, offset){
-  list.forEach((ex, i) => {
-    const idx = offset + i;
-    const div = document.createElement("div");
-    div.className = "exercise";
-    div.dataset.answer = normalize(ex.answer);
-    div.dataset.checked = "false";
-    div.innerHTML = `
-      <div class="prompt"><span class="num">${idx + 1}.</span>${ex.prompt} <em>(subjuntivo presente)</em></div>
-      <div class="answer-row">
-        <input type="text" placeholder="escribe la forma correcta">
-        <button class="btn verify-btn">Verificar</button>
-      </div>
-      <div class="feedback"></div>
-    `;
-    container.appendChild(div);
-
-    const input = div.querySelector("input");
-    const btn = div.querySelector(".verify-btn");
-    const fb = div.querySelector(".feedback");
-
-    function check(){
-      const val = normalize(input.value);
-      const wasChecked = div.dataset.checked === "true";
-      if(val === div.dataset.answer && val !== ""){
-        fb.textContent = "¡Correcto!";
-        fb.className = "feedback correct";
-        if(!wasChecked || div.dataset.result !== "correct"){
-          if(div.dataset.result === "incorrect"){ incorrectCount--; }
-          if(div.dataset.result !== "correct"){ correctCount++; }
-        }
-        div.dataset.result = "correct";
-      } else {
-        fb.textContent = `Incorrecto. La respuesta correcta es: "${ex.answer}"`;
-        fb.className = "feedback incorrect";
-        if(!wasChecked || div.dataset.result !== "incorrect"){
-          if(div.dataset.result === "correct"){ correctCount--; }
-          if(div.dataset.result !== "incorrect"){ incorrectCount++; }
-        }
-        div.dataset.result = "incorrect";
-      }
-      div.dataset.checked = "true";
-      updateScore();
-    }
-
-    btn.addEventListener("click", check);
-    input.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
-  });
-}
-
-buildExerciseBlock(document.getElementById("regular-exercises"), regularExercises, 0);
-buildExerciseBlock(document.getElementById("irregular-exercises"), irregularExercises, regularExercises.length);
-
-document.getElementById("check-all").addEventListener("click", () => {
-  document.querySelectorAll(".exercise .verify-btn").forEach(btn => btn.click());
-});
-
-document.getElementById("reset-all").addEventListener("click", () => {
-  document.querySelectorAll(".exercise").forEach(div => {
-    div.querySelector("input").value = "";
-    div.querySelector(".feedback").className = "feedback";
-    div.querySelector(".feedback").textContent = "";
-    div.dataset.checked = "false";
-    div.dataset.result = "";
-  });
-  correctCount = 0;
-  incorrectCount = 0;
-  updateScore();
-  buildMatch();
-});
-
-updateScore();
-
-const matchPairs = [
-  { a: "Espero que tú", b: "encuentres lo que buscas." },
-  { a: "Es importante que nosotros", b: "sigamos las instrucciones." },
-  { a: "Ojalá que ellos", b: "recuerden traer los boletos." },
-  { a: "Dudo que ella", b: "pueda terminar hoy." },
-  { a: "Mis papás quieren que yo", b: "estudie una carrera útil." },
-  { a: "Es necesario que ustedes", b: "practiquen todos los días." },
-  { a: "Me alegra que tú", b: "quieras venir con nosotros." },
-  { a: "Espero que nosotros", b: "podamos vernos pronto." },
-];
-
-let selectedA = null;
-let matchedCount = 0;
-
-function shuffle(arr){
-  const copy = [...arr];
-  for(let i = copy.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-function buildMatch(){
-  const colA = document.getElementById("match-col-a");
-  const colB = document.getElementById("match-col-b");
-  colA.innerHTML = "";
-  colB.innerHTML = "";
-  selectedA = null;
-  matchedCount = 0;
-  document.getElementById("match-feedback").className = "feedback";
-  document.getElementById("match-feedback").textContent = "";
-
-  const shuffledA = shuffle(matchPairs.map((p, i) => ({ text: p.a, id: i })));
-  const shuffledB = shuffle(matchPairs.map((p, i) => ({ text: p.b, id: i })));
-
-  shuffledA.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "match-item";
-    div.textContent = item.text;
-    div.dataset.id = item.id;
-    div.addEventListener("click", () => {
-      if(div.classList.contains("matched")) return;
-      document.querySelectorAll("#match-col-a .match-item").forEach(el => el.classList.remove("selected"));
-      div.classList.add("selected");
-      selectedA = div;
-    });
-    colA.appendChild(div);
-  });
-
-  shuffledB.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "match-item";
-    div.textContent = item.text;
-    div.dataset.id = item.id;
-    div.addEventListener("click", () => {
-      if(div.classList.contains("matched") || !selectedA) return;
-      if(selectedA.dataset.id === div.dataset.id){
-        selectedA.classList.remove("selected");
-        selectedA.classList.add("matched");
-        div.classList.add("matched");
-        selectedA = null;
-        matchedCount++;
-        const fb = document.getElementById("match-feedback");
-        if(matchedCount === matchPairs.length){
-          fb.className = "feedback correct";
-          fb.textContent = "¡Uniste todas las frases correctamente!";
-        }
-      } else {
-        div.classList.add("wrong-flash");
-        selectedA.classList.add("wrong-flash");
-        setTimeout(() => {
-          div.classList.remove("wrong-flash");
-          selectedA.classList.remove("wrong-flash");
-          selectedA.classList.remove("selected");
-          selectedA = null;
-        }, 500);
-      }
-    });
-    colB.appendChild(div);
-  });
-}
-buildMatch();
-</script>
-
 </body>
 </html>
