@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia: La vida de Albert | TSLE</title>
+<style>
+:root{--red:#EE3535;--navy:#0B4A7C;--nlight:#1c5fa0;--bg:#F7F8FC;--white:#fff;--bdr:#D0D8E8;--ok:#2e7d32;--okbg:#e8f5e9;--no:#c62828;--nobg:#ffebee;--muted:#6b7a99;--sh:0 2px 12px rgba(27,58,107,0.10);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;}
+.wrap{max-width:820px;margin:0 auto;padding:20px;}
+.back-link{display:inline-block;margin-bottom:14px;color:var(--navy);text-decoration:none;font-size:.9rem;font-weight:600;}
+header{background:var(--navy);color:#fff;padding:22px 24px;border-radius:12px 12px 0 0;}
+header img{max-width:150px;height:auto;margin-bottom:10px;display:block;}
+header h1{font-size:1.35rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.85;}
+.story-section{background:#fff;border-radius:0 0 12px 12px;box-shadow:var(--sh);margin-bottom:24px;}
+.story-header{background:var(--red);color:#fff;padding:18px 24px;}
+.story-header h2{margin:0 0 4px;font-size:1.15rem;}
+.story-header p{margin:0;font-size:.85rem;opacity:.9;}
+.story-body{padding:24px;}
+.story-text{font-size:1.03rem;line-height:2.4;}
+.story-select{font-size:.9rem;font-weight:700;color:var(--navy);background:#eef1f8;border:2px solid var(--nlight);border-radius:6px;padding:4px 8px;margin:0 4px;cursor:pointer;}
+.story-select.correct{border-color:var(--ok);background:var(--okbg);color:var(--ok);}
+.story-select.incorrect{border-color:var(--no);background:var(--nobg);color:var(--no);}
+.story-score{margin:0 24px 20px;padding:10px 16px;border-radius:8px;background:var(--bg);font-weight:700;color:var(--navy);display:none;}
+.story-score.show{display:block;}
+.story-actions{padding:0 24px 24px;display:flex;gap:12px;flex-wrap:wrap;}
+.btn-all{background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:.9rem;font-weight:700;cursor:pointer;}
+.btn-rst{background:transparent;color:var(--navy);border:2px solid var(--bdr);border-radius:8px;padding:10px 24px;font-size:.9rem;font-weight:700;cursor:pointer;}
+
+.vocab-section{background:#fff;border-radius:12px;box-shadow:var(--sh);margin-bottom:20px;padding:18px 24px;}
+.vocab-section h2{font-size:1.05rem;color:var(--navy);margin-bottom:10px;}
+.vocab-line{font-size:.87rem;line-height:1.9;color:#333;}
+.vocab-line strong{color:var(--navy);}
+
+.comp-section{background:#fff;border-radius:12px;box-shadow:var(--sh);margin-bottom:20px;}
+.comp-header{background:var(--navy);color:#fff;padding:18px 24px;border-radius:12px 12px 0 0;}
+.comp-header h2{font-size:1.1rem;margin-bottom:3px;}
+.comp-header p{font-size:.84rem;opacity:.85;}
+.comp-body{padding:20px 24px;}
+.comp-q{margin-bottom:20px;padding-bottom:20px;border-bottom:1px dashed var(--bdr);}
+.comp-q:last-child{border:none;margin:0;padding:0;}
+.comp-num{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:6px;}
+.comp-text{font-weight:600;color:var(--navy);margin-bottom:10px;font-size:1rem;}
+.comp-opts{display:flex;flex-direction:column;gap:8px;}
+.comp-opt{text-align:left;padding:10px 14px;border:2px solid var(--bdr);border-radius:8px;background:#fff;cursor:pointer;font-size:.9rem;}
+.comp-opt.correct{border-color:var(--ok);background:var(--okbg);color:var(--ok);font-weight:700;}
+.comp-opt.incorrect{border-color:var(--no);background:var(--nobg);color:var(--no);font-weight:700;}
+
+.brand-footer{text-align:center;margin-top:18px;color:#8a8f9c;font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="s3.html">&larr; Volver a Español 3</a>
+
+<header>
+  <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+  <h1>Historia: La vida de Albert</h1>
+  <p>Elige entre pretérito e imperfecto en el menú desplegable</p>
+</header>
+
+<div class="story-section">
+  <div class="story-header">
+    <h2>Un día común en la vida de Albert</h2>
+    <p>Haz clic en cada menú y elige la forma correcta del verbo</p>
+  </div>
+  <div class="story-body">
+    <div class="story-text" id="story-container"></div>
+  </div>
+  <div class="story-score" id="story-score-bar"></div>
+  <div class="story-actions">
+    <button class="btn-all" onclick="checkStory()">Verificar historia</button>
+    <button class="btn-rst" onclick="resetStory()">Reiniciar historia</button>
+  </div>
+</div>
+
+<div class="vocab-section">
+  <h2>Vocabulario clave</h2>
+  <div id="vocab-list"></div>
+</div>
+
+<div class="comp-section">
+  <div class="comp-header">
+    <h2>Preguntas de comprensión</h2>
+    <p>Responde según lo que leíste en la historia</p>
+  </div>
+  <div class="comp-body" id="comp-container"></div>
+  <div class="story-actions" style="padding:0 24px 24px;">
+    <button class="btn-rst" onclick="resetComp()">Reiniciar preguntas</button>
+  </div>
+</div>
+
+<div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+
+<script>
+function normalize(s){return s.trim().toLowerCase().replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');}
+
+// Cada bloque de texto va seguido de un objeto "blank" (o solo texto si no hay blank)
+var story = [
+  {text:"Albert "},
+  {opts:["fue","era"], correct:1},
+  {text:" un hombre muy sociable que "},
+  {opts:["vivió","vivía"], correct:1},
+  {text:" en Carolina del Norte con su familia. Todos los días, Albert "},
+  {opts:["se levantó","se levantaba"], correct:1},
+  {text:" temprano y "},
+  {opts:["salió","salía"], correct:1},
+  {text:" a correr antes de empezar su jornada. A él le "},
+  {opts:["gustó","gustaba"], correct:1},
+  {text:" mucho hacer ejercicio porque le "},
+  {opts:["dio","daba"], correct:1},
+  {text:" energía para el resto del día. Albert "},
+  {opts:["trabajó","trabajaba"], correct:1},
+  {text:" en ventas para una empresa de educación. Normalmente, él "},
+  {opts:["viajó","viajaba"], correct:1},
+  {text:" mucho para reunirse con clientes en diferentes ciudades. Un lunes en particular, Albert "},
+  {opts:["voló","volaba"], correct:0},
+  {text:" a Atlanta para una reunión muy importante. Ese día "},
+  {opts:["hizo","hacía"], correct:1},
+  {text:" mucho calor y el vuelo "},
+  {opts:["salió","salía"], correct:0},
+  {text:" a tiempo. Cuando Albert "},
+  {opts:["llegó","llegaba"], correct:0},
+  {text:" a la reunión, "},
+  {opts:["conoció","conocía"], correct:0},
+  {text:" a un cliente nuevo muy interesante. Ellos "},
+  {opts:["hablaron","hablaban"], correct:0},
+  {text:" por dos horas sobre nuevos proyectos. A Albert siempre le "},
+  {opts:["encantó","encantaba"], correct:1},
+  {text:" conocer gente nueva porque "},
+  {opts:["fue","era"], correct:1},
+  {text:" muy curioso y sociable. Por las tardes, cuando "},
+  {opts:["estuvo","estaba"], correct:1},
+  {text:" en casa, Albert "},
+  {opts:["pasó","pasaba"], correct:1},
+  {text:" tiempo con sus hijos jugando videojuegos o viendo películas juntos. A ellos les "},
+  {opts:["encantó","encantaba"], correct:1},
+  {text:" esos momentos con su papá. Los fines de semana, Albert "},
+  {opts:["disfrutó","disfrutaba"], correct:1},
+  {text:" cocinar para toda la familia. Él "},
+  {opts:["fue","era"], correct:1},
+  {text:" muy bueno en la cocina y siempre "},
+  {opts:["preparó","preparaba"], correct:1},
+  {text:" platillos deliciosos. Un sábado especial, Albert "},
+  {opts:["organizó","organizaba"], correct:0},
+  {text:" una fiesta grande para celebrar la graduación de su hija. Todos sus amigos "},
+  {opts:["se reunieron","se reunían"], correct:0},
+  {text:" en el jardín y "},
+  {opts:["pasaron","pasaban"], correct:0},
+  {text:" una tarde inolvidable juntos. Por las noches, antes de dormir, Albert "},
+  {opts:["leyó","leía"], correct:1},
+  {text:" un poco o "},
+  {opts:["escuchó","escuchaba"], correct:1},
+  {text:" música relajante para descansar. Su esposa siempre "},
+  {opts:["dijo","decía"], correct:1},
+  {text:" que Albert "},
+  {opts:["fue","era"], correct:1},
+  {text:" el corazón de la familia. En resumen, Albert "},
+  {opts:["llevó","llevaba"], correct:1},
+  {text:" una vida activa, llena de trabajo, familia y buenos momentos con las personas que más quería."}
+];
+
+function renderStory(){
+  var container = document.getElementById("story-container");
+  container.innerHTML = "";
+  var blankIndex = 0;
+  story.forEach(function(item){
+    if(item.text !== undefined){
+      var span = document.createElement("span");
+      span.textContent = item.text;
+      container.appendChild(span);
+    } else {
+      var sel = document.createElement("select");
+      sel.className = "story-select";
+      sel.id = "blank-" + blankIndex;
+      var def = document.createElement("option");
+      def.value = ""; def.textContent = "- elige -";
+      sel.appendChild(def);
+      item.opts.forEach(function(opt, oi){
+        var o = document.createElement("option");
+        o.value = oi;
+        o.textContent = opt;
+        sel.appendChild(o);
+      });
+      container.appendChild(sel);
+      blankIndex++;
+    }
+  });
+  document.getElementById("story-score-bar").className = "story-score";
+  document.getElementById("story-score-bar").innerHTML = "";
+}
+
+var blankItems = story.filter(function(i){ return i.opts !== undefined; });
+
+function checkStory(){
+  var correct = 0, total = blankItems.length, answered = 0;
+  for(var i = 0; i < total; i++){
+    var sel = document.getElementById("blank-" + i);
+    sel.classList.remove("correct","incorrect");
+    if(sel.value === "") continue;
+    answered++;
+    if(parseInt(sel.value,10) === blankItems[i].correct){
+      sel.classList.add("correct");
+      correct++;
+    } else {
+      sel.classList.add("incorrect");
+    }
+  }
+  var bar = document.getElementById("story-score-bar");
+  bar.className = "story-score show";
+  var pct = Math.round(correct / total * 100);
+  bar.textContent = "Resultado: " + correct + " / " + total + " correctas (" + pct + "%). Respondidas: " + answered + " de " + total + ".";
+}
+
+function resetStory(){ renderStory(); }
+
+var vocab = [
+  ["sociable","sociable, outgoing"],
+  ["la jornada","the workday"],
+  ["las ventas","sales"],
+  ["reunirse","to meet up"],
+  ["el vuelo","the flight"],
+  ["curioso/a","curious"],
+  ["disfrutar","to enjoy"],
+  ["el platillo","the dish (food)"],
+  ["inolvidable","unforgettable"],
+  ["el corazón","the heart"]
+];
+
+function renderVocab(){
+  var el = document.getElementById("vocab-list");
+  el.innerHTML = vocab.map(function(v){
+    return "<div class='vocab-line'><strong>" + v[0] + "</strong> — " + v[1] + "</div>";
+  }).join("");
+}
+
+var compQuestions = [
+  { q: "¿En qué estado vivía Albert con su familia?", opts: ["Georgia","Carolina del Norte","Florida","Texas"], correct: 1 },
+  { q: "¿En qué área trabajaba Albert?", opts: ["Medicina","Ventas para una empresa de educación","Construcción","Finanzas"], correct: 1 },
+  { q: "¿A dónde voló Albert un lunes para una reunión importante?", opts: ["A Chicago","A Miami","A Atlanta","A Dallas"], correct: 2 },
+  { q: "¿Qué celebraron con una fiesta especial un sábado?", opts: ["El cumpleaños de Albert","La graduación de su hija","Un ascenso de trabajo","Una boda"], correct: 1 },
+  { q: "¿Qué le gustaba hacer a Albert los fines de semana?", opts: ["Viajar solo","Trabajar desde casa","Cocinar para la familia","Ver deportes todo el día"], correct: 2 }
+];
+
+function renderComp(){
+  var container = document.getElementById("comp-container");
+  container.innerHTML = "";
+  compQuestions.forEach(function(q, qi){
+    var div = document.createElement("div");
+    div.className = "comp-q";
+    var optsHtml = q.opts.map(function(opt, oi){
+      return "<button type='button' class='comp-opt' id='comp-" + qi + "-" + oi + "' onclick='answerComp(" + qi + "," + oi + ")'>" + opt + "</button>";
+    }).join("");
+    div.innerHTML = "<div class='comp-num'>Pregunta " + (qi+1) + " de " + compQuestions.length + "</div><div class='comp-text'>" + q.q + "</div><div class='comp-opts'>" + optsHtml + "</div>";
+    container.appendChild(div);
+  });
+}
+
+function answerComp(qi, oi){
+  var q = compQuestions[qi];
+  for(var i = 0; i < q.opts.length; i++){
+    var btn = document.getElementById("comp-" + qi + "-" + i);
+    btn.onclick = null;
+    if(i === q.correct) btn.classList.add("correct");
+    if(i === oi && oi !== q.correct) btn.classList.add("incorrect");
+  }
+}
+
+function resetComp(){ renderComp(); }
+
+renderStory();
+renderVocab();
+renderComp();
+</script>
+</body>
+</html>
