@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuro 1 | TSLE</title>
+<style>
+:root{--red:#EE3535;--navy:#0B4A7C;--nlight:#1c5fa0;--bg:#F7F8FC;--white:#fff;--bdr:#D0D8E8;--ok:#2e7d32;--okbg:#e8f5e9;--no:#c62828;--nobg:#ffebee;--muted:#6b7a99;--sh:0 2px 12px rgba(27,58,107,0.10);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:var(--navy);min-height:100vh;}
+.wrap{max-width:820px;margin:0 auto;padding:20px;}
+.back-link{display:inline-block;margin-bottom:14px;color:var(--navy);text-decoration:none;font-size:.9rem;font-weight:600;}
+header{background:var(--navy);color:#fff;padding:22px 24px;border-radius:12px 12px 0 0;}
+header img{max-width:150px;height:auto;margin-bottom:10px;display:block;}
+header h1{font-size:1.35rem;margin-bottom:4px;}
+header p{font-size:.9rem;opacity:.85;}
+.explain-box{background:#fff;padding:22px 24px;box-shadow:var(--sh);}
+.explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.exp-card{background:var(--bg);border-radius:10px;padding:16px 18px;border-left:4px solid var(--navy);}
+.exp-card.red{border-left-color:var(--red);}
+.exp-card h3{font-size:1.02rem;color:var(--navy);margin-bottom:10px;}
+.exp-card ul{padding-left:18px;font-size:.84rem;line-height:1.6;color:#333;}
+.exp-card li{margin-bottom:6px;}
+@media(max-width:600px){.explain-grid{grid-template-columns:1fr;}}
+.stitle{background:var(--red);color:#fff;padding:20px 24px 16px;}
+.stitle h2{font-size:1.2rem;margin-bottom:3px;}
+.stitle p{font-size:.84rem;color:rgba(255,255,255,.85);}
+.sbody{background:var(--white);border-radius:0 0 12px 12px;padding:24px;box-shadow:var(--sh);margin-bottom:28px;}
+.scorebar{display:flex;background:var(--nlight);}
+.sc{flex:1;text-align:center;padding:9px 6px;border-right:1px solid rgba(255,255,255,.15);color:#fff;}
+.sc:last-child{border-right:none;}
+.sc .lb{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;opacity:.7;}
+.sc .vl{font-size:1.3rem;font-weight:800;}
+.sc.c .vl{color:#8de3ab;}
+.sc.e .vl{color:#ffb3b3;}
+.exblock{margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--bdr);}
+.exblock:last-child{border:none;margin:0;padding:0;}
+.exnum{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--red);margin-bottom:6px;}
+.ex-sentence{font-size:1.03rem;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.verb-hint{font-size:.82rem;color:#6b7280;margin-bottom:12px;}
+.controls-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+input.fill-input{width:200px;padding:9px 12px;font-size:.95rem;border:2px solid var(--bdr);border-radius:8px;}
+.btn-check{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:.88rem;font-weight:700;cursor:pointer;}
+.fb{margin-top:8px;font-size:.85rem;font-weight:700;border-radius:6px;padding:6px 12px;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:var(--okbg);color:var(--ok);}
+.fb.no{background:var(--nobg);color:var(--no);}
+.brow{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;}
+.btn-all{background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-size:.9rem;font-weight:700;cursor:pointer;}
+.btn-rst{background:transparent;color:var(--navy);border:2px solid var(--bdr);border-radius:8px;padding:10px 24px;font-size:.9rem;font-weight:700;cursor:pointer;}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.match-col h4{font-size:.75rem;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.match-item{background:var(--bg);border:2px solid var(--bdr);border-radius:8px;padding:9px 13px;font-size:.86rem;font-weight:600;margin-bottom:7px;cursor:pointer;}
+.match-item.selected{border-color:var(--navy);background:#eef1f8;}
+.match-item.matched-ok{border-color:var(--ok);background:var(--okbg);color:var(--ok);cursor:default;}
+.match-item.matched-no{border-color:var(--no);background:var(--nobg);color:var(--no);}
+.match-item.reveal{border-color:var(--ok);background:var(--okbg);color:var(--ok);cursor:default;}
+.match-msg{font-size:.82rem;font-weight:700;margin-top:8px;min-height:22px;}
+.match-msg.ok{color:var(--ok);}
+.match-msg.no{color:var(--no);}
+@media(max-width:600px){.match-wrap{grid-template-columns:1fr;}}
+.brand-footer{text-align:center;margin-top:18px;color:#8a8f9c;font-size:.8rem;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="s3.html">&larr; Volver a Español 3</a>
+
+<header>
+  <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+  <h1>Futuro 1</h1>
+  <p>Conjuga en futuro y une las oraciones completas</p>
+</header>
+
+<div class="explain-box">
+  <div class="explain-grid">
+    <div class="exp-card">
+      <h3>Usos del futuro</h3>
+      <ul>
+        <li>Predictions: <em>Mañana lloverá.</em></li>
+        <li>Promises: <em>Te ayudaré con la mudanza.</em></li>
+        <li>Future plans: <em>El próximo año viajaremos a España.</em></li>
+        <li>Probability/conjecture in the present: <em>¿Qué hora será? Serán las tres.</em></li>
+      </ul>
+    </div>
+    <div class="exp-card red">
+      <h3>Formación</h3>
+      <ul>
+        <li>Regular: infinitivo + <strong>-é, -ás, -á, -emos, -án</strong></li>
+        <li>Ejemplo: hablar → hablaré, hablarás, hablará...</li>
+        <li>Irregulares comunes: tener→tendr-, poder→podr-, saber→sabr-, poner→pondr-, salir→saldr-, venir→vendr-, decir→dir-, hacer→har-, querer→querr-</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="stitle">
+  <h2>Ejercicios — Conjuga en Futuro</h2>
+  <p>Completa cada oración con la forma correcta del futuro. 15 ejercicios.</p>
+</div>
+<div class="scorebar">
+  <div class="sc c"><div class="lb">Correctas</div><div class="vl" id="e-c">0</div></div>
+  <div class="sc e"><div class="lb">Incorrectas</div><div class="vl" id="e-e">0</div></div>
+  <div class="sc"><div class="lb">Restantes</div><div class="vl" id="e-r">15</div></div>
+</div>
+<div class="sbody" style="border-radius:0 0 12px 12px;">
+  <div id="econtainer"></div>
+  <div class="brow">
+    <button class="btn-all" onclick="checkAllE()">Verificar Todas</button>
+    <button class="btn-rst" onclick="resetE()">Reiniciar</button>
+  </div>
+</div>
+
+<div class="stitle">
+  <h2>Une las Oraciones Completas</h2>
+  <p>Une cada inicio de oración con el final correcto. 10 pares.</p>
+</div>
+<div class="scorebar">
+  <div class="sc c"><div class="lb">Correctas</div><div class="vl" id="m-c">0</div></div>
+  <div class="sc e"><div class="lb">Incorrectas</div><div class="vl" id="m-e">0</div></div>
+  <div class="sc"><div class="lb">Restantes</div><div class="vl" id="m-r">10</div></div>
+</div>
+<div class="sbody" style="border-radius:0 0 12px 12px;">
+  <div class="match-wrap">
+    <div><h4>Columna A — Inicio</h4><div id="col-a"></div></div>
+    <div><h4>Columna B — Final</h4><div id="col-b"></div></div>
+  </div>
+  <div class="match-msg" id="match-msg"></div>
+  <div class="brow">
+    <button class="btn-all" onclick="revealAllM()">Ver Respuestas</button>
+    <button class="btn-rst" onclick="resetM()">Reiniciar</button>
+  </div>
+</div>
+
+<div class="brand-footer">TSLE · The Spanish Learning Experience</div>
+</div>
+
+<script>
+function normalize(s){return s.trim().toLowerCase().replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');}
+
+var eItems = [
+  { s: "Mañana yo _____ (llamar) al doctor para hacer una cita.", ans: "llamaré" },
+  { s: "El próximo año, nosotros _____ (viajar) a Colombia.", ans: "viajaremos" },
+  { s: "Ella _____ (tener) que estudiar mucho para el examen.", ans: "tendrá" },
+  { s: "¿A qué hora _____ (llegar) tú a la reunión?", ans: "llegarás" },
+  { s: "Ellos _____ (poder) terminar el proyecto a tiempo.", ans: "podrán" },
+  { s: "Yo te _____ (ayudar) con la mudanza el sábado.", ans: "ayudaré" },
+  { s: "Nosotros _____ (hacer) una fiesta grande para su cumpleaños.", ans: "haremos" },
+  { s: "¿Qué _____ (decir) el jefe cuando vea el reporte?", ans: "dirá" },
+  { s: "Mis padres _____ (venir) a visitarnos en diciembre.", ans: "vendrán" },
+  { s: "Yo _____ (poner) la mesa antes de que lleguen los invitados.", ans: "pondré" },
+  { s: "¿Tú _____ (saber) los resultados mañana?", ans: "sabrás" },
+  { s: "Nosotros _____ (salir) temprano para evitar el tráfico.", ans: "saldremos" },
+  { s: "Ella _____ (querer) ver los resultados lo antes posible.", ans: "querrá" },
+  { s: "Ustedes _____ (necesitar) practicar más antes del examen.", ans: "necesitarán" },
+  { s: "En el futuro, la tecnología _____ (cambiar) mucho la medicina.", ans: "cambiará" }
+];
+
+var eState = { correct: 0, incorrect: 0, checked: {} };
+
+function renderE(){
+  var w = document.getElementById("econtainer");
+  w.innerHTML = "";
+  for(var i = 0; i < eItems.length; i++){
+    var ex = eItems[i];
+    var div = document.createElement("div");
+    div.className = "exblock";
+    div.innerHTML =
+      "<div class='exnum'>Ejercicio " + (i+1) + " de " + eItems.length + "</div>" +
+      "<div class='ex-sentence'>" + ex.s + "</div>" +
+      "<div class='controls-row'>" +
+        "<input type='text' class='fill-input' id='ei-" + i + "' placeholder='Escribe la conjugación...'>" +
+        "<button class='btn-check' onclick='checkE(" + i + ")'>Verificar</button>" +
+      "</div>" +
+      "<div class='fb' id='efb-" + i + "'></div>";
+    w.appendChild(div);
+  }
+  updateEScore();
+}
+
+function checkE(i){
+  var ex = eItems[i];
+  var input = document.getElementById("ei-" + i);
+  var fb = document.getElementById("efb-" + i);
+  if(!input.value.trim()){ fb.className = "fb show no"; fb.textContent = "Escribe una respuesta."; return; }
+  var already = eState.checked[i];
+  if(!already) eState.checked[i] = true;
+  var correct = normalize(input.value) === normalize(ex.ans);
+  if(!already){ if(correct) eState.correct++; else eState.incorrect++; }
+  updateEScore();
+  if(correct){ fb.className = "fb show ok"; fb.textContent = "¡Correcto!"; }
+  else{ fb.className = "fb show no"; fb.textContent = "Respuesta correcta: " + ex.ans; }
+}
+
+function checkAllE(){ for(var i = 0; i < eItems.length; i++) checkE(i); }
+function resetE(){ renderE(); }
+function updateEScore(){
+  document.getElementById("e-c").textContent = eState.correct;
+  document.getElementById("e-e").textContent = eState.incorrect;
+  document.getElementById("e-r").textContent = eItems.length - Object.keys(eState.checked).length;
+}
+
+var mPairs=[],mState={correct:0,incorrect:0,selA:-1,matched:{}};
+var mPairsData = [
+  { a: "El próximo verano, nosotros", b: "viajaremos a la playa con toda la familia." },
+  { a: "Ella promete que", b: "llamará en cuanto llegue al aeropuerto." },
+  { a: "Si sigue lloviendo,", b: "cancelaremos el picnic del domingo." },
+  { a: "Mis amigos dicen que", b: "vendrán a la fiesta el sábado." },
+  { a: "El doctor me dijo que", b: "los resultados estarán listos en una semana." },
+  { a: "Cuando termine la universidad,", b: "buscaré trabajo en un hospital." },
+  { a: "Para el próximo año,", b: "habrá más oportunidades en esa empresa." },
+  { a: "Te prometo que", b: "haré todo lo posible por ayudarte." },
+  { a: "Si estudias mucho,", b: "aprobarás el examen sin problema." },
+  { a: "El fin de semana,", b: "saldremos temprano para evitar el tráfico." }
+];
+
+function buildM(){ mPairs = mPairsData; }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function renderM(){mState={correct:0,incorrect:0,selA:-1,matched:{}};
+var oA=shuffle(mPairs.map(function(_,i){return i;}));var oB=shuffle(mPairs.map(function(_,i){return i;}));
+var ca=document.getElementById("col-a"),cb=document.getElementById("col-b");ca.innerHTML="";cb.innerHTML="";
+oA.forEach(function(idx,i){var b=document.createElement("div");b.className="match-item";b.id="ma-"+idx;b.setAttribute("data-idx",idx);b.innerHTML="<strong>"+String.fromCharCode(65+i)+". </strong>"+mPairs[idx].a;b.onclick=function(){clickA(parseInt(this.getAttribute("data-idx")));};ca.appendChild(b);});
+oB.forEach(function(idx,j){var b=document.createElement("div");b.className="match-item";b.id="mb-"+idx;b.setAttribute("data-idx",idx);b.innerHTML="<strong>"+String.fromCharCode(65+j)+". </strong>"+mPairs[idx].b;b.onclick=function(){clickB(parseInt(this.getAttribute("data-idx")));};cb.appendChild(b);});
+document.getElementById("match-msg").textContent="";document.getElementById("match-msg").className="match-msg";updateMScore();}
+function clickA(idx){if(mState.matched[idx]===1)return;document.querySelectorAll("#col-a .match-item").forEach(function(el){if(mState.matched[parseInt(el.getAttribute("data-idx"))]!==1)el.className="match-item";});mState.selA=idx;document.getElementById("ma-"+idx).className="match-item selected";document.getElementById("match-msg").textContent="Ahora elige el final correcto en la columna B.";document.getElementById("match-msg").className="match-msg";}
+function clickB(idx){if(mState.selA<0)return;if(mState.matched[mState.selA]===1)return;var selA=mState.selA;var correct=(selA===idx);
+if(correct){mState.matched[selA]=1;mState.correct++;document.getElementById("ma-"+selA).className="match-item matched-ok";document.getElementById("mb-"+idx).className="match-item matched-ok";document.getElementById("match-msg").textContent="¡Correcto!";document.getElementById("match-msg").className="match-msg ok";}
+else{mState.incorrect++;document.getElementById("ma-"+selA).className="match-item matched-no";document.getElementById("mb-"+idx).className="match-item matched-no";document.getElementById("match-msg").textContent="Incorrecto. Intenta de nuevo.";document.getElementById("match-msg").className="match-msg no";
+setTimeout(function(){if(mState.matched[selA]!==1)document.getElementById("ma-"+selA).className="match-item";document.getElementById("mb-"+idx).className="match-item";},800);}
+mState.selA=-1;updateMScore();}
+function revealAllM(){for(var i=0;i<mPairs.length;i++){document.getElementById("ma-"+i).className="match-item reveal";document.getElementById("mb-"+i).className="match-item reveal";}document.getElementById("match-msg").textContent="Respuestas reveladas.";document.getElementById("match-msg").className="match-msg ok";}
+function resetM(){renderM();}
+function updateMScore(){document.getElementById("m-c").textContent=mState.correct;document.getElementById("m-e").textContent=mState.incorrect;var done=Object.keys(mState.matched).filter(function(k){return mState.matched[k]===1;}).length;document.getElementById("m-r").textContent=mPairs.length-done;}
+
+renderE();
+buildM();
+renderM();
+</script>
+</body>
+</html>
