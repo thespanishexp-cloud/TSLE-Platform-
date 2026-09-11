@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuro Perfecto 2 | TSLE</title>
+<style>
+  :root{
+    --navy:#0B4A7C; --navy-dark:#08375e; --red:#EE3535;
+    --bg:#f4f7fa; --card:#ffffff; --border:#dbe4ec; --text:#1c2b36; --muted:#5a6b78;
+    --correct:#1e8e5a; --correct-bg:#e6f6ee; --incorrect-bg:#fdeaea;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Segoe UI', Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.5; padding-bottom:60px;}
+  header{background:var(--navy); color:#fff; padding:24px 20px;}
+  .header-inner{max-width:900px; margin:0 auto; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  header img{height:56px; background:#fff; border-radius:8px; padding:6px;}
+  header h1{margin:0 0 4px 0; font-size:1.6rem;}
+  header p{margin:0; color:#dce8f2; font-size:0.98rem;}
+  .back-link{max-width:900px; margin:16px auto 0 auto; padding:0 20px;}
+  .back-link a{color:var(--navy); text-decoration:none; font-weight:600; font-size:0.95rem;}
+  .back-link a:hover{ text-decoration:underline; }
+  main{max-width:900px; margin:0 auto; padding:16px 20px 0 20px;}
+  .ref-box{background:var(--card); border:1px solid var(--border); border-left:6px solid var(--navy); border-radius:10px; padding:18px 20px; margin-bottom:24px;}
+  .ref-box h2{margin-top:0; font-size:1.1rem; color:var(--navy);}
+  .irreg-stems{margin-top:14px; font-size:0.92rem;}
+  .irreg-stems span{display:inline-block; background:#eef4f9; border:1px solid var(--border); border-radius:6px; padding:3px 9px; margin:3px 4px 0 0;}
+  .score-bar{position:sticky; top:0; z-index:10; background:var(--navy-dark); color:#fff; display:flex; justify-content:center; gap:28px; padding:10px; border-radius:0 0 10px 10px; margin-bottom:22px; font-weight:600; font-size:0.95rem; flex-wrap:wrap;}
+  .score-bar span.num{font-size:1.1rem; margin-right:4px;}
+  #score-correct .num{ color:#7CE0A6; }
+  #score-incorrect .num{ color:#ff9b9b; }
+  #score-remaining .num{ color:#ffd97c; }
+  section.block{margin-bottom:34px;}
+  section.block > h2{color:var(--navy); font-size:1.25rem; border-bottom:2px solid var(--border); padding-bottom:8px;}
+  .exercise{background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:14px;}
+  .exercise .num{color:var(--red); font-weight:700; margin-right:6px;}
+  .exercise .prompt{margin-bottom:10px; font-size:1.02rem;}
+  .exercise .prompt em{color:var(--muted); font-style:normal; background:#eef4f9; padding:2px 6px; border-radius:5px; font-size:0.9rem;}
+  .exercise .answer-row{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .exercise input[type="text"]{flex:1; min-width:180px; padding:8px 10px; border:1px solid var(--border); border-radius:6px; font-size:1rem;}
+  .btn{background:var(--navy); color:#fff; border:none; padding:8px 16px; border-radius:6px; font-size:0.95rem; cursor:pointer; font-weight:600;}
+  .btn:hover{ background:var(--navy-dark); }
+  .btn.red{ background:var(--red); }
+  .btn.red:hover{ background:#c92929; }
+  .feedback{margin-top:10px; padding:8px 12px; border-radius:6px; font-size:0.92rem; display:none;}
+  .feedback.correct{ display:block; background:var(--correct-bg); color:var(--correct); }
+  .feedback.incorrect{ display:block; background:var(--incorrect-bg); color:var(--red); }
+  .actions{display:flex; justify-content:center; gap:16px; margin:30px 0 40px 0;}
+  .match-wrap{display:flex; gap:24px; flex-wrap:wrap; justify-content:center;}
+  .match-col{flex:1; min-width:260px; display:flex; flex-direction:column; gap:10px;}
+  .match-item{background:var(--card); border:2px solid var(--border); border-radius:8px; padding:10px 14px; cursor:pointer; font-size:0.96rem; transition:border-color .15s, background .15s;}
+  .match-item.selected{ border-color:var(--navy); background:#eef4f9; }
+  .match-item.matched{ border-color:var(--correct); background:var(--correct-bg); color:var(--correct); cursor:default; }
+  .match-item.wrong-flash{ border-color:var(--red); background:var(--incorrect-bg); }
+  footer{text-align:center; color:var(--muted); font-size:0.85rem; padding:20px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="logo-tsle.png" alt="The Spanish Learning Experience">
+    <div>
+      <h1>Futuro Perfecto 2</h1>
+      <p>Español 4 · Segundo set — más práctica con metas y planes</p>
+    </div>
+  </div>
+</header>
+
+<div class="back-link">
+  <a href="s4.html">← Volver a Español 4</a>
+</div>
+
+<main>
+
+  <div class="ref-box">
+    <h2>Referencia rápida: el futuro perfecto</h2>
+    <p><strong>Haber</strong> en futuro (habré, habrás, habrá, habremos, habrán) + <strong>participio pasado</strong>.</p>
+    <div class="irreg-stems">
+      <strong>Participios irregulares de este set:</strong><br>
+      <span>freír → frito</span>
+      <span>componer → compuesto</span>
+      <span>suponer → supuesto</span>
+      <span>cubrir → cubierto</span>
+      <span>devolver → devuelto</span>
+      <span>romper → roto</span>
+      <span>proponer → propuesto</span>
+      <span>deshacer → deshecho</span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span id="score-correct"><span class="num">0</span>Correctas</span>
+    <span id="score-incorrect"><span class="num">0</span>Incorrectas</span>
+    <span id="score-remaining"><span class="num">20</span>Restantes</span>
+  </div>
+
+  <section class="block">
+    <h2>Parte 1 — Participios regulares</h2>
+    <div id="regular-exercises"></div>
+  </section>
+
+  <section class="block">
+    <h2>Parte 2 — Participios irregulares</h2>
+    <div id="irregular-exercises"></div>
+  </section>
+
+  <div class="actions">
+    <button class="btn" id="check-all">Verificar Todas</button>
+    <button class="btn red" id="reset-all">Reiniciar</button>
+  </div>
+
+  <section class="block">
+    <h2>Unir columnas: metas cumplidas para el futuro</h2>
+    <p style="color:var(--muted);font-size:0.92rem;">Haz clic en una frase de la columna A y luego en la frase de la columna B que la completa correctamente.</p>
+    <div class="match-wrap">
+      <div class="match-col" id="match-col-a"></div>
+      <div class="match-col" id="match-col-b"></div>
+    </div>
+    <div class="feedback" id="match-feedback"></div>
+  </section>
+
+</main>
+
+<footer>TSLE · The Spanish Learning Experience</footer>
+
+<script>
+const regularExercises = [
+  { prompt: "Para esa hora, ella ya (preparar) la cena", answer: "habrá preparado" },
+  { prompt: "Para el sábado, nosotros ya (organizar) la fiesta", answer: "habremos organizado" },
+  { prompt: "Para el mediodía, tú ya (limpiar) la casa", answer: "habrás limpiado" },
+  { prompt: "Para esa fecha, ellos ya (arreglar) el carro", answer: "habrán arreglado" },
+  { prompt: "Para el próximo mes, yo ya (mejorar) mi pronunciación", answer: "habré mejorado" },
+  { prompt: "Para el torneo, ella ya (practicar) suficiente", answer: "habrá practicado" },
+  { prompt: "Para esa edad, nosotros ya (invertir) en una casa", answer: "habremos invertido" },
+  { prompt: "Para el viaje, tú ya (planear) todo", answer: "habrás planeado" },
+  { prompt: "Para esa hora, él ya (revisar) los documentos", answer: "habrá revisado" },
+  { prompt: "Para el próximo año, ellos ya (cambiar) de trabajo", answer: "habrán cambiado" },
+  { prompt: "Para esa fecha, yo ya (mandar) la solicitud", answer: "habré mandado" },
+  { prompt: "Para el viernes, nosotros ya (terminar) el proyecto", answer: "habremos terminado" },
+];
+
+const irregularExercises = [
+  { prompt: "Para esa hora, ella ya (freír) el pescado", answer: "habrá frito" },
+  { prompt: "Para el concierto, él ya (componer) tres canciones más", answer: "habrá compuesto" },
+  { prompt: "Para entonces, yo ya (suponer) la respuesta", answer: "habré supuesto" },
+  { prompt: "Para la boda, ellos ya (cubrir) todos los gastos", answer: "habrán cubierto" },
+  { prompt: "Para esa fecha, tú ya (devolver) el préstamo", answer: "habrás devuelto" },
+  { prompt: "Para el final del día, nosotros ya (romper) el récord", answer: "habremos roto" },
+  { prompt: "Para la reunión, ella ya (proponer) una solución", answer: "habrá propuesto" },
+  { prompt: "Para esa hora, él ya (deshacer) el error", answer: "habrá deshecho" },
+];
+
+const allExercises = [...regularExercises, ...irregularExercises];
+
+function normalize(s){
+  return s.trim().toLowerCase()
+    .replace(/á/g,"a").replace(/é/g,"e").replace(/í/g,"i").replace(/ó/g,"o").replace(/ú/g,"u")
+    .replace(/\s+/g," ");
+}
+
+let correctCount = 0;
+let incorrectCount = 0;
+const totalExercises = allExercises.length;
+
+function updateScore(){
+  document.querySelector("#score-correct .num").textContent = correctCount;
+  document.querySelector("#score-incorrect .num").textContent = incorrectCount;
+  document.querySelector("#score-remaining .num").textContent = Math.max(totalExercises - correctCount - incorrectCount, 0);
+}
+
+function buildExerciseBlock(container, list, offset){
+  list.forEach((ex, i) => {
+    const idx = offset + i;
+    const div = document.createElement("div");
+    div.className = "exercise";
+    div.dataset.answer = normalize(ex.answer);
+    div.dataset.checked = "false";
+    div.innerHTML = `
+      <div class="prompt"><span class="num">${idx + 1}.</span>${ex.prompt} <em>(futuro perfecto)</em></div>
+      <div class="answer-row">
+        <input type="text" placeholder="escribe la forma correcta">
+        <button class="btn verify-btn">Verificar</button>
+      </div>
+      <div class="feedback"></div>
+    `;
+    container.appendChild(div);
+
+    const input = div.querySelector("input");
+    const btn = div.querySelector(".verify-btn");
+    const fb = div.querySelector(".feedback");
+
+    function check(){
+      const val = normalize(input.value);
+      const wasChecked = div.dataset.checked === "true";
+      if(val === div.dataset.answer && val !== ""){
+        fb.textContent = "¡Correcto!";
+        fb.className = "feedback correct";
+        if(!wasChecked || div.dataset.result !== "correct"){
+          if(div.dataset.result === "incorrect"){ incorrectCount--; }
+          if(div.dataset.result !== "correct"){ correctCount++; }
+        }
+        div.dataset.result = "correct";
+      } else {
+        fb.textContent = `Incorrecto. La respuesta correcta es: "${ex.answer}"`;
+        fb.className = "feedback incorrect";
+        if(!wasChecked || div.dataset.result !== "incorrect"){
+          if(div.dataset.result === "correct"){ correctCount--; }
+          if(div.dataset.result !== "incorrect"){ incorrectCount++; }
+        }
+        div.dataset.result = "incorrect";
+      }
+      div.dataset.checked = "true";
+      updateScore();
+    }
+
+    btn.addEventListener("click", check);
+    input.addEventListener("keydown", e => { if(e.key === "Enter") check(); });
+  });
+}
+
+buildExerciseBlock(document.getElementById("regular-exercises"), regularExercises, 0);
+buildExerciseBlock(document.getElementById("irregular-exercises"), irregularExercises, regularExercises.length);
+
+document.getElementById("check-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise .verify-btn").forEach(btn => btn.click());
+});
+
+document.getElementById("reset-all").addEventListener("click", () => {
+  document.querySelectorAll(".exercise").forEach(div => {
+    div.querySelector("input").value = "";
+    div.querySelector(".feedback").className = "feedback";
+    div.querySelector(".feedback").textContent = "";
+    div.dataset.checked = "false";
+    div.dataset.result = "";
+  });
+  correctCount = 0;
+  incorrectCount = 0;
+  updateScore();
+  buildMatch();
+});
+
+updateScore();
+
+const matchPairs = [
+  { a: "Para las ocho,", b: "ya habré llegado a casa." },
+  { a: "Para el próximo año,", b: "ellos ya habrán terminado la carrera." },
+  { a: "Para esa fecha,", b: "nosotros ya habremos ahorrado suficiente." },
+  { a: "Para el viernes,", b: "tú ya habrás entregado el reporte." },
+  { a: "Para entonces,", b: "ella ya habrá tomado una decisión." },
+  { a: "Para el verano,", b: "ustedes ya habrán viajado por Europa." },
+  { a: "Para esa hora,", b: "yo ya habré preparado todo." },
+  { a: "Para el final del mes,", b: "él ya habrá conseguido el trabajo." },
+];
+
+let selectedA = null;
+let matchedCount = 0;
+
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function buildMatch(){
+  const colA = document.getElementById("match-col-a");
+  const colB = document.getElementById("match-col-b");
+  colA.innerHTML = "";
+  colB.innerHTML = "";
+  selectedA = null;
+  matchedCount = 0;
+  document.getElementById("match-feedback").className = "feedback";
+  document.getElementById("match-feedback").textContent = "";
+
+  const shuffledA = shuffle(matchPairs.map((p, i) => ({ text: p.a, id: i })));
+  const shuffledB = shuffle(matchPairs.map((p, i) => ({ text: p.b, id: i })));
+
+  shuffledA.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "match-item";
+    div.textContent = item.text;
+    div.dataset.id = item.id;
+    div.addEventListener("click", () => {
+      if(div.classList.contains("matched")) return;
+      document.querySelectorAll("#match-col-a .match-item").forEach(el => el.classList.remove("selected"));
+      div.classList.add("selected");
+      selectedA = div;
+    });
+    colA.appendChild(div);
+  });
+
+  shuffledB.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "match-item";
+    div.textContent = item.text;
+    div.dataset.id = item.id;
+    div.addEventListener("click", () => {
+      if(div.classList.contains("matched") || !selectedA) return;
+      if(selectedA.dataset.id === div.dataset.id){
+        selectedA.classList.remove("selected");
+        selectedA.classList.add("matched");
+        div.classList.add("matched");
+        selectedA = null;
+        matchedCount++;
+        const fb = document.getElementById("match-feedback");
+        if(matchedCount === matchPairs.length){
+          fb.className = "feedback correct";
+          fb.textContent = "¡Uniste todas las frases correctamente!";
+        }
+      } else {
+        div.classList.add("wrong-flash");
+        selectedA.classList.add("wrong-flash");
+        setTimeout(() => {
+          div.classList.remove("wrong-flash");
+          selectedA.classList.remove("wrong-flash");
+          selectedA.classList.remove("selected");
+          selectedA = null;
+        }, 500);
+      }
+    });
+    colB.appendChild(div);
+  });
+}
+buildMatch();
+</script>
+
+</body>
+</html>
