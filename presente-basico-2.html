@@ -106,7 +106,7 @@
 
   <section class="block">
     <h2>Unir columnas: sujeto + acción</h2>
-    <p style="color:var(--muted);font-size:0.92rem;">Haz clic en el sujeto y luego en la frase que le corresponde.</p>
+    <p style="color:var(--muted);font-size:0.92rem;">Haz clic en el sujeto y luego en la frase que le corresponde. Nota: él, ella y usted se conjugan igual, y ellos y ustedes también, así que cualquiera de ellos es válido con la frase correspondiente.</p>
     <div class="match-wrap">
       <div class="match-col" id="match-col-a"></div>
       <div class="match-col" id="match-col-b"></div>
@@ -226,14 +226,14 @@ document.getElementById("reset-all").addEventListener("click", () => {
 updateScore();
 
 const matchPairs = [
-  { a: "Yo", b: "hablo español todos los días." },
-  { a: "Tú", b: "comes mucha fruta." },
-  { a: "Ella", b: "vive en una casa grande." },
-  { a: "Nosotros", b: "trabajamos los fines de semana." },
-  { a: "Ellos", b: "estudian para el examen." },
-  { a: "Ustedes", b: "cocinan muy bien." },
-  { a: "Él", b: "escribe cartas a su familia." },
-  { a: "Usted", b: "lee el periódico cada mañana." },
+  { a: "Yo", b: "hablo español todos los días.", g: "1s" },
+  { a: "Tú", b: "comes mucha fruta.", g: "2s" },
+  { a: "Ella", b: "vive en una casa grande.", g: "3s" },
+  { a: "Nosotros", b: "trabajamos los fines de semana.", g: "1p" },
+  { a: "Ellos", b: "estudian para el examen.", g: "3p" },
+  { a: "Ustedes", b: "cocinan muy bien.", g: "3p" },
+  { a: "Él", b: "escribe cartas a su familia.", g: "3s" },
+  { a: "Usted", b: "lee el periódico cada mañana.", g: "3s" },
 ];
 
 let selectedA = null;
@@ -258,14 +258,14 @@ function buildMatch(){
   document.getElementById("match-feedback").className = "feedback";
   document.getElementById("match-feedback").textContent = "";
 
-  const shuffledA = shuffle(matchPairs.map((p, i) => ({ text: p.a, id: i })));
-  const shuffledB = shuffle(matchPairs.map((p, i) => ({ text: p.b, id: i })));
+  const shuffledA = shuffle(matchPairs.map(p => ({ text: p.a, g: p.g })));
+  const shuffledB = shuffle(matchPairs.map(p => ({ text: p.b, g: p.g })));
 
   shuffledA.forEach(item => {
     const div = document.createElement("div");
     div.className = "match-item";
     div.textContent = item.text;
-    div.dataset.id = item.id;
+    div.dataset.g = item.g;
     div.addEventListener("click", () => {
       if(div.classList.contains("matched")) return;
       document.querySelectorAll("#match-col-a .match-item").forEach(el => el.classList.remove("selected"));
@@ -279,10 +279,10 @@ function buildMatch(){
     const div = document.createElement("div");
     div.className = "match-item";
     div.textContent = item.text;
-    div.dataset.id = item.id;
+    div.dataset.g = item.g;
     div.addEventListener("click", () => {
       if(div.classList.contains("matched") || !selectedA) return;
-      if(selectedA.dataset.id === div.dataset.id){
+      if(selectedA.dataset.g === div.dataset.g){
         selectedA.classList.remove("selected");
         selectedA.classList.add("matched");
         div.classList.add("matched");
@@ -294,12 +294,13 @@ function buildMatch(){
           fb.textContent = "¡Uniste todas las frases correctamente!";
         }
       } else {
+        const a = selectedA;
         div.classList.add("wrong-flash");
-        selectedA.classList.add("wrong-flash");
+        a.classList.add("wrong-flash");
         setTimeout(() => {
           div.classList.remove("wrong-flash");
-          selectedA.classList.remove("wrong-flash");
-          selectedA.classList.remove("selected");
+          a.classList.remove("wrong-flash");
+          a.classList.remove("selected");
           selectedA = null;
         }, 500);
       }
