@@ -38,6 +38,18 @@
   .progress-bar{height:6px; background:rgba(255,255,255,.25); border-radius:4px; margin-top:16px; overflow:hidden;}
   .progress-fill{height:100%; background:var(--red); width:0%; transition:width .3s ease;}
   main{background:#fff; border-radius:0 0 12px 12px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:4px;}
+  .ref-box{padding:22px 24px; border-bottom:1px dashed #e0e2e8;}
+  .ref-box h3{font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; color:var(--navy); margin:0 0 12px;}
+  .ref-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .ref-card{background:var(--gray); border-radius:8px; padding:12px 14px; border-left:4px solid var(--navy);}
+  .ref-card.red{border-left-color:var(--red);}
+  .ref-card h4{margin:0 0 8px; font-size:.76rem; color:#5a6070; text-transform:uppercase;}
+  .ref-card table{width:100%; border-collapse:collapse; font-size:.8rem;}
+  .ref-card td{padding:2px 2px;}
+  .ref-card td:first-child{color:#6b7280;}
+  .ref-card td:last-child{font-weight:700; color:var(--navy); text-align:right;}
+  @media (max-width:560px){.ref-grid{grid-template-columns:1fr;}}
+  .ref-en{margin-top:14px; color:#6b7280; font-style:italic; font-size:.85rem; border-top:1px dashed #e0e2e8; padding-top:10px;}
   .question{display:none; padding:28px 24px;}
   .question.active{display:block;}
   .q-tag{display:inline-block; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-bottom:14px;}
@@ -78,6 +90,45 @@
     <p>Verbos -ar, -er, -ir en presente</p>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </header>
+
+  <div class="ref-box">
+    <h3>Referencia rápida — Presente regular</h3>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <h4>-AR (hablar)</h4>
+        <table>
+          <tr><td>yo</td><td>hablo</td></tr>
+          <tr><td>tú</td><td>hablas</td></tr>
+          <tr><td>él/ella</td><td>habla</td></tr>
+          <tr><td>nosotros</td><td>hablamos</td></tr>
+          <tr><td>ellos</td><td>hablan</td></tr>
+        </table>
+      </div>
+      <div class="ref-card red">
+        <h4>-ER (comer)</h4>
+        <table>
+          <tr><td>yo</td><td>como</td></tr>
+          <tr><td>tú</td><td>comes</td></tr>
+          <tr><td>él/ella</td><td>come</td></tr>
+          <tr><td>nosotros</td><td>comemos</td></tr>
+          <tr><td>ellos</td><td>comen</td></tr>
+        </table>
+      </div>
+      <div class="ref-card">
+        <h4>-IR (vivir)</h4>
+        <table>
+          <tr><td>yo</td><td>vivo</td></tr>
+          <tr><td>tú</td><td>vives</td></tr>
+          <tr><td>él/ella</td><td>vive</td></tr>
+          <tr><td>nosotros</td><td>vivimos</td></tr>
+          <tr><td>ellos</td><td>viven</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="ref-en">
+      🇬🇧 <strong>In English:</strong> Regular present-tense verbs change their ending based on who is doing the action. -AR verbs (hablar = to speak) use -o/-as/-a/-amos/-an. -ER verbs (comer = to eat) use -o/-es/-e/-emos/-en. -IR verbs (vivir = to live) use -o/-es/-e/-imos/-en.
+    </div>
+  </div>
 
   <main id="quizMain">
 
